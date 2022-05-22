@@ -39,7 +39,7 @@
 
 ## 설치 방법
 
-1. .env 파일 설정 (MONGODB_URL 환경변수를, 개인 로컬 혹은 Atlas 서버 URL로 설정해야 함)
+1. **.env 파일 설정 (MONGODB_URL 환경변수를, 개인 로컬 혹은 Atlas 서버 URL로 설정해야 함)**
 
 2. express 실행
 
