@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+// 메인페이지에서 이미지에 마우스 갖다 댔을 때!
+
 let shopmenDiv = document.querySelector('#shopmenDiv');
 let shopwomenDiv = document.querySelector('#shopwomenDiv');
 let hidden = shopmenDiv.querySelector('.hidden');
