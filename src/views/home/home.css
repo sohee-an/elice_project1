@@ -5,13 +5,13 @@
   height: 100vh;
 }
 
-.landing {
+.shopmen {
   cursor: pointer;
   border: 1px solid red;
   padding: 10px;
 }
 
-.greeting {
+.shopwomen {
   cursor: pointer;
   border: 1px solid blue;
   padding: 10px;
