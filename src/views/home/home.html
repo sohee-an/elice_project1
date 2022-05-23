@@ -41,12 +41,20 @@
             class="navbar-burger"
             aria-label="menu"
             aria-expanded="false"
-            data-target="navbarBasicExample"
+            data-target="navMenu"
           >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
+          <div class="navbar-menu is-fullheight" id="navMenu">
+            <div class="navbar-start">
+              <a href="#" class="navbar-item">MENS</a>
+            </div>
+            <div class="navbar-end">
+              <a href="#" class="navbar-item">WOMENS</a>
+            </div>
+          </div>
         </div>
 
           <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
@@ -58,7 +66,6 @@
                   <span class="icon">
                     <i class="fas fa-cart-shopping"></i>
                   </span>
-                  <span>카트</span>
                 </a>
               </li>
             </ul>
@@ -67,12 +74,26 @@
       </div>
     </nav>
 
-    <div class="div-container">
-      <div class="landing" id="landingDiv">
-        <h1>랜딩 페이지</h1>
+    <div class="container mt-5 mainpagecontainer">
+      <div class="shopmen" id="shopmenDiv">
+        <a href="#">
+          <div class="left">
+            <img src="../homepage_men.JPG" alt="">
+            <div>
+              <p class="hidden">MENS NEW ARRIVALS</p>
+            </div>
+          </div>
+        </a>
       </div>
-      <div class="greeting" id="greetingDiv">
-        <h1>안녕하세요!</h1>
+      <div class="shopwomen mx-2" id="shopwomenDiv">
+        <a href="#">
+          <div class="right">
+            <img src="../homepage_women.JPG" alt="">
+            <div>
+              <p class="hidden">WOMENS NEW ARRIVALS</p>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
 

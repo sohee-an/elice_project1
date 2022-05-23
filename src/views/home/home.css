@@ -1,10 +1,8 @@
-.div-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
+/* .div-container img {
+  width: 540px;
+  height: 750px;
+} */
+/* 
 .shopmen {
   cursor: pointer;
   border: 1px solid red;
@@ -16,4 +14,25 @@
   border: 1px solid blue;
   padding: 10px;
   margin-left: 3rem;
+} */
+.mainpagecontainer {
+  display: flex;
 }
+.left, .right {
+  position: relative;
+  transition: all 0.3s;
+}
+.mainpagecontainer p {
+  position: absolute;
+  top: 50%;
+  left: 35%;
+}
+.hidden {
+  visibility: hidden;
+}
+.left:hover, .right:hover {
+  opacity: 0.5;
+}
+
+
+

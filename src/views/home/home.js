@@ -19,3 +19,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+let shopmenDiv = document.querySelector('#shopmenDiv');
+let shopwomenDiv = document.querySelector('#shopwomenDiv');
+let hidden = shopmenDiv.querySelector('.hidden');
+let hidden1 = shopwomenDiv.querySelector('.hidden');
+
+shopmenDiv.addEventListener('mouseenter',(e)=>{
+  hidden.classList.remove('hidden');
+})
+shopmenDiv.addEventListener('mouseleave',(e)=>{
+  hidden.classList.add('hidden');
+})
+
+shopwomenDiv.addEventListener('mouseenter',(e)=>{
+  hidden1.classList.remove('hidden');
+})
+shopwomenDiv.addEventListener('mouseleave',(e)=>{
+  hidden1.classList.add('hidden');
+})
