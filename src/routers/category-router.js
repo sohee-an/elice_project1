@@ -7,31 +7,30 @@ categoryRouter.get('/', async (req, res, next) => {
     const categories = await categoryService.getCategories();
 
     res.status(200).json(categories);
-})
+});
 
 categoryRouter.post('/register', async (req, res, next) => {
-    const category = req.body.category;
-    const newCategory = await categoryService.addCategory(category);
+    const { largeCategory, mediumCategory } = req.body;
+    const newCategory = await categoryService.addCategory({ largeCategory, mediumCategory });
 
     res.status(200).json(newCategory);
-})
+});
 
 categoryRouter.patch('/:id', async (req, res, next) => {
-    const id = req.params.id;
-    const category = req.body.category;
+    const category_id = req.params.id;
+    const { largeCategory, mediumCategory } = req.body;
 
-    const updatedCategory = await categoryService.updateCategory(id, category);
+    const updatedCategory = await categoryService.updateCategory(category_id, { largeCategory, mediumCategory });
 
     res.status(200).json(updatedCategory);
-})
+});
 
 categoryRouter.delete('/:id', async (req, res, next) => {
-    const id = req.params.id;
+    const category_id = req.params.id;
 
-    const deletedCategory = await categoryService.deleteCategory(id);
+    const deletedCategory = await categoryService.deleteCategory(category_id);
 
-    console.log(deletedCategory);
     res.status(200).json(deletedCategory);
-})
+});
 
 export { categoryRouter };

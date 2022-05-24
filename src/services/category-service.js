@@ -6,8 +6,8 @@ class CategoryService {
         this.categoryModel = categoryModel;
     }
 
-    async addCategory(category) {
-        const createdNewCategory = await this.categoryModel.create(category);
+    async addCategory(categoryInfo) {
+        const createdNewCategory = await this.categoryModel.create(categoryInfo);
         return createdNewCategory;
     }
 
@@ -16,8 +16,8 @@ class CategoryService {
         return categories;
     }
 
-    async updateCategory(category_id, category) {
-        const updatedCategory = await this.categoryModel.update(category_id, category);
+    async updateCategory(category_id, newCategoryInfo) {
+        const updatedCategory = await this.categoryModel.update(category_id, newCategoryInfo);
         return updatedCategory;
     }
 

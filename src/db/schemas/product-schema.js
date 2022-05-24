@@ -13,7 +13,7 @@ const ProductSchema = new Schema({
         type: String,
         required: true
     },
-    madeBy: {
+    brand: {
         type: String,
         required: true
     },
@@ -21,7 +21,11 @@ const ProductSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "categories",
         required: true
+    },
+    image: {
+        type: Object,
     }
+    //상품 이미지 이름 저장 필드 추가 필요
 }, {
     collection: 'products',
     timestamps: true,

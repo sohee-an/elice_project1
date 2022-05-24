@@ -4,8 +4,8 @@ import { CategorySchema } from "../schemas/category-schema";
 const Category = model('categories', CategorySchema);
 
 export class CategoryModel {
-    async create(category) {
-        const createdNewCategory = await Category.create({ category: category });
+    async create(categoryInfo) {
+        const createdNewCategory = await Category.create(categoryInfo);
         return createdNewCategory;
     }
 
@@ -14,11 +14,10 @@ export class CategoryModel {
         return categories;
     }
 
-    async update(category_id, category) {
+    async update(category_id, newCategoryInfo) {
         const filter = { _id: category_id };
-        const update = { category: category };
 
-        const updatedCategory = await Category.findOneAndUpdate(filter, update);
+        const updatedCategory = await Category.updateOne(filter, newCategoryInfo);
         return updatedCategory;
     }
 
