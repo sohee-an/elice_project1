@@ -10,6 +10,12 @@ class ProductService {
         const product = await this.productModel.create({ name, price, description, madeBy });
         return product;
     }
+
+    async getProducts() {
+        const products = await this.productModel.findAll();
+        return products;
+    }
+
 }
 
 const productService = new ProductService(productModel);
