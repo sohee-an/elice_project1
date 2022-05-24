@@ -19,8 +19,11 @@ class ProductModel {
 
     }
 
-    async remove() {
+    async remove(product_id) {
+        const filter = { _id: product_id };
+        const removedProduct = await Product.deleteOne(filter);
 
+        return removedProduct;
     }
 }
 

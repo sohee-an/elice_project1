@@ -16,6 +16,11 @@ class ProductService {
         return products;
     }
 
+    async deleteProduct(product_id) {
+        const deletedProduct = await this.productModel.remove(product_id);
+        return deletedProduct;
+    }
+
 }
 
 const productService = new ProductService(productModel);

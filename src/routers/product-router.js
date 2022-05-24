@@ -22,5 +22,13 @@ productRouter.post('/register', async (req, res, next) => {
     res.status(200).json(product);
 })
 
+productRouter.delete('/:id', async (req, res, next) => {
+    const id = req.params.id;
+
+    const result = await productService.deleteProduct(id);
+
+    res.status(200).json(result);
+})
+
 
 export { productRouter };
