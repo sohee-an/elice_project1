@@ -1,3 +1,5 @@
+@import '../sidebar/sidebar.css';
+
 /* .div-container img {
   width: 540px;
   height: 750px;
@@ -15,6 +17,7 @@
   padding: 10px;
   margin-left: 3rem;
 } */
+
 .mainpagecontainer {
   display: flex;
 }
@@ -33,6 +36,3 @@
 .left:hover, .right:hover {
   opacity: 0.5;
 }
-
-
-
