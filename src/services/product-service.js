@@ -6,10 +6,25 @@ class ProductService {
     }
 
     async addProduct(productInfo) {
-        const { name, price, description, madeBy } = productInfo
-        const product = await this.productModel.create({ name, price, description, madeBy });
+        const product = await this.productModel.create(productInfo);
         return product;
     }
+
+    async getProducts() {
+        const products = await this.productModel.findAll();
+        return products;
+    }
+
+    async deleteProduct(product_id) {
+        const deletedProduct = await this.productModel.remove(product_id);
+        return deletedProduct;
+    }
+
+    async updateProduct(product_id, updateProductInfo) {
+        const updatedProduct = await this.productModel.update(product_id, updateProductInfo)
+        return updatedProduct;
+    }
+
 }
 
 const productService = new ProductService(productModel);

@@ -16,6 +16,11 @@ const ProductSchema = new Schema({
     madeBy: {
         type: String,
         required: true
+    },
+    category_id: {
+        type: Schema.Types.ObjectId,
+        ref: "categories",
+        required: true
     }
 }, {
     collection: 'products',
