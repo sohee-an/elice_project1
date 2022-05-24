@@ -2,10 +2,9 @@ import { model } from "mongoose";
 import { ProductSchema } from "../schemas/product-schema";
 
 const Product = model('products', ProductSchema);
-
-//productInfo는 객체이다.
 class ProductModel {
-    async create(productInfo) {
+
+    async create(productInfo) { //productInfo는 객체이다.
         const createdProduct = await Product.create(productInfo);
         return createdProduct;
     }
@@ -15,12 +14,17 @@ class ProductModel {
         return products;
     }
 
-    async update() {
+    async update(product_id, updateProductInfo) { //updateProductInfo는 객체이다.
+        const filter = { _id: product_id };
 
+        const updatedProduct = await Product.updateOne(filter, updateProductInfo);
+
+        return updatedProduct;
     }
 
     async remove(product_id) {
         const filter = { _id: product_id };
+
         const removedProduct = await Product.deleteOne(filter);
 
         return removedProduct;

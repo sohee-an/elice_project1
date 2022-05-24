@@ -6,8 +6,7 @@ class ProductService {
     }
 
     async addProduct(productInfo) {
-        const { name, price, description, madeBy } = productInfo
-        const product = await this.productModel.create({ name, price, description, madeBy });
+        const product = await this.productModel.create(productInfo);
         return product;
     }
 
@@ -19,6 +18,11 @@ class ProductService {
     async deleteProduct(product_id) {
         const deletedProduct = await this.productModel.remove(product_id);
         return deletedProduct;
+    }
+
+    async updateProduct(product_id, updateProductInfo) {
+        const updatedProduct = await this.productModel.update(product_id, updateProductInfo)
+        return updatedProduct;
     }
 
 }
