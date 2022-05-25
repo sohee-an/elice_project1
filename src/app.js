@@ -4,7 +4,7 @@ import { viewsRouter, userRouter, categoryRouter, productRouter } from './router
 import { errorHandler } from './middlewares';
 
 const app = express();
-const data = require('./data.js'); //test code/예시 데이터 가져오기 (프-박재현);
+const data = require('./data-back.js'); //test code/예시 데이터 가져오기 (프-박재현);
 
 //test code
 app.get('/api/products',(req,res)=>{
