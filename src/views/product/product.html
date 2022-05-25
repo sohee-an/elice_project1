@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-데모</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../elice-rabbit-favicon.png"
+    />
+    <!-- bulma css 관련 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="product.css" />
+    <script src="product.js" type="module" defer></script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="container mt-3">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="../elice-rabbit.png" width="30" height="30" />
+            <span class="has-text-link">쇼핑-데모</span>
+          </a>
+
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+            <ul id="navbar">
+              <li><a href="/register">회원가입</a></li>
+              <li>
+                <a href="/cart" aria-current="page">
+                  <span class="icon">
+                    <i class="fas fa-cart-shopping"></i>
+                  </span>
+                  <span>카트</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 사이드 메뉴 -->
+    <aside class="side-menu hidden">
+      <h3 class="sr-only">사이드 메뉴</h3>
+      <div class="top">
+        <i class="fa-duotone fa-x"></i>
+      </div>
+      <ul>
+        <li><a href="/register">회원가입</a></li>
+        <li><a href="/login">로그인</a></li>
+        <li><a href="/cart">카트</a></li>
+      </ul>
+    </aside>
+
+    <!-- 상품 목록 -->
+    <section class="section">
+      <div class="container">
+        <h1 class="sr-only">상품 목록</h1>
+      <ul class="product-list">
+        <li class="product-item">
+          <a href="/">
+            <div class="left">
+              <img src="https://i.pinimg.com/564x/e8/63/19/e86319da60951e98bcc7e0804a81fcff.jpg" alt="아이보리 니트">
+            </div>
+            <div class="right">
+              <p class="title">아이보리 니트<span class="tag is-success is-rounded">추천</span></p>
+              <p class="description">따뜻한 느낌의 남성 니트입니다.</p>
+              <p class="price">19,000원</p>
+            </div>
+          </a>
+        </li>
+        <li class="product-item">
+          <a href="/">
+            <div class="left">
+              <img src="https://i.pinimg.com/564x/e8/63/19/e86319da60951e98bcc7e0804a81fcff.jpg" alt="남성 정장">
+            </div>
+            <div class="right">
+              <p class="title">남성 정장</p>
+              <p class="description">세련된 느낌의 정장입니다.</p>
+              <p class="price">189,000원</p>
+            </div>
+          </a>
+        </li>
+        <li class="product-item">
+          <a href="/">
+            <div class="left">
+              <img src="https://i.pinimg.com/564x/e8/63/19/e86319da60951e98bcc7e0804a81fcff.jpg" alt="캐주얼 반팔 코디 남성">
+            </div>
+            <div class="right">
+              <p class="title">캐주얼 반팔 코디 남성</p>
+              <p class="description">캐주얼하고 편하게 입을 수 있는 깔끔한 코디 세트입니다.</p>
+              <p class="price">13,000원</p>
+            </div>
+          </a>
+        </li>
+        <li class="product-item">
+          <a href="/">
+            <div class="left">
+              <img src="https://i.pinimg.com/564x/e8/63/19/e86319da60951e98bcc7e0804a81fcff.jpg" alt="봄, 가을 남자 느낌 물씬 코디">
+            </div>
+            <div class="right">
+              <p class="title">봄, 가을 남자 느낌 물씬 코디</p>
+              <p class="description">편하고 깔끔한 패션을 가져 보세요.</p>
+              <p class="price">28,900원</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+      </div>
+    </section>
+  </body>
+</html>

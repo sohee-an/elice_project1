@@ -13,9 +13,17 @@ const ProductSchema = new Schema({
         type: String,
         required: true
     },
-    madeBy: {
+    brand: {
         type: String,
         required: true
+    },
+    category_id: {
+        type: Schema.Types.ObjectId,
+        ref: "categories",
+        required: true
+    },
+    image: {
+        type: String,
     }
 }, {
     collection: 'products',

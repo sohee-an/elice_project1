@@ -6,14 +6,29 @@ class CategoryService {
         this.categoryModel = categoryModel;
     }
 
-    async addCategory(category) {
-        const createdNewCategory = await this.categoryModel.create(category);
+    async addCategory(categoryInfo) {
+        const createdNewCategory = await this.categoryModel.create(categoryInfo);
         return createdNewCategory;
     }
 
     async getCategories() {
         const categories = await this.categoryModel.findAll();
         return categories;
+    }
+
+    async getSpecificCategory(categoryInfo) {
+        const category = await this.categoryModel.findCategory(categoryInfo);
+        return category;
+    }
+
+    async updateCategory(category_id, newCategoryInfo) {
+        const updatedCategory = await this.categoryModel.update(category_id, newCategoryInfo);
+        return updatedCategory;
+    }
+
+    async deleteCategory(category_id) {
+        const deletedCategory = await this.categoryModel.remove(category_id);
+        return deletedCategory;
     }
 }
 

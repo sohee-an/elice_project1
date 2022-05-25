@@ -1,3 +1,6 @@
+import { sidebar } from '../sidebar/sidebar.js';
+sidebar();
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // Get all "navbar-burger" elements
