@@ -9,7 +9,7 @@ export class UserModel {
     return user;
   }
 
-  async findById(userId) {
+  async findById(userId) { 
     const user = await User.findOne({ _id: userId });
     return user;
   }
