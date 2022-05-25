@@ -16,6 +16,7 @@ export class CategoryModel {
 
     async findCategory(categoryInfo) {
         const category = await Category.findOne(categoryInfo);
+        return category;
     }
 
     async update(category_id, newCategoryInfo) {
