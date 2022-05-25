@@ -4,15 +4,15 @@ import { viewsRouter, userRouter, categoryRouter, productRouter } from './router
 import { errorHandler } from './middlewares';
 
 const app = express();
-const data = require('./data-back.js'); //test code/예시 데이터 가져오기 (프-박재현);
-
-//test code
-app.get('/api/products',(req,res)=>{
-  res.json(data.products)
-})
+const data = require('./data-back.js'); //데이터 가져오기 (프-박재현);
 
 // CORS 에러 방지
 app.use(cors());
+
+//벡엔드에서 데이터 가져오기
+app.get('/api/products',(req,res)=>{
+  res.json(data.products)
+})
 
 // Content-Type: application/json 형태의 데이터를 인식하고 핸들링할 수 있게 함.
 app.use(express.json());

@@ -1,8 +1,18 @@
-import data from '../data.js'
+// import data from '../data.js'
 
 const Products_screen = {
-  render: ()=>{
-    const {products} = data;
+  render: async ()=>{
+    //fetch를 이용해서 벡엔드 데이터 가져오기
+    // const {products} = data;
+    const response = await fetch("http://localhost:5000/api/products",{
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    if (!response || !response.ok) {
+      return `<div>Error in getting data</div>`
+    }
+    const products = await response.json();
     return `
     <ul class="products">
       ${products

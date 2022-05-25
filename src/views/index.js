@@ -11,7 +11,7 @@ const routes = {
   "/product/:id": ProductScreen,
 }
 
-const router = ()=>{
+const router = async ()=>{
   const request = parseRequestUrl();
 
   const parseUrl = (request.resource ? `/${request.resource}` : '/') +
@@ -21,7 +21,7 @@ const router = ()=>{
   const screen = routes[parseUrl] ? routes[parseUrl] : Error404Screen;
 
   const main = document.getElementById("producItemContainer");
-  main.innerHTML = screen.render();
+  main.innerHTML = await screen.render();
 }
 //페이지 로드 시
 window.addEventListener('load',router);
