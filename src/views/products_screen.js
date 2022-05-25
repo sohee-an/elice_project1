@@ -10,11 +10,11 @@ const Products_screen = {
           (product) =>`
         <li>
           <div class="product">
-          <a href="/#/product/${product.product_id}">
+          <a href="#/product/${product.product_id}">
             <img src="${product.image}" alt="${product.name}">
           </a>
           <div class="product-name">
-            <a href="/#/product/${product.product_id}">
+            <a href="#/product/${product.product_id}">
               ${product.name}
             </a>
           </div>
