@@ -4,6 +4,12 @@ import { viewsRouter, userRouter, categoryRouter, productRouter } from './router
 import { errorHandler } from './middlewares';
 
 const app = express();
+const data = require('./data.js'); //test code/예시 데이터 가져오기 (프-박재현);
+
+//test code
+app.get('/api/products',(req,res)=>{
+  res.json(data.products)
+})
 
 // CORS 에러 방지
 app.use(cors());
