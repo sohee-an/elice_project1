@@ -14,6 +14,10 @@ export class CategoryModel {
         return categories;
     }
 
+    async findCategory(categoryInfo) {
+        const category = await Category.findOne(categoryInfo);
+    }
+
     async update(category_id, newCategoryInfo) {
         const filter = { _id: category_id };
 

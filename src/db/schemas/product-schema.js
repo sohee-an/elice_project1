@@ -25,7 +25,6 @@ const ProductSchema = new Schema({
     image: {
         type: String,
     }
-    //상품 이미지 이름 저장 필드 추가 필요
 }, {
     collection: 'products',
     timestamps: true,

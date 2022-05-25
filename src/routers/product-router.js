@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { productService } from "../services";
+import { productService, categoryService } from "../services";
 import multer from "multer";
 
 const productRouter = Router();
@@ -25,15 +25,22 @@ productRouter.get('/', async (req, res, next) => {
 })
 
 //상품 상세 목록 구현 필요
+productRouter.get('/:id', async (req, res, next) => {
+    const id = req.params.id;
+
+    const product = await productRouter.getProductDetail(id);
+
+    res.status(200).json(product)
+})
 
 //single 메소드의 인자인 'img'는 form의 필드중 name속성의 value이다.
 productRouter.post('/register', upload.single('img'), async (req, res, next) => {
 
     const image = req.file.filename;
     //나중에 폼으로 대분류, 소분류 카테고리를 받아서 카테고리서비스를 통해 아이디를 가져와서 저장한다.
-    const { name, price, description, brand, category_id } = req.body
-
-    console.log(req.file, req.body);
+    const { name, price, description, brand, largeCategory, mediumCategory } = req.body
+    const category = await categoryService.getSpecificCategory({ largeCategory, mediumCategory })
+    const category_id = category._id;
 
     const product = await productService.addProduct({
         name,
