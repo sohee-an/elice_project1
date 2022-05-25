@@ -4,7 +4,7 @@ import { viewsRouter, userRouter, categoryRouter, productRouter } from './router
 import { errorHandler } from './middlewares';
 
 const app = express();
-const data = require('./data-back.js'); //데이터 가져오기 (프-박재현);
+const data = require('./data-back.js'); //데이터 가져오기
 
 // CORS 에러 방지
 app.use(cors());
