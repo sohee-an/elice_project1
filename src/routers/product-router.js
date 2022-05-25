@@ -4,6 +4,8 @@ import multer from "multer";
 
 const productRouter = Router();
 
+
+//////////////////////이미지 저장을 위한 코드//////////////////////
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/')
@@ -14,6 +16,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage })
+/////////////////////////////////////////////////////////////////
 
 productRouter.get('/', async (req, res, next) => {
     const products = await productService.getProducts();
@@ -21,9 +24,12 @@ productRouter.get('/', async (req, res, next) => {
     res.status(200).json(products);
 })
 
+//상품 상세 목록 구현 필요
+
+//single 메소드의 인자인 'img'는 form의 필드중 name속성의 value이다.
 productRouter.post('/register', upload.single('img'), async (req, res, next) => {
-    
-    const image = req.file;
+
+    const image = req.file.filename;
     //나중에 폼으로 대분류, 소분류 카테고리를 받아서 카테고리서비스를 통해 아이디를 가져와서 저장한다.
     const { name, price, description, brand, category_id } = req.body
 
@@ -35,7 +41,7 @@ productRouter.post('/register', upload.single('img'), async (req, res, next) => 
         description,
         brand,
         category_id,
-        image 
+        image
     })
 
     res.status(200).json(product);
@@ -50,7 +56,8 @@ productRouter.patch('/:id', async (req, res, next) => {
         price,
         description,
         madeBy,
-        category_id
+        category_id,
+        image
     })
 
     res.status(200).json(updateProduct);

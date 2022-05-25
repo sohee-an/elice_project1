@@ -10,6 +10,9 @@ const CategorySchema = new Schema({
         required: true
     },
     //대표 이미지 이름 필드도 추후에 추가 해야됨
+    image: {
+        type: String,
+    }
 }, {
     collection: 'categories',
     timestamps: true,
