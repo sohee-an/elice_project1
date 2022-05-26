@@ -39,9 +39,13 @@ class UserService {
   async getUserToken(loginInfo) {
     // 객체 destructuring
     const { email, password } = loginInfo;
+    console.log("이건 비밀번호");
+    console.log(password);
 
     // 우선 해당 이메일의 사용자 정보가  db에 존재하는지 확인
     const user = await this.userModel.findByEmail(email);
+    console.log( "찾은 유저다")
+    console.log(user);
     if (!user) {
       throw new Error(
         '해당 이메일은 가입 내역이 없습니다. 다시 한 번 확인해 주세요.'
@@ -126,16 +130,47 @@ class UserService {
 
     return user;
   }
-<<<<<<< HEAD:src/services/user-service.js
-=======
-  // 회원탈퇴 
-  async deleteOneUser(userEmail) {
-    // let  email= userEmail;
-    console.log(userEmail);
-    let user = await this.userModel.delete(userEmail);
-    return user;
+
+  async delteUser(userId,currentPassword){
+    let user = await this.userModel.findById(userId);
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!deltUser!!!!!!!!!!!!")
+    console.log( userId);
+    // 유저 비밀번호 가지고 옴 
+    const correctPasswordHash = user.password; // 유저 패스워드를  찾음 
+    console.log(correctPasswordHash);
+    //비밀번호가 맞는지 한번 확인해본다.
+    const isPasswordCorrect = await bcrypt.compare(
+      currentPassword,
+      correctPasswordHash
+    );
+
+
+    if(isPasswordCorrect){// 맞으면 삭제해주고 아니면 경고 
+        const userEmail = user.email;
+        // 만일 패스워드랑 db패스워드랑 맞으면 유저를 삭제해준다.
+        const deltEmail =await this.userModel.delete(userEmail);
+        return deltEmail;
+
+    }else  {
+      throw new Error(
+        '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
+      );
+     
+    }
+
+    
+
+   
+    
   }
->>>>>>> backend-product-api:server/services/user-service.js
+
+   // 회원탈퇴 
+  // async deleteOneUser(userEmail){
+    // let  email= userEmail;
+   // console.log(userEmail);
+   //   let user =await this.userModel.delete(userEmail);
+   //   return user;
+  // }
 }
 
 const userService = new UserService(userModel);

@@ -9,10 +9,11 @@ export class UserModel {
     return user;
   }
 
-  async findById(userId) {
+  async findById(userId) { 
     const user = await User.findOne({ _id: userId });
     return user;
   }
+
 
   async create(userInfo) {
     const createdNewUser = await User.create(userInfo);
@@ -31,15 +32,12 @@ export class UserModel {
     const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
   }
-<<<<<<< HEAD:src/db/models/user-model.js
-=======
-  async delete(email) {
-    // const filter={email};
-    const deleteUser = await User.findOneAndDelete({ email: email });
-    return deleteUser;
-
-  }
->>>>>>> backend-product-api:server/db/models/user-model.js
+  async delete(email){
+    
+     const deleteUser= await User.findOneAndDelete({email:email});
+     return deleteUser;
+ 
+   }
 }
 
 const userModel = new UserModel();

@@ -53,6 +53,7 @@ userRouter.post('/login', async function (req, res, next) {
 
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
+    console.log(userToken);
 
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
     res.status(200).json(userToken);
@@ -134,21 +135,28 @@ userRouter.patch(
   }
 );
 
-<<<<<<< HEAD:src/routers/user-router.js
-=======
 
-userRouter.delete('/del/:id', async function (req, res, next) {
-  try {
-    const deltEmail = req.params.id;
+userRouter.delete('/del/:pwd',loginRequired, async function(req,res,next){
+    //로그인된 유저의 ObjectId를 가쟈온것
+    try{
+    const userId = req.currentUserId; // 로그인된 유저의 아이디 가지고옴 
+    const pwd = req.params.pwd;// 현재 적은 비밀번호가지고옴 
 
-    console.log(deltEmail);
-    const deletuser = await userService.deleteOneUser(deltEmail);
-    res.json(deletuser);
-  } catch (error) {
-    next(error);
-  }
+    const findPassword = await userService.delteUser(userId,pwd);// 로그인 된 비밀번호와  현재 적은 비밀번호를 보낸다 .
+    res.status(200).json(findPassword);
+    }catch(error){
+      next(err);
+    }
+    
+  });
+ 
+   
 
-});
+    
+   
+    
 
->>>>>>> backend-product-api:server/routers/user-router.js
+
+
+
 export { userRouter };
