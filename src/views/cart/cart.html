@@ -73,7 +73,7 @@
         <p class="cur-process"> 장바구니 </p> <p> &gt; 주문결제 &gt; 주문완료 </p>
       </div>
       <div class="order-body">
-        <!-- 장바구니 목록 -->
+        <!-- 장바구니 정보 -->
         <div class="order-iteminfo" id="iteminfoDiv">
           <div class="select-container">
             <input type="checkbox" />
@@ -91,19 +91,19 @@
             <tbody>
               <tr>
                 <td align="left">상품수</td>
-                <td align="right">1개</td>
+                <td align="right" id="p-amount"></td>
               </tr>
               <tr>
                 <td align="left">상품금액</td>
-                <td align="right">68,000원</td>
+                <td align="right" id="p-price"></td>
               </tr>
               <tr>
                 <td align="left">배송비</td>
-                <td align="right">3,000원</td>
+                <td align="right" id="p-shipping"></td>
               </tr>
             </tbody>     
           </table>
-          <div>총 결제금액</div>
+          <div id="p-total"> 총 결제금액 <div id="p-total-price"> </div></div>
           <input type="button" value="구매하기" id="purchase-btn">
         </div>
       </div>

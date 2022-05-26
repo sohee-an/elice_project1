@@ -18,7 +18,7 @@ const items = [{
     name: '드레스',
     image: '../homepage_women.jpg',
     price: 150000,
-    quantity: 2,
+    quantity: 3,
 }];
 
 createItemList(items);
@@ -69,8 +69,8 @@ function getPaymentInfo(items) {
     const shippingElem = document.getElementById('p-shipping');
     const totalElem = document.getElementById('p-total-price');
 
-    let itemAmount= (items.length())? items.reduce((acc, cur) => acc+Number(cur.quantity), 0) : 0;
-    let itemPrice= (items.length())? items.reduce((acc, cur) => acc+Number((cur.price*cur.quantity)), 0): 0;
+    let itemAmount= items.reduce((acc, cur) => acc+Number(cur.quantity), 0);
+    let itemPrice= items.reduce((acc, cur) => acc+Number((cur.price*cur.quantity)), 0);
     let shippingPrice=3000;
     let totalPrice=itemPrice+shippingPrice;
 

@@ -34,6 +34,8 @@ height: auto;
 border-radius: 10px;
 box-shadow: 5px 5px 10px lightgray;
 }
+
+
 .select-container {
 height: auto;
 margin: 10px;
@@ -99,6 +101,8 @@ width: 30%;
 .item-price p{
 display:inline;
 }
+
+
 
 @media screen and (max-width: 768px) {
 .order-body{
