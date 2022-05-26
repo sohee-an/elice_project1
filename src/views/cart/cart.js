@@ -8,11 +8,13 @@ const itemListElem = document.getElementById("item-list");
  */
 
 const items = [{
+    _id: '1',
     name: '상의',
     image: '../homepage_men.jpg',
     price: 15000,
     quantity: 1,
 }, {
+    _id: '2',
     name: '드레스',
     image: '../homepage_women.jpg',
     price: 150000,
@@ -24,7 +26,7 @@ getPaymentInfo(items);
 
 // 아이템 렌더링을 위한 div 생성
 /** Needed
- * 아이템 개수 +, - 버튼과 기능 ==> 
+ * 아이템 개수 +, - 기능 ==> 
  * 아이템 삭제 기능
  */
 function createItemList(items) {
@@ -39,7 +41,11 @@ function createItemList(items) {
             <div class="item-info">
                 <p>${cur.name}</p>
                 <div class="quantity">
-                    <input type="number" id="qunatity-input" min="1" max="50" value="${cur.quantity}"/>
+                    <table id="quantity-table">
+                        <tr><input type="button" value="-" class="minus-btn" id="minus-${cur._id}"></tr>
+                        <tr><input type="number" id="qunatity-input-${cur._id}" min="1" max="50" value="${cur.quantity}"/></tr>
+                        <tr><input type="button" value="+" class="plus-btn" id="plus-${cur._id}"></tr>
+                    </table>
                 </div>
             </div>
             <div class="item-price">
@@ -48,8 +54,8 @@ function createItemList(items) {
         </div>
     </li>
     `}, ``);
+   itemListElem.innerHTML = newItems; 
 
-    itemListElem.innerHTML = newItems;
 } 
 
 // 결제 정보 보여주기 
@@ -61,18 +67,22 @@ function getPaymentInfo(items) {
     const amountElem = document.getElementById('p-amount');
     const priceElem = document.getElementById('p-price');
     const shippingElem = document.getElementById('p-shipping');
-    const totalElem = document.getElementById('p-total');
+    const totalElem = document.getElementById('p-total-price');
 
-    const paymentInfo={ itemAmount, itemPrice, shippingPrice, totalPrice };
+    let itemAmount= (items.length())? items.reduce((acc, cur) => acc+Number(cur.quantity), 0) : 0;
+    let itemPrice= (items.length())? items.reduce((acc, cur) => acc+Number((cur.price*cur.quantity)), 0): 0;
+    let shippingPrice=3000;
+    let totalPrice=itemPrice+shippingPrice;
 
-    itemAmount=addCommas(items.reduce((acc, cur) => acc+cur.amount, 0));
-    itemPrice=addCommas(items.reduce((acc, cur) => acc+(cur.price*cur.amount), 0));
-    shippingPrice=addCommas(3000);
-    totalPrice=addCommas(itemPrice+shippingPrice);
+    amountElem.innerText=addCommas(itemAmount);
+    priceElem.innerText=addCommas(itemPrice);
+    shippingElem.innerText=addCommas(shippingPrice);
+    totalElem.innerText=addCommas(totalPrice); 
+}
 
-    amountElem.innerText='30';
-    priceElem.innerText=priceAmount;
-    shippingElem.innerText=shippingAmount;
-    totalElem.innerText=totalAmount;
-    
+function changeQuantity(btn_type, id){
+    const item_id=id.split('-')[1];
+    if(btn_type=='+'){ 
+        console.log(item_id);
+    }
 }
