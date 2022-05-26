@@ -119,21 +119,3 @@ async function del(endpoint, params = '', data = {}) {
 
 // 아래처럼 export하면, import * as Api 로 할 시 Api.get, Api.post 등으로 쓸 수 있음.
 export { get, post, patch, del as delete };
-
-export const getProduct = async (id) => {
-  try {
-    const response = await fetch(`http://localhost:5000/api/products/${id}`,{
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (response.statusText !== 'OK') {
-      throw new Error(response.data.message);
-    }
-    return response.data;
-  } catch (err) {
-    console.log(err);
-    return { error: err.response.data.message || err.message };
-  }
-};
