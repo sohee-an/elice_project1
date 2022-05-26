@@ -126,13 +126,13 @@ class UserService {
 
     return user;
   }
-   // 회원탈퇴 
-   async deleteOneUser(userEmail){
+  // 회원탈퇴 
+  async deleteOneUser(userEmail) {
     // let  email= userEmail;
     console.log(userEmail);
-      let user =await this.userModel.delete(userEmail);
-      return user;
-   }
+    let user = await this.userModel.delete(userEmail);
+    return user;
+  }
 }
 
 const userService = new UserService(userModel);

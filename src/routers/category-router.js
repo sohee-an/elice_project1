@@ -1,21 +1,7 @@
 import { categoryService } from "../services";
 import { Router } from "express";
-import multer from "multer";
 
 const categoryRouter = Router();
-
-//////////////////////이미지 저장을 위한 코드//////////////////////
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/categories/')
-    },
-    filename: function (req, file, cb) {
-        cb(null, `${file.originalname}`)
-    }
-});
-
-const upload = multer({ storage: storage })
-/////////////////////////////////////////////////////////////////
 
 categoryRouter.get('/', async (req, res, next) => {
     const categories = await categoryService.getCategories();
@@ -23,10 +9,9 @@ categoryRouter.get('/', async (req, res, next) => {
     res.status(200).json(categories);
 });
 
-categoryRouter.post('/register', upload.single('img'), async (req, res, next) => {
-    const image = req.file.filename;
+categoryRouter.post('/register', async (req, res, next) => {
     const { largeCategory, mediumCategory } = req.body;
-    const newCategory = await categoryService.addCategory({ largeCategory, mediumCategory, image });
+    const newCategory = await categoryService.addCategory({ largeCategory, mediumCategory });
 
     res.status(200).json(newCategory);
 });

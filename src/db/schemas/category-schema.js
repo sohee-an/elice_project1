@@ -9,9 +9,6 @@ const CategorySchema = new Schema({
         type: String,
         required: true
     },
-    image: {
-        type: String,
-    }
 }, {
     collection: 'categories',
     timestamps: true,
