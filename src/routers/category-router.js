@@ -7,10 +7,10 @@ const categoryRouter = Router();
 //////////////////////이미지 저장을 위한 코드//////////////////////
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/')
+        cb(null, 'uploads/categories/')
     },
     filename: function (req, file, cb) {
-        cb(null, `${Date.now()}_${file.originalname}`)
+        cb(null, `${file.originalname}`)
     }
 });
 
