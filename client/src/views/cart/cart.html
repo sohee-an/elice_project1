@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>쇼핑-n팀</title>
+  <title>쇼핑-3팀</title>
   <!-- 아이콘 -->
   <link rel="icon" type="image/png" sizes="16x16" href="../images/elice-rabbit-favicon.png" />
   <!-- bulma css -->
@@ -76,22 +76,15 @@
       <p> &gt; 주문결제 &gt; 주문완료 </p>
     </div>
     <div class="order-body">
-      <!-- 장바구니 목록 -->
+
+      <!-- 장바구니 정보 -->
       <div class="order-iteminfo" id="iteminfoDiv">
         <div class="select-container">
           <input type="checkbox" />
-          <a href="#">전체선택</a> | <a href="#">선택삭제</a>
+          <a href="#" >전체선택</a> | <a href="#">선택삭제</a>
         </div>
-        <ol style="list-style: none;">
-          <li>
-            <div class="item">
-              <input type="checkbox" />
-              <div id="item-img">
-                <img src="/elice-rabbit.png" width="30" height="30" />
-              </div>
-              <div id="item-name"></div>
-            </div>
-          </li>
+        <ol style="list-style: none;" id="item-list">
+
         </ol>
       </div>
 
@@ -102,19 +95,19 @@
           <tbody>
             <tr>
               <td align="left">상품수</td>
-              <td align="right">1개</td>
+              <td align="right" id="p-amount"></td>
             </tr>
             <tr>
               <td align="left">상품금액</td>
-              <td align="right">68,000원</td>
+              <td align="right" id="p-price"></td>
             </tr>
             <tr>
               <td align="left">배송비</td>
-              <td align="right">3,000원</td>
+              <td align="right" id="p-shipping"></td>
             </tr>
-          </tbody>
+          </tbody>     
         </table>
-        <div>총 결제금액</div>
+        <div class="p-total"> <p>총 결제금액 </p><p id="p-total-price" align="right"> </p></div>
         <input type="button" value="구매하기" id="purchase-btn">
       </div>
     </div>

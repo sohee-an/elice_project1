@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-n팀</title>
+    <title>쇼핑-3팀</title>
     <!-- 아이콘 -->
     <link
       rel="icon"
@@ -72,67 +72,67 @@
       <div class="order-header" id="processDiv">
         <p class="cur-process"> 장바구니 </p> <p> &gt; 주문결제 &gt; 주문완료 </p>
       </div>
-        <div class="order-body">
-          <!-- 배송 정보 -->
-          <form id="delivery-form">
-            <div class="delivery-info" id="deliveryinfoDiv">
-              <ol style="list-style: none;">
-                <li>
-                  <p>이름</p>  
-                  <input type="text" placeholder="받는 분 이름을 입력해 주세요." name=""/>
-                </li>
-                <li>
-                  <p>연락처</p>
-                  <input type="text" placeholder="-없이 입력해 주세요." name=""> 
-                </li>
-                <li>
-                  <p>주소</p>
-                  <div>
-                    <input type="text" id="postal-address">
-                    <input type="button" value="주소찾기"><br>
-                    <input type="text" id="address1"><br>
-                    <input type="text" id="address2">
-                  </div>
-                </li>
-                <li>
-                  <p>요청사항</p>
-                  <select name="requests" form="form id">
-                    <option value="no request">배송시 요청사항을 선택해 주세요.</option>
-                    <option value="직접 수령">직접 수령하겠습니다.</option>
-                    <option value="배송전 연락">배송 전 연락바랍니다.</option>
-                    <option value="경비실">부재 시 경비실에 맡겨주세요.</option>
-                    <option value="문앞">부재 시 문앞에 놓아주세요.</option>
-                    <option value="택배함">부재 시 택배함에 넣어주세요.</option>
-                    <option value="">직접 입력</option>
-                  </select>
-                </li>
-              </ol>
-            </div>
-          </form>
-
-          <!-- 결제정보 -->
-          <div class="order-summary" id="summaryDiv">
-            <h3> 결제정보 </h3>
-            <table id="ordersummary-table">
-              <tbody>
-                <tr>
-                  <td align="left">상품수</td>
-                  <td align="right" id="p-amount"></td>
-                </tr>
-                <tr>
-                  <td align="left">상품금액</td>
-                  <td align="right" id="p-price"></td>
-                </tr>
-                <tr>
-                  <td align="left">배송비</td>
-                  <td align="right" id="p-shipping"></td>
-                </tr>
-              </tbody>     
-            </table>
-            <div id="p-total"> 총 결제금액 <div id="p-total-price"> </div></div>
-            <input type="button" value="구매하기" id="purchase-btn" form="delivery-form">
+      <div class="order-body">
+        <!-- 배송 정보 -->
+        <form id="delivery-form">
+          <div class="delivery-info" id="deliveryinfoDiv">
+            <ol id="delivery-info-list" style="list-style: none;">
+              <li>
+                <p>이름</p>  
+                <input type="text" placeholder="받는 분 이름을 입력해 주세요." name=""/>
+              </li>
+              <li>
+                <p>연락처</p>
+                <input type="text" placeholder="-없이 입력해 주세요." name=""> 
+              </li>
+              <li>
+                <p>주소</p>
+                <div>
+                  <input type="text" id="postcode" style="width: 70%">
+                  <input type="button" value="주소찾기" style="width: 20%" onclick="DaumPostcode()"><br>
+                  <input type="text" id="address"><br>
+                  <input type="text" id="detail-address">
+                </div>
+              </li>
+              <li>
+                <p>요청사항</p>
+                <select name="requests" form="form id">
+                  <option value="">배송시 요청사항을 선택해 주세요.</option>
+                  <option value="직접 수령">직접 수령하겠습니다.</option>
+                  <option value="배송전 연락">배송 전 연락바랍니다.</option>
+                  <option value="경비실">부재 시 경비실에 맡겨주세요.</option>
+                  <option value="문앞">부재 시 문앞에 놓아주세요.</option>
+                  <option value="택배함">부재 시 택배함에 넣어주세요.</option>
+                  <option value="">직접 입력</option>
+                </select>
+              </li>
+            </ol>
           </div>
+        </form>
+
+        <!-- 결제정보 -->
+        <div class="order-summary" id="summaryDiv">
+          <h3> 결제정보 </h3>
+          <table id="ordersummary-table">
+            <tbody>
+              <tr>
+                <td align="left">상품수</td>
+                <td align="right" id="p-amount"></td>
+              </tr>
+              <tr>
+                <td align="left">상품금액</td>
+                <td align="right" id="p-price"></td>
+              </tr>
+              <tr>
+                <td align="left">배송비</td>
+                <td align="right" id="p-shipping"></td>
+              </tr>
+            </tbody>     
+          </table>
+          <div id="p-total"> 총 결제금액 <div id="p-total-price"> </div></div>
+          <input type="button" value="구매하기" id="purchase-btn" form="delivery-form">
         </div>
+      </div>
 
     </div>
   </body>
