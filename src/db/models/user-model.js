@@ -9,7 +9,7 @@ export class UserModel {
     return user;
   }
 
-  async findById(userId) { 
+  async findById(userId) {
     const user = await User.findOne({ _id: userId });
     return user;
   }
@@ -31,12 +31,6 @@ export class UserModel {
     const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
   }
-  async delete(email){
-    // const filter={email};
-     const deleteUser= await User.findOneAndDelete({email:email});
-     return deleteUser;
- 
-   }
 }
 
 const userModel = new UserModel();

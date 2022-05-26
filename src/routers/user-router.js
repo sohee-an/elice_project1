@@ -134,18 +134,4 @@ userRouter.patch(
   }
 );
 
-
-userRouter.delete('/del/:id', async function(req,res,next){
- try{  
-  const deltEmail =req.params.id; 
-  
-  console.log(deltEmail) ;
-  const deletuser = await userService.deleteOneUser(deltEmail);
-  res.json(deletuser);
- }catch(error){
-  next(error);
- }
-
-});
-
 export { userRouter };
