@@ -1,5 +1,8 @@
 import { sidebar } from '../sidebar/sidebar.js';
+import { changeNavbar, handleLogoutBtn } from '../navbar/navbar.js';
 sidebar();
+changeNavbar();
+handleLogoutBtn();
 
 document.addEventListener('DOMContentLoaded', () => {
 
