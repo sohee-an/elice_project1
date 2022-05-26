@@ -4,9 +4,23 @@ import { viewsRouter, userRouter, categoryRouter, productRouter, orderRouter } f
 import { errorHandler } from './middlewares';
 
 const app = express();
+const data = require('./data-back.js'); //데이터 가져오기
 
 // CORS 에러 방지
 app.use(cors());
+
+//프-박재현
+app.get('/api/products/test', (req, res) => {
+  res.send(data.products);
+});
+app.get('/api/products/test/:id', (req, res) => {
+  const product = data.products.find((x) => x._id === req.params.id);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: 'Product Not Found!' });
+  }
+});
 
 // Content-Type: application/json 형태의 데이터를 인식하고 핸들링할 수 있게 함.
 app.use(express.json());
