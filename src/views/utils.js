@@ -3,5 +3,7 @@ export const parseRequestUrl = () =>{
   const request = url.split("/");
   return {
     resource: request[1],
+    id: request[2],
+    verb: request[3],
   }
 }
