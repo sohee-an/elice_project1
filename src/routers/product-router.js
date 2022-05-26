@@ -8,10 +8,10 @@ const productRouter = Router();
 //////////////////////이미지 저장을 위한 코드//////////////////////
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/')
+        cb(null, 'uploads/products/')
     },
     filename: function (req, file, cb) {
-        cb(null, `${Date.now()}_${file.originalname}`)
+        cb(null, `${file.originalname}`)
     }
 });
 
@@ -41,6 +41,8 @@ productRouter.post('/register', upload.single('img'), async (req, res, next) => 
     const { name, price, description, brand, largeCategory, mediumCategory } = req.body
     const category = await categoryService.getSpecificCategory({ largeCategory, mediumCategory })
     const category_id = category._id;
+
+    console.log(req.file);
 
     const product = await productService.addProduct({
         name,

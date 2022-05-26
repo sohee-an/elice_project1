@@ -30,6 +30,7 @@
   left: 35%;
 }
 .hidden {
+  display: none !important;
   visibility: hidden;
 }
 .left:hover, .right:hover {
