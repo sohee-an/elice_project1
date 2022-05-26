@@ -1,8 +1,5 @@
-<<<<<<< HEAD:src/views/login/login.css
-=======
 @import '../common/sidebar/sidebar.css';
 
->>>>>>> backend-product-api:client/src/views/login/login.css
 .login-form-container {
   display: flex;
   align-items: center;

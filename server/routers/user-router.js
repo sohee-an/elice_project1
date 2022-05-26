@@ -136,27 +136,18 @@ userRouter.patch(
 );
 
 
-userRouter.delete('/del/:pwd',loginRequired, async function(req,res,next){
-    //로그인된 유저의 ObjectId를 가쟈온것
-    try{
+userRouter.delete('/del/:pwd', loginRequired, async function (req, res, next) {
+  //로그인된 유저의 ObjectId를 가쟈온것
+  try {
     const userId = req.currentUserId; // 로그인된 유저의 아이디 가지고옴 
     const pwd = req.params.pwd;// 현재 적은 비밀번호가지고옴 
 
-    const findPassword = await userService.delteUser(userId,pwd);// 로그인 된 비밀번호와  현재 적은 비밀번호를 보낸다 .
+    const findPassword = await userService.delteUser(userId, pwd);// 로그인 된 비밀번호와  현재 적은 비밀번호를 보낸다 .
     res.status(200).json(findPassword);
-    }catch(error){
-      next(err);
-    }
-    
-  });
- 
-   
+  } catch (error) {
+    next(err);
+  }
 
-    
-   
-    
-
-
-
+});
 
 export { userRouter };

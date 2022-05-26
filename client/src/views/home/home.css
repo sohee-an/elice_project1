@@ -1,13 +1,3 @@
-<<<<<<< HEAD:src/views/home/home.css
-.div-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
-.landing {
-=======
 @import '../common/sidebar/sidebar.css';
 /* .div-container img {
   width: 540px;
@@ -15,19 +5,16 @@
 } */
 /* 
 .shopmen {
->>>>>>> backend-product-api:client/src/views/home/home.css
   cursor: pointer;
   border: 1px solid red;
   padding: 10px;
 }
 
-.greeting {
+.shopwomen {
   cursor: pointer;
   border: 1px solid blue;
   padding: 10px;
   margin-left: 3rem;
-<<<<<<< HEAD:src/views/home/home.css
-=======
 } */
 /* 
 .mainpagecontainer {
@@ -52,7 +39,6 @@
 
 .main_categories {
   display: block;
->>>>>>> backend-product-api:client/src/views/home/home.css
 }
 
 .main_category_section {

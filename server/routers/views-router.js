@@ -3,17 +3,17 @@ import path from 'path';
 
 const viewsRouter = express.Router();
 
+//서버 이미지를 사용하기 위한 라우터
+viewsRouter.use('/uploads', express.static('uploads'))
+
 // 페이지별로 html, css, js 파일들을 라우팅함
 // 아래와 같이 하면, http://localhost:5000/ 에서는 views/home/home.html 파일을,
 // http://localhost:5000/register 에서는 views/register/register.html 파일을 화면에 띄움
 viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
-<<<<<<< HEAD:src/routers/views-router.js
-=======
 viewsRouter.use('/products', serveStatic('products'))
 viewsRouter.use('/cart', serveStatic('cart'));
->>>>>>> backend-product-api:server/routers/views-router.js
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));

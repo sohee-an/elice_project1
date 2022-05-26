@@ -1,8 +1,5 @@
-<<<<<<< HEAD:src/views/register/register.css
-=======
 @import '../common/sidebar/sidebar.css';
 
->>>>>>> backend-product-api:client/src/views/register/register.css
 .register-user-form-container {
   display: flex;
   align-items: center;
