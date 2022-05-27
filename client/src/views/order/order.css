@@ -1,3 +1,5 @@
+@import "../common/sidebar/sidebar.css";
+
 .div-container {
   display: flex;
   flex-direction: column;
