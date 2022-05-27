@@ -1,11 +1,15 @@
 // products.html과 연결
 import { sidebar } from '../common/sidebar/sidebar.js';
+import { changeNavbar, handleLogoutBtn } from "../common/navbar/navbar.js";
 import Products_screen from "./products_screen.js";
 import { parseRequestUrl } from './utils.js';
 import ProductScreen from './screens/ProductScreen.js';
 import Error404Screen from './screens/Error404Screen.js';
 
 sidebar();
+changeNavbar();
+handleLogoutBtn();
+
 const routes = {
   "/": Products_screen,
   "/product/:id": ProductScreen,
