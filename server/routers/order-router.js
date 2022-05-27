@@ -11,10 +11,6 @@ orderRouter.post('/', async (req, res, next) => {
 
 })
 
-orderRouter.patch('/', async (req, res, next) => {
-
-})
-
 orderRouter.delete('/', async (req, res, next) => {
 
 })
