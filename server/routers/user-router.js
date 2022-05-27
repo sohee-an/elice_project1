@@ -53,7 +53,6 @@ userRouter.post('/login', async function (req, res, next) {
 
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
-    console.log(userToken);
 
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
     res.status(200).json(userToken);
@@ -145,7 +144,7 @@ userRouter.delete('/del/:pwd', loginRequired, async function (req, res, next) {
     const findPassword = await userService.delteUser(userId, pwd);// 로그인 된 비밀번호와  현재 적은 비밀번호를 보낸다 .
     res.status(200).json(findPassword);
   } catch (error) {
-    next(err);
+    next(error);
   }
 
 });

@@ -1,4 +1,5 @@
 @import '../common/sidebar/sidebar.css';
+@import '../common/navbar/navbar.css';
 
 .register-user-form-container {
   display: flex;

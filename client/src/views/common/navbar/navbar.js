@@ -18,6 +18,7 @@ function handleLogoutBtn() {
   logoutBtn.addEventListener('click', () => {
     // 로컬스토리지에서 토큰 삭제
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     // 기본 페이지로 이동
     window.location.href = '/';
   })

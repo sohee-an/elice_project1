@@ -16,11 +16,11 @@ const Products_screen = {
           (product) => `
         <li>
           <div class="product">
-          <a href="/product/${product._id}">
+          <a href="#/product/${product._id}">
             <img src="/uploads/${product.image}" alt="${product.name}">
           </a>
           <div class="product-name">
-            <a href="/product/${product._id}">
+            <a href="#/product/${product._id}">
               ${product.name}
             </a>
           </div>
@@ -28,7 +28,7 @@ const Products_screen = {
             ${product.brand}
           </div>
           <div class="product-price">
-            ${product.price} ￦
+            ${product.price} 원
           </div>
         </div>
         </li>
