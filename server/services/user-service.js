@@ -39,13 +39,10 @@ class UserService {
   async getUserToken(loginInfo) {
     // 객체 destructuring
     const { email, password } = loginInfo;
-    console.log("이건 비밀번호");
-    console.log(password);
 
     // 우선 해당 이메일의 사용자 정보가  db에 존재하는지 확인
     const user = await this.userModel.findByEmail(email);
-    console.log("찾은 유저다")
-    console.log(user);
+
     if (!user) {
       throw new Error(
         '해당 이메일은 가입 내역이 없습니다. 다시 한 번 확인해 주세요.'
@@ -75,7 +72,7 @@ class UserService {
     // 2개 프로퍼티를 jwt 토큰에 담음
     const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
 
-    return { token };
+    return { token, role: user.role };
   }
 
   // 사용자 목록을 받음.
@@ -158,19 +155,8 @@ class UserService {
 
     }
 
-
-
-
-
   }
 
-  // 회원탈퇴 
-  // async deleteOneUser(userEmail){
-  // let  email= userEmail;
-  // console.log(userEmail);
-  //   let user =await this.userModel.delete(userEmail);
-  //   return user;
-  // }
 }
 
 const userService = new UserService(userModel);
