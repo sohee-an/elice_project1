@@ -42,7 +42,7 @@ productRouter.get('/', async (req, res, next) => {
 productRouter.get('/:id', async (req, res, next) => {
     const id = req.params.id;
 
-    const product = await productRouter.getProductDetail(id);
+    const product = await productService.getProductDetail(id);
 
     res.status(200).json(product)
 })
