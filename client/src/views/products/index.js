@@ -26,6 +26,7 @@ const router = async () => {
 
   const main = document.getElementById("producItemContainer");
   main.innerHTML = await screen.render();
+  await screen.after_render();
 }
 //페이지 로드 시
 window.addEventListener('load', router);
