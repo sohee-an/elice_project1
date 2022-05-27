@@ -21,15 +21,16 @@ const items = [{
     quantity: 3,
 }];
 
-createItemList(items);
-getPaymentInfo(items);
+createItemList();
+updateItemList();
+
 
 // 아이템 렌더링을 위한 div 생성
-/** Needed
+/** 추가 구현
  * 아이템 개수 +, - 기능 ==> 
  * 아이템 삭제 기능
  */
-function createItemList(items) {
+function createItemList() {
 
     let newItems=``;
     if(items.length==0) newItems=`<li>장바구니가 비어있습니다.</li>`;
@@ -41,11 +42,9 @@ function createItemList(items) {
             <div class="item-info">
                 <p>${cur.name}</p>
                 <div class="quantity">
-                    <table class="quantity-control">
-                        <tr><input type="button" value="-" class="minus-btn" id="minus-${cur._id}"></tr>
-                        <tr><input type="number" id="qunatity-input-${cur._id}" min="1" max="50" value="${cur.quantity}"/></tr>
-                        <tr><input type="button" value="+" class="plus-btn" id="plus-${cur._id}"></tr>
-                    </table>
+                    <input type="button" value="-" class="minus-btn" id="minus-${cur._id}" />
+                    <input type="number" class="quantity-input" id="quantity-${cur._id}" min="1" max="50" value="${cur.quantity}"/>
+                    <input type="button" value="+" class="plus-btn" id="plus-${cur._id}" />
                 </div>
             </div>
             <div class="item-price">
@@ -55,15 +54,46 @@ function createItemList(items) {
     </li>
     `}, ``);
    itemListElem.innerHTML = newItems; 
+    getPaymentInfo();
 
 } 
 
+function updateItemList() {
+    const quantityControlElem = document.querySelectorAll(".quantity");
+    quantityControlElem.forEach( elem => {
+
+        const minusElem = elem.querySelector('.minus-btn');
+        const plusElem = elem.querySelector('.plus-btn');
+        const inputElem = elem.querySelector('.quantity-input');
+        const elem_id=inputElem.id.split('-')[1];   // 해당 아이템 아이디
+
+        minusElem.addEventListener("click", async () =>{
+            if(inputElem.value > 1){   // 아이템이 1개 이상일 때 수량 감소가능
+                items.find( e => e._id==elem_id ).quantity--;
+                inputElem.value--;
+                getPaymentInfo();
+            } 
+        })
+        plusElem.addEventListener("click", async () =>{
+            if(inputElem.value < 100){   // 아이템이 100개 이하일 때 수량 증가가능
+                items.find( e => e._id==elem_id ).quantity++;
+                inputElem.value++;
+                getPaymentInfo();
+            } 
+        })
+    })
+}
+
+function deleteItem() {
+    
+}
+
 // 결제 정보 보여주기 
-/** Needed
+/** 추가 구현 ***
  * 결제 정보 암호화 저장
  * 
  */
-function getPaymentInfo(items) {
+function getPaymentInfo() {
     const amountElem = document.getElementById('p-amount');
     const priceElem = document.getElementById('p-price');
     const shippingElem = document.getElementById('p-shipping');
