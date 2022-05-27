@@ -144,7 +144,7 @@ userRouter.delete('/del/:pwd', loginRequired, async function (req, res, next) {
     const findPassword = await userService.delteUser(userId, pwd);// 로그인 된 비밀번호와  현재 적은 비밀번호를 보낸다 .
     res.status(200).json(findPassword);
   } catch (error) {
-    next(err);
+    next(error);
   }
 
 });
