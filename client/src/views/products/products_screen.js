@@ -28,7 +28,7 @@ const Products_screen = {
             ${product.brand}
           </div>
           <div class="product-price">
-            ${product.price} ￦
+            ${product.price} 원
           </div>
         </div>
         </li>
