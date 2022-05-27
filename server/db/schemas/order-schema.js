@@ -12,14 +12,18 @@ const OrderSchema = new Schema({
     quantity: {
         type: Number,
     },
-    postalCode: {
-        type: String
-    },
-    address1: {
-        type: String
-    },
-    address2: {
-        type: String
+    address: {
+        type: new Schema(
+            {
+                postalCode: String,
+                address1: String,
+                address2: String,
+            },
+            {
+                _id: false,
+            }
+        ),
+        required: false,
     }
 }, {
     timestamps: true,
