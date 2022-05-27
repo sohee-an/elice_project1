@@ -128,10 +128,10 @@ export const getProduct = async (id) => {
         'Content-Type': 'application/json',
       },
     });
-    if (response.statusText !== 'OK') {
+    if (!response.ok) {
       throw new Error(response.data.message);
     }
-    return response.data;
+    return response.json();
   } catch (err) {
     console.log(err);
     return { error: err.response.data.message || err.message };
