@@ -15,7 +15,7 @@ class ProductModel {
     }
 
     async findOneById(product_id) {
-        const product = await Product.findOne({ _id: product_id })
+        const product = await Product.findOne({ _id: product_id }).populate('category_id');
         return product;
     }
 

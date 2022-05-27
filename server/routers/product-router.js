@@ -38,7 +38,7 @@ productRouter.get('/', async (req, res, next) => {
     res.status(200).json(filteredProducts);
 })
 
-//상품 상세 목록 구현 필요
+
 productRouter.get('/:id', async (req, res, next) => {
     const id = req.params.id;
 
