@@ -13,19 +13,7 @@ const purchaseBtnElem = document.getElementById("purchase-btn");
  * local storage와 연결 필요
  */
 
-const items = [{
-    _id: '1',
-    name: '점퍼',
-    image: '/uploads/product-1.jpg',
-    price: 15000,
-    quantity: 1,
-}, {
-    _id: '2',
-    name: '셔츠',
-    image: '/uploads/product-2.jpg',
-    price: 150000,
-    quantity: 3,
-}];
+const items = 
 
 createItemList();
 updateItemList();
@@ -153,40 +141,4 @@ async function purchaseBtn(e) {
         alert('구매를 위해서는 로그인해야 합니다.')
     }
   
-    // 잘 입력했는지 확인
-    const isEmailValid = validateEmail(email);
-    const isPasswordValid = password.length >= 4;
-  
-    if (!isEmailValid || !isPasswordValid) {
-      return alert(
-        '비밀번호가 4글자 이상인지, 이메일 형태가 맞는지 확인해 주세요.'
-      );
-    }
-  
-  
-    // 로그인 api 요청
-    try {
-      const data = { email, password };
-  
-      const result = await Api.post('/api/login', data);
-      const token = result.token;
-      const role = result.role;
-  
-      // 로그인 성공, 토큰을 세션 스토리지에 저장
-      // 물론 다른 스토리지여도 됨
-      localStorage.setItem('token', token);
-      localStorage.setItem('role', role);
-  
-      alert(`정상적으로 로그인되었습니다.`);
-      // 로그인 성공
-  
-      // TODO: db와 로그인 폼 입력값 비교해서 맞으면 로그인 성공
-      // TODO: 관리자 계정
-  
-      // 기본 페이지로 이동
-      window.location.href = '/';
-    } catch (err) {
-      console.error(err.stack);
-      alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-    }
 }
