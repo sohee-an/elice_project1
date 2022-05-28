@@ -1,5 +1,10 @@
-import { addCommas, convertToNumber } from '/useful-functions.js';
+import { addCommas, convertToNumber } from '../useful-functions.js';
 import * as Api from '/api.js'
+import { sidebar } from '../common/sidebar/sidebar.js'
+import { changeNavbar, handleLogoutBtn } from '../common/navbar/navbar.js';
+sidebar();
+changeNavbar();
+handleLogoutBtn();
 
 const itemListElem = document.getElementById("item-list");
 const purchaseBtnElem = document.getElementById("purchase-btn");
@@ -34,9 +39,10 @@ deleteItem();
  */
 function createItemList() {
 
-    let newItems=``;
-    if(items.length==0) newItems=`<li>장바구니가 비어있습니다.</li>`;
-    else newItems = items.reduce((acc, cur) => { return acc + ` <li id="item${cur.item}">
+    let newItems = ``;
+    if (items.length == 0) newItems = `<li>장바구니가 비어있습니다.</li>`;
+    else newItems = items.reduce((acc, cur) => {
+        return acc + ` <li id="item${cur.item}">
         <div class="item"> 
             <div> <input type="checkbox" class="checked" id="checkbox-${cur._id}" checked/> </div>
             
@@ -50,38 +56,40 @@ function createItemList() {
                 </div>
             </div>
             <div class="item-price">
-                <p>${cur.price}원</p> X <p>${cur.quantity}개</p> = <p> ${cur.price*cur.quantity}원 </p>
+                <p>${cur.price}원</p> X <p>${cur.quantity}개</p> = <p> ${cur.price * cur.quantity}원 </p>
             </div>
         </div>
     </li>
     `}, ``);
-   itemListElem.innerHTML = newItems; 
+    itemListElem.innerHTML = newItems;
     getPaymentInfo();
 
-} 
+}
 
 function updateItemList() {
     const quantityControlElem = document.querySelectorAll(".quantity");
-    quantityControlElem.forEach( elem => {
+    quantityControlElem.forEach(elem => {
 
         const minusElem = elem.querySelector('.minus-btn');
         const plusElem = elem.querySelector('.plus-btn');
         const inputElem = elem.querySelector('.quantity-input');
-        const elem_id=inputElem.id.split('-')[1];   // 해당 아이템 아이디
+        const elem_id = inputElem.id.split('-')[1];   // 해당 아이템 아이디
+
 
         minusElem.addEventListener("click", () =>{
             if(inputElem.value > 1){   // 아이템이 1개 이상일 때 수량 감소가능
                 items.find( e => e._id==elem_id ).quantity--;
                 inputElem.value--;
                 getPaymentInfo();
-            } 
+            }
         })
         plusElem.addEventListener("click", () =>{
             if(inputElem.value < 100){   // 아이템이 100개 이하일 때 수량 증가가능
                 items.find( e => e._id==elem_id ).quantity++;
+
                 inputElem.value++;
                 getPaymentInfo();
-            } 
+            }
         })
     })
 }
@@ -124,15 +132,15 @@ function getPaymentInfo() {
     const shippingElem = document.getElementById('p-shipping');
     const totalElem = document.getElementById('p-total-price');
 
-    let itemAmount= items.reduce((acc, cur) => acc+Number(cur.quantity), 0);
-    let itemPrice= items.reduce((acc, cur) => acc+Number((cur.price*cur.quantity)), 0);
-    let shippingPrice=3000;
-    let totalPrice=itemPrice+shippingPrice;
+    let itemAmount = items.reduce((acc, cur) => acc + Number(cur.quantity), 0);
+    let itemPrice = items.reduce((acc, cur) => acc + Number((cur.price * cur.quantity)), 0);
+    let shippingPrice = 3000;
+    let totalPrice = itemPrice + shippingPrice;
 
-    amountElem.innerText=addCommas(itemAmount);
-    priceElem.innerText=addCommas(itemPrice);
-    shippingElem.innerText=addCommas(shippingPrice);
-    totalElem.innerText=addCommas(totalPrice); 
+    amountElem.innerText = addCommas(itemAmount);
+    priceElem.innerText = addCommas(itemPrice);
+    shippingElem.innerText = addCommas(shippingPrice);
+    totalElem.innerText = addCommas(totalPrice);
 }
 
 async function purchaseBtn(e) {
@@ -181,4 +189,4 @@ async function purchaseBtn(e) {
       console.error(err.stack);
       alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
     }
-  }
+}

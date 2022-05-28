@@ -92,3 +92,15 @@
 .button-submit {
   margin-top: 20px;
 }
+
+.modal .delete {
+  background: transparent;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+}
+
+.modal .delete::before,
+.modal .delete::after {
+  background-color: #000;
+}

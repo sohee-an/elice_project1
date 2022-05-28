@@ -1,4 +1,6 @@
 @import '../common/sidebar/sidebar.css';
+@import '../common/navbar/navbar.css';
+
 /* .div-container img {
   width: 540px;
   height: 750px;
@@ -36,7 +38,6 @@
 .left:hover, .right:hover {
   opacity: 0.5;
 } */
-
 .main_categories {
   display: block;
 }

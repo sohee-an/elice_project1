@@ -26,7 +26,7 @@
           <span class="has-text-link">쇼핑-3팀</span>
         </a>
 
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -34,7 +34,9 @@
       </div>
 
       <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-        <ul id="navbar">
+        <!-- 로그인 안했을 때 -->
+        <ul id="navbar" class="login-hidden">
+          <li><a href="/products">VIEW ALL</a></li>
           <li><a href="/login">로그인</a></li>
           <li><a href="/register">회원가입</a></li>
           <li>
@@ -42,12 +44,23 @@
               <span class="icon">
                 <i class="fas fa-cart-shopping"></i>
               </span>
-              <span>카트</span>
+            </a>
+          </li>
+        </ul>
+        <!-- 로그인 했을 때 -->
+        <ul id="navbar" class="logout-hidden hidden">
+          <li><a href="/products">VIEW ALL</a></li>
+          <li><a href="/">계정관리</a></li>
+          <li><a class="logout-btn" href="/">로그아웃</a></li>
+          <li>
+            <a href="/cart" aria-current="page">
+              <span class="icon">
+                <i class="fas fa-cart-shopping"></i>
+              </span>
             </a>
           </li>
         </ul>
       </div>
-    </div>
     </div>
   </nav>
 
@@ -82,6 +95,7 @@
         <div class="select-container">
           <input type="checkbox" id="select-all"/>
           <a href="#" id="delete-all">전체삭제</a> | <a href="#" id="delete-selected">선택삭제</a>
+
         </div>
         <ol style="list-style: none;" id="item-list">
 
@@ -105,9 +119,12 @@
               <td align="left">배송비</td>
               <td align="right" id="p-shipping"></td>
             </tr>
-          </tbody>     
+          </tbody>
         </table>
-        <div class="p-total"> <p>총 결제금액 </p><p id="p-total-price" align="right"> </p></div>
+        <div class="p-total">
+          <p>총 결제금액 </p>
+          <p id="p-total-price" align="right"> </p>
+        </div>
         <input type="button" value="구매하기" id="purchase-btn">
       </div>
     </div>
