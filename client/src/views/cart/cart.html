@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>쇼핑-3팀</title>
+  <!-- 아이콘 -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/elice-rabbit-favicon.png" />
+  <!-- bulma css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+  <!-- 폰트 어썸: 아이콘 -->
+  <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+  <!-- 커스텀 css, js -->
+  <link rel="stylesheet" href="cart.css" />
+  <script src="cart.js" type="module" defer></script>
+</head>
+
+<body>
+  <!-- 헤더 -->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container mt-3">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img src="../images/elice-rabbit.png" width="30" height="30" />
+          <span class="has-text-link">쇼핑-3팀</span>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+        <!-- 로그인 안했을 때 -->
+        <ul id="navbar" class="login-hidden">
+          <li><a href="/products">VIEW ALL</a></li>
+          <li><a href="/login">로그인</a></li>
+          <li><a href="/register">회원가입</a></li>
+          <li>
+            <a href="/cart" aria-current="page">
+              <span class="icon">
+                <i class="fas fa-cart-shopping"></i>
+              </span>
+            </a>
+          </li>
+        </ul>
+        <!-- 로그인 했을 때 -->
+        <ul id="navbar" class="logout-hidden hidden">
+          <li><a href="/products">VIEW ALL</a></li>
+          <li><a href="/">계정관리</a></li>
+          <li><a class="logout-btn" href="/">로그아웃</a></li>
+          <li>
+            <a href="/cart" aria-current="page">
+              <span class="icon">
+                <i class="fas fa-cart-shopping"></i>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 사이드 메뉴 -->
+  <aside class="side-menu hidden">
+    <h3 class="sr-only">사이드 메뉴</h3>
+    <div class="top">
+      <i class="fa-duotone fa-x"></i>
+    </div>
+    <ul class="login-hidden">
+      <!-- 로그인 안했을 때 -->
+      <li><a href="/register">회원가입</a></li>
+      <li><a href="/login">로그인</a></li>
+      <li><a href="/cart">카트</a></li>
+    </ul>
+    <ul class="logout-hidden">
+      <!-- 로그인 했을 때 -->
+      <li><a href="/">계정관리</a></li>
+      <li><a class="logout-btn" href="/">로그아웃</a></li>
+      <li><a href="/cart">카트</a></li>
+    </ul>
+  </aside>
+
+  <!--- 카트 구현 --->
+  <div class="div-container">
+    <div class="order-header" id="processDiv">
+      <p class="cur-process"> 장바구니 </p>
+      <p> &gt; 주문결제 &gt; 주문완료 </p>
+    </div>
+    <div class="order-body">
+
+      <!-- 장바구니 정보 -->
+      <div class="order-iteminfo" id="iteminfoDiv">
+        <div class="select-container">
+          <input type="checkbox" />
+          <a href="#">전체선택</a> | <a href="#">선택삭제</a>
+        </div>
+        <ol style="list-style: none;" id="item-list">
+
+        </ol>
+      </div>
+
+      <!-- 결제정보 -->
+      <div class="order-summary" id="summaryDiv">
+        <h3> 결제정보 </h3>
+        <table id="ordersummary-table">
+          <tbody>
+            <tr>
+              <td align="left">상품수</td>
+              <td align="right" id="p-amount"></td>
+            </tr>
+            <tr>
+              <td align="left">상품금액</td>
+              <td align="right" id="p-price"></td>
+            </tr>
+            <tr>
+              <td align="left">배송비</td>
+              <td align="right" id="p-shipping"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="p-total">
+          <p>총 결제금액 </p>
+          <p id="p-total-price" align="right"> </p>
+        </div>
+        <input type="button" value="구매하기" id="purchase-btn">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

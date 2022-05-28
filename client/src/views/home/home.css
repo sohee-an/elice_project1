@@ -1,0 +1,70 @@
+@import '../common/sidebar/sidebar.css';
+@import '../common/navbar/navbar.css';
+
+/* .div-container img {
+  width: 540px;
+  height: 750px;
+} */
+/* 
+.shopmen {
+  cursor: pointer;
+  border: 1px solid red;
+  padding: 10px;
+}
+
+.shopwomen {
+  cursor: pointer;
+  border: 1px solid blue;
+  padding: 10px;
+  margin-left: 3rem;
+} */
+/* 
+.mainpagecontainer {
+  display: flex;
+}
+.left, .right {
+  position: relative;
+  transition: all 0.3s;
+}
+.mainpagecontainer p {
+  position: absolute;
+  top: 50%;
+  left: 35%;
+}
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+.left:hover, .right:hover {
+  opacity: 0.5;
+} */
+.main_categories {
+  display: block;
+}
+
+.main_category_section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.main_categories_multicontainer {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 16px;
+}
+
+div {
+  display: block;
+}
+
+.category_image_container {
+  position: relative;
+}
