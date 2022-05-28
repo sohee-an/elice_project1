@@ -1,3 +1,8 @@
+import { sidebar } from '../common/sidebar/sidebar.js'
+import { changeNavbar, handleLogoutBtn } from '../common/navbar/navbar.js';
+sidebar();
+changeNavbar();
+handleLogoutBtn();
 
 /* 다음 우편번호 서비스 api 사용 코드 */
 function DaumPostcode() {
