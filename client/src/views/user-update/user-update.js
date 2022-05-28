@@ -67,9 +67,7 @@ saveBtn.addEventListener("click", async (e) => {
 
     // 토큰 삭제
     localStorage.removeItem("token");
-
-    // 기본 페이지로 이동
-    window.location.href = "/";
+    
   } catch (err) {
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }

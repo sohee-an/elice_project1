@@ -1,14 +1,14 @@
 // 로그인 했을 때 / 안했을 때 navbar UI 바뀜
 function changeNavbar() {
-  const loginHidden = document.querySelector('.login-hidden');
-  const logoutHidden = document.querySelector('.logout-hidden');
+  const loginHidden = document.querySelectorAll('.login-hidden');
+  const logoutHidden = document.querySelectorAll('.logout-hidden');
 
   if (localStorage.getItem('token')) {
-    loginHidden.classList.add('hidden');
-    logoutHidden.classList.remove('hidden');
+    loginHidden.forEach(el => {el.classList.add('hidden')});
+    logoutHidden.forEach(el => {el.classList.remove('hidden')});
   } else {
-    logoutHidden.classList.add('hidden');
-    loginHidden.classList.remove('hidden');
+    loginHidden.forEach(el => {el.classList.remove('hidden')});
+    logoutHidden.forEach(el => {el.classList.add('hidden')});
   }
 }
 
