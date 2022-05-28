@@ -1,11 +1,14 @@
 import { parseRequestUrl } from '../utils.js'
 import { getProduct } from '../../api.js';
+import { addToCart } from '../../localStorage.js';
 
-const ProductScreen = {
+export const ProductScreen = {
   after_render: () => {
-    const request = parseRequestUrl();
     document.getElementById('add-button').addEventListener('click', () => {
-      document.location.hash = `/cart/${request.id}`;
+      renderCart()
+    });
+    document.getElementById('cart-button').addEventListener('click', () => {
+      renderCart()
     });
   },
   render: async () => {
@@ -46,7 +49,8 @@ const ProductScreen = {
             <li>
               Price: ${product.price} 원
             </li>
-              <button id="add-button" class="fw primary">Add to Cart</div>
+              <button id="add-button" class="fw primary">Add to Cart</button>
+              <a href="/cart"><button id="cart-button" class="fw primary">Buy Now</button></a>
           </ul>
         </div>
       </div>
@@ -54,5 +58,19 @@ const ProductScreen = {
     `;
   },
 };
+
+async function renderCart () {
+  const request = parseRequestUrl();
+  if (request.id) {
+    const product = await getProduct(request.id);
+    addToCart({
+      id: product._id,
+      name:product.name,
+      image:product.image,
+      price: product.price,
+      quantity:1,
+    })
+  }
+}
 
 export default ProductScreen;
