@@ -1,8 +1,37 @@
 import { sidebar } from '../common/sidebar/sidebar.js'
 import { changeNavbar, handleLogoutBtn } from '../common/navbar/navbar.js';
+import { getCartItems, setCartItems, addToCart, removeFromCart} from '../localStorage.js';
+import { addCommas, convertToNumber } from '../useful-functions.js';
+//import daum from 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
+
+
 sidebar();
 changeNavbar();
 handleLogoutBtn();
+
+document.getElementById('findPostcode').addEventListener("click", DaumPostcode)
+getPaymentInfo();
+
+function getPaymentInfo() {
+    let items = getCartItems();
+
+    const amountElem = document.getElementById('p-amount');
+    const priceElem = document.getElementById('p-price');
+    const shippingElem = document.getElementById('p-shipping');
+    const totalElem = document.getElementById('p-total-price');
+
+    let itemAmount = items.reduce((acc, cur) => acc + Number(cur.quantity), 0);
+    let itemPrice = items.reduce((acc, cur) => acc + Number((cur.price * cur.quantity)), 0);
+    let shippingPrice = 3000;
+    let totalPrice = itemPrice + shippingPrice;
+
+    amountElem.innerText = addCommas(itemAmount);
+    priceElem.innerText = addCommas(itemPrice);
+    shippingElem.innerText = addCommas(shippingPrice);
+    totalElem.innerText = addCommas(totalPrice);
+}
+
+
 
 /* 다음 우편번호 서비스 api 사용 코드 */
 function DaumPostcode() {
