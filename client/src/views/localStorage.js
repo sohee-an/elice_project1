@@ -19,6 +19,8 @@ export const addToCart = (item) => {
     cartItems = [...cartItems,item];
   }
   setCartItems(cartItems);
-  //로컬스토리지에 업데이트하고 리렌더링
 };
 
+export const removeFromCart = (id)=>{
+  setCartItems(getCartItems().filter(x=>x.id !== id));
+}
