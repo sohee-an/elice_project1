@@ -2,6 +2,8 @@ import { sidebar } from '../common/sidebar/sidebar.js'
 import { changeNavbar, handleLogoutBtn } from '../common/navbar/navbar.js';
 import { getCartItems, setCartItems, addToCart, removeFromCart} from '../localStorage.js';
 import { addCommas, convertToNumber } from '../useful-functions.js';
+import * as Api from '../api.js';
+
 //import daum from 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
 
 
@@ -9,9 +11,63 @@ sidebar();
 changeNavbar();
 handleLogoutBtn();
 
-document.getElementById('findPostcode').addEventListener("click", DaumPostcode)
-getPaymentInfo();
 
+const purchaseBtn = document.getElementById('purchase-btn');
+const findPostcodeBtn = document.getElementById('findPostcode');
+
+getPaymentInfo();
+addAllEvents();
+
+function addAllEvents() {
+    findPostcodeBtn.addEventListener("click", DaumPostcode);
+    purchaseBtn.addEventListener("click", handleSubmit);
+}
+
+async function handleSubmit(e) {
+    e.preventDefault();
+
+    const name = document.querySelector('#d-name').value;
+    const phoneNumber= document.querySelector('#d-phoneNumber').value;
+    const postcode = document.querySelector('#d-postcode').value;
+    const address = document.querySelector('#d-address').value;
+    const detailAddress = document.querySelector('#d-detail-address').value;
+    const orderRequest = document.querySelector('#d-requests').value;
+
+  
+    if (!name || !phoneNumber || !postcode || !detailAddress || !address) {
+        
+      return alert(`주문 정보를 입력해주세요. ${name}님`);
+    }
+    
+    if (localStorage.)
+    // 회원가입 api 요청
+    try {
+        const cartItems = getCartItems().;
+
+
+        const data = { 
+            name,
+            phoneNumber,
+            address : {
+                postalCode: postcode,
+                address1: address,
+                address2: detailAddress,
+            },
+            cartItems : cartItems
+        };
+        
+        await Api.post('/api/order', data);
+
+        alert(`주문 및 결제가 완료되었습니다.`);
+
+        // 로그인 페이지 이동
+        window.location.href = './complete';
+    } catch (err) {
+      console.error(err.stack);
+      alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+    }
+  }
+  
 function getPaymentInfo() {
     let items = getCartItems();
 
@@ -30,8 +86,6 @@ function getPaymentInfo() {
     shippingElem.innerText = addCommas(shippingPrice);
     totalElem.innerText = addCommas(totalPrice);
 }
-
-
 
 /* 다음 우편번호 서비스 api 사용 코드 */
 function DaumPostcode() {
