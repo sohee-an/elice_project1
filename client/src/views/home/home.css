@@ -5,41 +5,45 @@
 nav {
   border-bottom: 3px solid black;
 }
-
-
-.shopmen {
-  cursor: pointer;
-  padding: auto;
-}
-
-.shopwomen {
-  cursor: pointer;
-  padding: auto;
+.navbar-start {
+  flex-grow: 1;
+  justify-content: center;
 }
 
 .mainpagecontainer {
   display: flex;
-  padding-top: 20px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
-
-.mainpagecontainer img {
-  width: 540px;
-  height: auto;
-}
-
-.left, .right {
+.left,.right {
   position: relative;
   transition: all 0.3s;
 }
-.mainpagecontainer p {
+.left p, .right p {
   position: absolute;
   top: 50%;
-  left: 35%;
-}
-.hidden {
-  display: none !important;
-  visibility: hidden;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 24px;
+  font-weight: 700;
+  color: aliceblue;
 }
 .left:hover, .right:hover {
   opacity: 0.5;
+}
+
+@media screen and (min-width: 1024px) {
+  .allcontainer {
+    display: flex;
+  }
+  .outercontainer {
+    display: flex;
+  }
+  .topcontainer {
+    display: flex;
+  } 
+  .bottomcontainer {
+    display: flex;
+  }
 }
