@@ -1,70 +1,53 @@
 @import '../common/sidebar/sidebar.css';
 @import '../common/navbar/navbar.css';
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
 
-/* .div-container img {
-  width: 540px;
-  height: 750px;
-} */
-/* 
-.shopmen {
-  cursor: pointer;
-  border: 1px solid red;
-  padding: 10px;
+nav {
+  border-bottom: 3px solid black;
+}
+.navbar-start {
+  flex-grow: 1;
+  justify-content: center;
+}
+.brandname {
+  font-family: 'Limelight',cursive;
+  font-size: 24px;
 }
 
-.shopwomen {
-  cursor: pointer;
-  border: 1px solid blue;
-  padding: 10px;
-  margin-left: 3rem;
-} */
-/* 
 .mainpagecontainer {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
-.left, .right {
+.left,.right {
   position: relative;
   transition: all 0.3s;
 }
-.mainpagecontainer p {
+.left p, .right p {
   position: absolute;
   top: 50%;
-  left: 35%;
-}
-.hidden {
-  display: none !important;
-  visibility: hidden;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 24px;
+  font-weight: 700;
+  color: aliceblue;
 }
 .left:hover, .right:hover {
   opacity: 0.5;
-} */
-.main_categories {
-  display: block;
 }
 
-.main_category_section {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 32px;
-  margin-bottom: 32px;
-  position: relative;
-}
-
-.main_categories_multicontainer {
-  display: grid;
-  gap: 16px;
-  width: 100%;
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 16px;
-}
-
-div {
-  display: block;
-}
-
-.category_image_container {
-  position: relative;
+@media screen and (min-width: 1024px) {
+  .allcontainer {
+    display: flex;
+  }
+  .outercontainer {
+    display: flex;
+  }
+  .topcontainer {
+    display: flex;
+  } 
+  .bottomcontainer {
+    display: flex;
+  }
 }

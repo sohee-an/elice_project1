@@ -20,7 +20,7 @@ export const ProductScreen = {
     return `
     <div class="content">
       <div class="back-to-result">
-        <a href="/#/">
+        <a href="#/">
           Back to Result
         </a>
       </div>

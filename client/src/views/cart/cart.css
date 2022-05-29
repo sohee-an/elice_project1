@@ -1,4 +1,17 @@
 @import "../common/sidebar/sidebar.css";
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+
+nav {
+  border-bottom: 3px solid black;
+}
+.navbar-start {
+  flex-grow: 1;
+  justify-content: center;
+}
+.brandname {
+  font-family: 'Limelight',cursive;
+  font-size: 24px;
+}
 
 .div-container {
   display: flex;
