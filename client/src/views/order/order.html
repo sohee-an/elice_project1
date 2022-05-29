@@ -5,23 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>쇼핑-3팀</title>
     <!-- 아이콘 -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/elice-rabbit-favicon.png"
-    />
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/elice-rabbit-favicon.png" />
     <!-- bulma css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
     <!-- 폰트 어썸: 아이콘 -->
-    <script
-      defer
-      src="https://kit.fontawesome.com/7630448495.js"
-      crossorigin="anonymous"
-    ></script>
+    <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+    <!-- daum 주소 api -->
+    <!-- <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" crossorigin="anonymous"></script> -->
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="order.css" />
     <script src="order.js" type="module" defer></script>
@@ -32,7 +22,12 @@
       <div class="container mt-3">
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
+<<<<<<< HEAD
+            <img src="../images/elice-rabbit.png" width="30" height="30" />
+            <span class="has-text-link">쇼핑-3팀</span>
+=======
             <span class="has-text-link brandname">SHOPAHOLIC</span>
+>>>>>>> 667f550c4abd6c63f086ce54d74aef994fc5ba16
           </a>
 
           <a
@@ -51,10 +46,11 @@
         <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
           <!-- 로그인 안했을 때 -->
           <ul id="navbar" class="login-hidden">
-            <li><a href="../login/login.html">로그인</a></li>
-            <li><a href="../register/register.html">회원가입</a></li>
+            <li><a href="/products">VIEW ALL</a></li>
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/register">회원가입</a></li>
             <li>
-              <a href="#cart" aria-current="page">
+              <a href="/cart" aria-current="page">
                 <span class="icon">
                   <i class="fas fa-cart-shopping"></i>
                 </span>
@@ -63,10 +59,11 @@
           </ul>
           <!-- 로그인 했을 때 -->
           <ul id="navbar" class="logout-hidden hidden">
+            <li><a href="/products">VIEW ALL</a></li>
             <li><a href="/">계정관리</a></li>
             <li><a class="logout-btn" href="/">로그아웃</a></li>
             <li>
-              <a href="#cart" aria-current="page">
+              <a href="/cart" aria-current="page">
                 <span class="icon">
                   <i class="fas fa-cart-shopping"></i>
                 </span>
@@ -100,7 +97,7 @@
     <!--- 카트 구현 --->
     <div class="div-container">
       <div class="order-header" id="processDiv">
-        <p class="cur-process"> 장바구니 </p> <p> &gt; 주문결제 &gt; 주문완료 </p>
+        <p> 장바구니  &gt; </p> <p class="cur-process"> 주문결제</p> <p> &gt; 주문완료 </p>
       </div>
       <div class="order-body">
         <!-- 배송 정보 -->
@@ -109,24 +106,24 @@
             <ol id="delivery-info-list" style="list-style: none;">
               <li>
                 <p>이름</p>  
-                <input type="text" placeholder="받는 분 이름을 입력해 주세요." name=""/>
+                <input type="text" name="name" id="d-name" placeholder="받는 분 이름을 입력해 주세요." name=""/>
               </li>
               <li>
                 <p>연락처</p>
-                <input type="text" placeholder="-없이 입력해 주세요." name=""> 
+                <input type="text" name="phoneNumber" id="d-phoneNumber" placeholder="-없이 입력해 주세요." name=""> 
               </li>
               <li>
                 <p>주소</p>
                 <div>
-                  <input type="text" id="postcode" style="width: 70%">
-                  <input type="button" value="주소찾기" style="width: 20%" onclick="DaumPostcode()"><br>
-                  <input type="text" id="address"><br>
-                  <input type="text" id="detail-address">
+                  <input type="text" name="postcode" id="d-postcode" style="width: 70%">
+                  <input type="button" value="주소찾기" style="width: 20%" id="findPostcode"><br>
+                  <input type="text" name="address" id="d-address"><br>
+                  <input type="text" name="detailAdress" id="d-detail-address">
                 </div>
               </li>
               <li>
                 <p>요청사항</p>
-                <select name="requests" form="form id">
+                <select name="requests" id="d-requests" form="form id">
                   <option value="">배송시 요청사항을 선택해 주세요.</option>
                   <option value="직접 수령">직접 수령하겠습니다.</option>
                   <option value="배송전 연락">배송 전 연락바랍니다.</option>
@@ -147,25 +144,25 @@
             <tbody>
               <tr>
                 <td align="left">상품수</td>
-                <td align="right" id="p-amount"></td>
+                <td align="right" id="d-amount"></td>
               </tr>
               <tr>
                 <td align="left">상품금액</td>
-                <td align="right" id="p-price"></td>
+                <td align="right" id="d-price"></td>
               </tr>
               <tr>
                 <td align="left">배송비</td>
-                <td align="right" id="p-shipping"></td>
+                <td align="right" id="d-shipping"></td>
               </tr>
-            </tbody>     
+            </tbody>
           </table>
-          <div id="p-total"> 총 결제금액 <div id="p-total-price"> </div></div>
-          <input type="button" value="구매하기" id="purchase-btn" form="delivery-form">
+          <div class="p-total">
+            <p>총 결제금액 </p>
+            <p id="d-total-price" align="right"> </p>
+          </div>
+          <input type="button" value="결제하기" id="purchase-btn" form="delivery-form">
         </div>
       </div>
-
     </div>
   </body>
 </html>
-
-

@@ -1,8 +1,122 @@
 import { sidebar } from '../common/sidebar/sidebar.js'
 import { changeNavbar, handleLogoutBtn } from '../common/navbar/navbar.js';
+import { getCartItems } from '../localStorage.js';
+import { addCommas } from '../useful-functions.js';
+//import { loginRequired } from '../../../../server/middlewares/login-required.js';
+import * as Api from '../api.js';
+
+
 sidebar();
 changeNavbar();
 handleLogoutBtn();
+
+
+const purchaseBtn = document.getElementById('purchase-btn');
+const findPostcodeBtn = document.getElementById('findPostcode');
+
+getPaymentInfo();
+addAllEvents();
+
+
+function addAllEvents() {
+    findPostcodeBtn.addEventListener("click", DaumPostcode);
+    purchaseBtn.addEventListener("click", handleSubmit);
+}
+
+function getPaymentInfo() {
+    let items = getCartItems();
+
+    const amountElem = document.getElementById('d-amount');
+    const priceElem = document.getElementById('d-price');
+    const shippingElem = document.getElementById('d-shipping');
+    const totalElem = document.getElementById('d-total-price');
+
+    let itemAmount = items.reduce((acc, cur) => acc + Number(cur.quantity), 0);
+    let itemPrice = items.reduce((acc, cur) => acc + Number((cur.price * cur.quantity)), 0);
+    let shippingPrice = itemPrice? 3000:0;
+    let totalPrice = itemPrice + shippingPrice;
+
+    amountElem.innerText = addCommas(itemAmount)+'개';
+    priceElem.innerText = '$'+addCommas(itemPrice);
+    shippingElem.innerText = '$'+addCommas(shippingPrice);
+    totalElem.innerText = '$'+addCommas(totalPrice);
+}
+
+
+function getUseridFromJwt(){
+    const userToken = localStorage.getItem(token) || '';
+
+    if(userToken.length==0){ // 유저 토큰이 없을 경우
+        console.log('서비스 사용 요청이 있습니다.하지만, Authorization 토큰: 없음');
+        res.status(403).json({
+            result: 'forbidden-approach',
+            reason: '로그인한 유저만 사용할 수 있는 서비스입니다.',
+        });
+        window.location.href='/login';
+        return;
+    }
+    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+    const jwtDecoded = jwt.verify(userToken, secretKey);
+
+    const userId = jwtDecoded.userId;
+}
+
+async function handleSubmit(e) {
+    e.preventDefault();
+
+    const name = document.querySelector('#d-name').value;
+    const phoneNumber= document.querySelector('#d-phoneNumber').value;
+    const postcode = document.querySelector('#d-postcode').value;
+    const address = document.querySelector('#d-address').value;
+    const detailAddress = document.querySelector('#d-detail-address').value;
+    const orderRequest = document.querySelector('#d-requests').value;
+
+    if(!localStorage.getItem('token')){ // 로그인 안되어있을 경우
+        window.location = '/login';
+        return;
+    }
+
+    if (!name || !phoneNumber || !postcode || !detailAddress || !address) { // 주문 정보 필드 입력이 완료되지 않았을 경우
+        
+      return alert(`주문 정보를 입력해주세요.`);
+    }
+    
+    if (getCartItems().length==0) {   // 장바구니에 물건이 담겨있지 않는 경우
+        alert(`구매할 제품이 없습니다. 제품을 선택해주세요.`);
+        window.location.href ='/products';
+        return;
+    }
+   
+    try {
+        const cartItems = getCartItems().filter(e=>{ return {productId: e.id, quantity: e.quantity}; });
+        const userId = loginRequired;
+        console.log(userId);
+
+        const data = { 
+            userId,
+            name,
+            phoneNumber,
+            address : {
+                postalCode: postcode,
+                address1: address,
+                address2: detailAddress,
+            },
+            orderRequest,
+            cartItems : cartItems
+        };
+        
+        await Api.post('/api/order', data);
+
+        alert(`주문 및 결제가 완료되었습니다.`);
+
+        // 로그인 페이지 이동
+        window.location.href = './complete';
+    } catch (err) {
+      console.error(err.stack);
+      alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+    }
+  }
+  
 
 /* 다음 우편번호 서비스 api 사용 코드 */
 function DaumPostcode() {
