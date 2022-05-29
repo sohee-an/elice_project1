@@ -1,10 +1,9 @@
 import { sidebar } from '../common/sidebar/sidebar.js'
 import { changeNavbar, handleLogoutBtn } from '../common/navbar/navbar.js';
-import { getCartItems, setCartItems, addToCart, removeFromCart} from '../localStorage.js';
-import { addCommas, convertToNumber } from '../useful-functions.js';
+import { getCartItems } from '../localStorage.js';
+import { addCommas } from '../useful-functions.js';
+//import { loginRequired } from '../../../../server/middlewares/login-required.js';
 import * as Api from '../api.js';
-
-//import daum from 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
 
 
 sidebar();
@@ -18,9 +17,48 @@ const findPostcodeBtn = document.getElementById('findPostcode');
 getPaymentInfo();
 addAllEvents();
 
+
 function addAllEvents() {
     findPostcodeBtn.addEventListener("click", DaumPostcode);
     purchaseBtn.addEventListener("click", handleSubmit);
+}
+
+function getPaymentInfo() {
+    let items = getCartItems();
+
+    const amountElem = document.getElementById('d-amount');
+    const priceElem = document.getElementById('d-price');
+    const shippingElem = document.getElementById('d-shipping');
+    const totalElem = document.getElementById('d-total-price');
+
+    let itemAmount = items.reduce((acc, cur) => acc + Number(cur.quantity), 0);
+    let itemPrice = items.reduce((acc, cur) => acc + Number((cur.price * cur.quantity)), 0);
+    let shippingPrice = itemPrice? 3000:0;
+    let totalPrice = itemPrice + shippingPrice;
+
+    amountElem.innerText = addCommas(itemAmount)+'개';
+    priceElem.innerText = '$'+addCommas(itemPrice);
+    shippingElem.innerText = '$'+addCommas(shippingPrice);
+    totalElem.innerText = '$'+addCommas(totalPrice);
+}
+
+
+function getUseridFromJwt(){
+    const userToken = localStorage.getItem(token) || '';
+
+    if(userToken.length==0){ // 유저 토큰이 없을 경우
+        console.log('서비스 사용 요청이 있습니다.하지만, Authorization 토큰: 없음');
+        res.status(403).json({
+            result: 'forbidden-approach',
+            reason: '로그인한 유저만 사용할 수 있는 서비스입니다.',
+        });
+        window.location.href='/login';
+        return;
+    }
+    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+    const jwtDecoded = jwt.verify(userToken, secretKey);
+
+    const userId = jwtDecoded.userId;
 }
 
 async function handleSubmit(e) {
@@ -33,19 +71,29 @@ async function handleSubmit(e) {
     const detailAddress = document.querySelector('#d-detail-address').value;
     const orderRequest = document.querySelector('#d-requests').value;
 
-  
-    if (!name || !phoneNumber || !postcode || !detailAddress || !address) {
+    if(!localStorage.getItem('token')){ // 로그인 안되어있을 경우
+        window.location = '/login';
+        return;
+    }
+
+    if (!name || !phoneNumber || !postcode || !detailAddress || !address) { // 주문 정보 필드 입력이 완료되지 않았을 경우
         
-      return alert(`주문 정보를 입력해주세요. ${name}님`);
+      return alert(`주문 정보를 입력해주세요.`);
     }
     
-    if (localStorage.)
-    // 회원가입 api 요청
+    if (getCartItems().length==0) {   // 장바구니에 물건이 담겨있지 않는 경우
+        alert(`구매할 제품이 없습니다. 제품을 선택해주세요.`);
+        window.location.href ='/products';
+        return;
+    }
+   
     try {
-        const cartItems = getCartItems().;
-
+        const cartItems = getCartItems().filter(e=>{ return {productId: e.id, quantity: e.quantity}; });
+        const userId = loginRequired;
+        console.log(userId);
 
         const data = { 
+            userId,
             name,
             phoneNumber,
             address : {
@@ -53,6 +101,7 @@ async function handleSubmit(e) {
                 address1: address,
                 address2: detailAddress,
             },
+            orderRequest,
             cartItems : cartItems
         };
         
@@ -68,24 +117,6 @@ async function handleSubmit(e) {
     }
   }
   
-function getPaymentInfo() {
-    let items = getCartItems();
-
-    const amountElem = document.getElementById('p-amount');
-    const priceElem = document.getElementById('p-price');
-    const shippingElem = document.getElementById('p-shipping');
-    const totalElem = document.getElementById('p-total-price');
-
-    let itemAmount = items.reduce((acc, cur) => acc + Number(cur.quantity), 0);
-    let itemPrice = items.reduce((acc, cur) => acc + Number((cur.price * cur.quantity)), 0);
-    let shippingPrice = 3000;
-    let totalPrice = itemPrice + shippingPrice;
-
-    amountElem.innerText = addCommas(itemAmount);
-    priceElem.innerText = addCommas(itemPrice);
-    shippingElem.innerText = addCommas(shippingPrice);
-    totalElem.innerText = addCommas(totalPrice);
-}
 
 /* 다음 우편번호 서비스 api 사용 코드 */
 function DaumPostcode() {

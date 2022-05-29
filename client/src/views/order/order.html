@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
     <!-- 폰트 어썸: 아이콘 -->
     <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+    <!-- daum 주소 api -->
+    <!-- <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" crossorigin="anonymous"></script> -->
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="order.css" />
     <script src="order.js" type="module" defer></script>
@@ -40,22 +42,24 @@
         <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
           <!-- 로그인 안했을 때 -->
           <ul id="navbar" class="login-hidden">
-            <li><a href="../login/login.html">로그인</a></li>
-            <li><a href="../register/register.html">회원가입</a></li>
+            <li><a href="/products">VIEW ALL</a></li>
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/register">회원가입</a></li>
             <li>
-              <a href="#cart" aria-current="page">
+              <a href="/cart" aria-current="page">
                 <span class="icon">
                   <i class="fas fa-cart-shopping"></i>
                 </span>
               </a>
-            </li>ㅇ
+            </li>
           </ul>
           <!-- 로그인 했을 때 -->
           <ul id="navbar" class="logout-hidden hidden">
+            <li><a href="/products">VIEW ALL</a></li>
             <li><a href="/">계정관리</a></li>
             <li><a class="logout-btn" href="/">로그아웃</a></li>
             <li>
-              <a href="#cart" aria-current="page">
+              <a href="/cart" aria-current="page">
                 <span class="icon">
                   <i class="fas fa-cart-shopping"></i>
                 </span>
@@ -136,21 +140,21 @@
             <tbody>
               <tr>
                 <td align="left">상품수</td>
-                <td align="right" id="p-amount"></td>
+                <td align="right" id="d-amount"></td>
               </tr>
               <tr>
                 <td align="left">상품금액</td>
-                <td align="right" id="p-price"></td>
+                <td align="right" id="d-price"></td>
               </tr>
               <tr>
                 <td align="left">배송비</td>
-                <td align="right" id="p-shipping"></td>
+                <td align="right" id="d-shipping"></td>
               </tr>
             </tbody>
           </table>
           <div class="p-total">
             <p>총 결제금액 </p>
-            <p id="p-total-price" align="right"> </p>
+            <p id="d-total-price" align="right"> </p>
           </div>
           <input type="button" value="결제하기" id="purchase-btn" form="delivery-form">
         </div>

@@ -21,27 +21,19 @@ document.getElementById("purchase-btn").addEventListener("click", async (e)=>{
     
 })
 
-/** Needed
- * local storage와 연결 필요
- */
-
 createItemList();
 updateItemList();
 deleteItem();
 
 
-// 아이템 렌더링을 위한 div 생성
-/** 추가 구현
- * 아이템 개수 +, - 기능 ==> 
- * 아이템 삭제 기능
- */
+// 로컬 스토리지 장바구니에 담은 내역 화면에 불러오기
 function createItemList() {
     let items = getCartItems();
-
+    console.log(items);
     let newItems = ``;
     if (items.length == 0) newItems = `<li>장바구니가 비어있습니다.</li>`;
     else newItems = items.reduce((acc, cur) => {
-        return acc + ` <li id="item${cur.item}">
+       return acc + `<li id="item${cur.item}">
         <div class="item"> 
             <div> <input type="checkbox" class="checked" id="checkbox-${cur.id}" checked/> </div>
             <input type="image" class="item-img" src="/uploads/${cur.image}">
@@ -65,6 +57,7 @@ function createItemList() {
 
 }
 
+// 물건 수량 변경 시 화면에 업데이트
 function updateItemList() {
     let items = getCartItems();
 
@@ -103,8 +96,8 @@ function updateItemList() {
     })
 }
 
+// 체크박스, 전체삭제, 선택삭제 클릭 시 로컬스토리지와 화면에 반영
 function deleteItem() {
-    let items = getCartItems();
 
     const selectAllElem = document.querySelector('#select-all');
     const deleteAllElem = document.querySelector('#delete-all');
@@ -118,16 +111,24 @@ function deleteItem() {
         }) 
     })
 
-    // 모든 상품 삭제시 -> 경고 창
+    // 모든 상품 삭제시 -> 경고 창 확인 클릭시 장바구니 비우기
     deleteAllElem.addEventListener('click', ()=> {
         if(confirm("장바구니의 모든 상품을 삭제합니다.")){
-            removeFromCart();
-            itemListElem.innerHTML=`장바구니가 비어있습니다.`;
+            setCartItems([]);
             getPaymentInfo();
+            itemListElem.innerHTML=`<li>장바구니가 비어있습니다.</li>`;
         }
     })
 
     // 선택한 상품 삭제
+    deleteSelectedElem.addEventListener('click', ()=>{
+        allItemElem.forEach(e=>{
+            if(e.checked){
+                removeFromCart(e.id.split('-')[1]);
+                createItemList();
+            }
+        })
+    })
 
 
 }
@@ -147,12 +148,12 @@ function getPaymentInfo() {
 
     let itemAmount = items.reduce((acc, cur) => acc + Number(cur.quantity), 0);
     let itemPrice = items.reduce((acc, cur) => acc + Number((cur.price * cur.quantity)), 0);
-    let shippingPrice = 3000;
+    let shippingPrice = itemPrice? 3000:0;
     let totalPrice = itemPrice + shippingPrice;
 
-    amountElem.innerText = addCommas(itemAmount);
-    priceElem.innerText = addCommas(itemPrice);
-    shippingElem.innerText = addCommas(shippingPrice);
-    totalElem.innerText = addCommas(totalPrice);
+    amountElem.innerText = addCommas(itemAmount)+'개';
+    priceElem.innerText = '$'+addCommas(itemPrice);
+    shippingElem.innerText = '$'+addCommas(shippingPrice);
+    totalElem.innerText = '$'+addCommas(totalPrice);
 }
 
