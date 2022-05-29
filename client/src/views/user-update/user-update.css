@@ -1,4 +1,4 @@
-@import '../common/sidebar/sidebar.css';
+@import '../../common/sidebar/sidebar.css';
 
 .form-container {
   display: flex;
@@ -60,7 +60,7 @@
   transition: all 400ms ease;
 }
 
-.switch.active {
+.switch.is-active {
   background-color: #2196f3;
 }
 
@@ -76,7 +76,7 @@
   transition: all 400ms ease;
 }
 
-.switch.active::before {
+.switch.is-active::before {
   transform: translate(35px, -50%);
 }
 
