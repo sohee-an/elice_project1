@@ -54,7 +54,6 @@ orderRouter.get("/adminOrdersAll",async function(req,res){
 
 
 orderRouter.delete('/', async (req, res, next) => {
-
 })
 
 export { orderRouter }
