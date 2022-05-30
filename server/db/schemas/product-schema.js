@@ -24,6 +24,7 @@ const ProductSchema = new Schema({
     },
     image: {
         type: String,
+        required: true
     }
 }, {
     collection: 'products',
