@@ -110,6 +110,15 @@ h1 {
 
 /*product(제품상세) */
 
+.content {
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.back-to-result {
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
 .details {
   display: flex;
   justify-content: space-between;
@@ -117,18 +126,10 @@ h1 {
   flex-wrap: wrap;
 }
 
-.details-image {
-  flex: 2 1 60rem;
-}
-
 .details-image img {
-  max-width: 60rem;
+  max-width: 30rem;
   width: 100%;
-}
-
-.details-info,
-.details-action {
-  flex: 1 1 30rem;
+  border: 1px solid black;
 }
 
 .details-info ul,
