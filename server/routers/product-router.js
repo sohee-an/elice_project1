@@ -58,12 +58,12 @@ productRouter.post('/register', upload.single('img'), async (req, res, next) => 
         const { name, price, description, brand, largeCategory, mediumCategory } = req.body
         const category = await categoryService.getSpecificCategory({ largeCategory, mediumCategory });
         const category_id = category._id;
-        console.log(category);
+
         if (!image || !name || !description || !brand || !largeCategory || !mediumCategory) {
             throw new Error("상품 정보를 모두 기입해 주세요")
         }
 
-        const product = await productService.addProduct({
+        await productService.addProduct({
             name,
             price,
             description,
@@ -72,7 +72,7 @@ productRouter.post('/register', upload.single('img'), async (req, res, next) => 
             image
         })
 
-        res.status(200).json(product);
+        res.status(200).redirect('/users');
     } catch (err) {
         next(err);
     }
@@ -85,13 +85,14 @@ productRouter.patch('/:id', upload.single('img'), async (req, res, next) => {
                 'headers의 Content-Type을 application/json으로 설정해주세요'
             );
         }
+        
         const id = req.params.id;
         const image = req.file.filename;
         const { name, price, description, brand, largeCategory, mediumCategory } = req.body
         const category = await categoryService.getSpecificCategory({ largeCategory, mediumCategory })
         const category_id = category._id;
 
-        const updateProduct = await productService.updateProduct(id, {
+        await productService.updateProduct(id, {
             name,
             price,
             description,
@@ -100,7 +101,7 @@ productRouter.patch('/:id', upload.single('img'), async (req, res, next) => {
             image
         })
 
-        res.status(200).json(updateProduct);
+        res.status(200).redirect('/users');
     } catch (err) {
         next(err);
     }

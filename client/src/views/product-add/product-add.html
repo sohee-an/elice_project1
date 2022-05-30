@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -62,7 +63,7 @@
           <!-- 로그인 했을 때 -->
           <ul id="navbar" class="logout-hidden hidden">
             <li><a href="/products">VIEW ALL</a></li>
-            <li><a href="/">계정관리</a></li>
+            <li><a href="/users">계정관리</a></li>
             <li><a class="logout-btn" href="/">로그아웃</a></li>
             <li>
               <a href="/cart" aria-current="page">
@@ -86,9 +87,9 @@
     </div>
     <ul class="login-hidden">
       <!-- 로그인 안했을 때 -->
-      <li><a href="../register">회원가입</a></li>
-      <li><a href="../login">로그인</a></li>
-      <li><a href="../cart">카트</a></li>
+      <li><a href="/register">회원가입</a></li>
+      <li><a href="/login">로그인</a></li>
+      <li><a href="/cart">카트</a></li>
     </ul>
     <ul class="logout-hidden">
       <!-- 로그인 했을 때 -->
@@ -110,18 +111,18 @@
           <!-- 제품 이름 -->
           <div class="field">
             <label class="label" for="titleInput">제품 이름</label>
-            <input id="titleInput" class="input" type="text" name="name" placeholder="아이보리 티셔츠" autocomplete="on"/>
+            <input id="titleInput" class="input" type="text" name="name" placeholder="아이보리 티셔츠" autocomplete="on" />
           </div>
 
           <!-- Large Category -->
           <div class="field">
             <label class="label" for="largeCategory">대분류</label>
             <div class="select is-fullwidth">
-              <select name="category" id="largeCategory" name="largeCategory">
+              <select id="largeCategory" name="largeCategory">
                 <option value="">카테고리를 선택해 주세요.</option>
-                <option value="" class="notification is-primary is-light">men</option>
-                <option value="" class="notification is-warning is-light">women</option>
-                <option value="" class="notification is-danger is-light">unisex</option>
+                <option value="men" class="notification is-primary is-light">men</option>
+                <option value="women" class="notification is-warning is-light">women</option>
+                <option value="unisex" class="notification is-danger is-light">unisex</option>
               </select>
             </div>
           </div>
@@ -130,11 +131,11 @@
           <div class="field">
             <label class="label" for="mediumCategory">소분류</label>
             <div class="select is-fullwidth">
-              <select name="category" id="mediumCategory" name="mediumCategory">
+              <select id="mediumCategory" name="mediumCategory">
                 <option value="">카테고리를 선택해 주세요.</option>
-                <option value="" class="notification is-primary is-light">top</option>
-                <option value="" class="notification is-warning is-light">bottom</option>
-                <option value="" class="notification is-danger is-light">ter</option>
+                <option value="top" class="notification is-primary is-light">top</option>
+                <option value="bottom" class="notification is-warning is-light">bottom</option>
+                <option value="outer" class="notification is-danger is-light">outer</option>
               </select>
             </div>
           </div>
@@ -142,19 +143,21 @@
           <!-- 제조사 -->
           <div class="field">
             <label for="brandInput" class="label">제조사</label>
-            <input id="brandInput" class="input" type="text" name="brand" placeholder="OO의류제조(주)" autocomplete="on"/>
+            <input id="brandInput" class="input" type="text" name="brand" placeholder="OO의류제조(주)" autocomplete="on" />
           </div>
 
           <!-- 요약 설명 -->
           <div class="field">
             <label for="shortDescInput" class="label">요약 설명</label>
-            <textarea class="textarea" id="shortDescInput" name="description" rows="3" placeholder="제품에 대한 1~2문장의 설명을 적어 주세요." autocomplete="on"></textarea>
+            <textarea class="textarea" id="shortDescInput" name="description" rows="3"
+              placeholder="제품에 대한 1~2문장의 설명을 적어 주세요." autocomplete="on"></textarea>
           </div>
 
           <!-- 상세 설명 -->
           <div class="field">
             <label for="detailDescInput" class="label">상세 설명</label>
-            <textarea class="textarea" id="detailDescInput" rows="8" placeholder="제품에 대한 상세 설명을 적어 주세요." autocomplete="on"></textarea>
+            <textarea class="textarea" id="detailDescInput" rows="8" placeholder="제품에 대한 상세 설명을 적어 주세요."
+              autocomplete="on"></textarea>
           </div>
 
           <!-- 제품 사진 -->
@@ -173,7 +176,7 @@
               </label>
             </div>
           </div>
-          
+
           <!-- 재고 수 -->
           <div class="field">
             <label for="inventoryInput" class="label">재고 수</label>
@@ -188,7 +191,7 @@
               <span class="icon is-small is-right">원</span>
             </div>
           </div>
-          
+
           <!-- 검색 키워드 -->
           <div class="field">
             <label for="searchKeywordInput" class="label">검색 키워드</label>

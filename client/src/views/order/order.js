@@ -24,7 +24,7 @@ const orderRequesElem = document.querySelector('#d-requests');
 
 
 /** 전역변수로 말고 재구현 **/
-let totalPrice; 
+let totalPrice=0;
 
 getPaymentInfo();
 purchaseBtn.addEventListener("click", handleSubmit);
@@ -101,7 +101,7 @@ async function handleSubmit(e) {
     }
    
     try {
-        const cartItems = getCartItems().filter(e=>{  });
+        const cartItems = getCartItems().map( item => { return {id: item.id, quantity: item.quantity }});
         console.log(cartItems);
 
         const data = { 

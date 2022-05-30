@@ -150,15 +150,15 @@ userRouter.delete('/del/:userId', loginRequired, async function (req, res, next)
 
 });
 
-userRouter.get('/basicUserInfo/:userId',async function(req,res,next){
+userRouter.get('/basicUserInfo/:userId', async function (req, res, next) {
   //원래 로그인 가지고 오기 
-  try{
-  const userId = req.params.userId; 
-  const basicUserInfo = await userService.basicUserInfo(userId);
-  res.status(200).json(basicUserInfo);
-}catch(error){
-  next(error);
-}
+  try {
+    const userId = req.params.userId;
+    const basicUserInfo = await userService.basicUserInfo(userId);
+    res.status(200).json(basicUserInfo);
+  } catch (error) {
+    next(error);
+  }
 
 })
 
