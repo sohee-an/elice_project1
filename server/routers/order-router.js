@@ -8,8 +8,8 @@ import { orderService } from "../services";
 const orderRouter = Router();
 
 
-orderRouter.post('/',loginRequired, async function(req, res, next)  {
-   
+orderRouter.post('/', loginRequired, async function (req, res, next) {
+
     // 데이터 가지고옴 
     const userId = req.currentUserId;
     const name=req.body.name;
@@ -21,7 +21,7 @@ orderRouter.post('/',loginRequired, async function(req, res, next)  {
     
    
     //데이터를 넣음
-    const newOrder= await orderService.addOrder({
+    const newOrder = await orderService.addOrder({
         userId,
         name,
         phoneNumber,
@@ -32,7 +32,7 @@ orderRouter.post('/',loginRequired, async function(req, res, next)  {
     });
 
     res.status(201).json(newOrder);
-   
+
 });
 
 // 상품조회하기 ㅜㅜ...

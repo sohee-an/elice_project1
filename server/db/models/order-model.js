@@ -1,10 +1,9 @@
 import { model } from "mongoose";
-import { orderService } from "../../services";
 import { OrderSchema } from "../schemas/order-schema";
 
 const Order = model("orders", OrderSchema);
 
-class OrderModel { 
+class OrderModel {
     async create(userOrder) {
         const createdOrder = await Order.create(userOrder);
         return createdOrder;
