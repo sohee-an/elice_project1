@@ -1,11 +1,12 @@
-import { sidebar } from "../common/sidebar/sidebar.js";
-import { changeNavbar, handleLogoutBtn } from "../common/navbar/navbar.js";
+import { sidebar } from "../../common/sidebar/sidebar.js";
+import { changeNavbar, handleLogoutBtn } from "../../common/navbar/navbar.js";
+import * as Api from '../../api.js';
 sidebar();
 changeNavbar();
 handleLogoutBtn();
 
 const submitBtn = document.querySelector(".form-box .button");
-const passwordInput = document.querySelector(".form-box .input");
+const passwordInput = document.querySelector("#password");
 const modal = document.querySelector(".modal");
 const yesBtn = document.querySelector('#deleteCompleteBtn');
 const closeBtn = document.querySelectorAll('.close');
@@ -25,12 +26,30 @@ closeBtn.forEach((el) => {
 })
 
 // 모달창 yes 버튼 클릭 시
-// yesBtn.addEventListener('click', (e) => {
-//   e.preventDefault();
-//   if (passwordInput.value === password) {
-//     alert('회원 정보가 삭제되었습니다.');
-//     // db에서 회원정보 삭제
-//   } else {
-//     alert('비밀번호가 일치하지 않습니다.');
-//   }
-// })
+yesBtn.addEventListener('click', async (e) => {
+  e.preventDefault();
+  try {
+    const token = localStorage.getItem("token");
+    const userId = parseJwt(token).userId;
+    const password = passwordInput.value;
+
+    const res = await Api.delete("/api/del", userId, { password });
+    console.log(res);
+    alert('회원 정보가 안전하게 삭제되었습니다.');
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+  } catch (err) {
+    alert(`회원정보 삭제 과정에서 오류가 발생하였습니다: ${err.message}`);
+  }
+})
+
+// Decode token
+function parseJwt(token) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+
+  return JSON.parse(jsonPayload);
+}

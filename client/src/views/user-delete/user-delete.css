@@ -1,4 +1,4 @@
-@import "../common/sidebar/sidebar.css";
+@import "../../common/sidebar/sidebar.css";
 
 .form-container {
   display: flex;
