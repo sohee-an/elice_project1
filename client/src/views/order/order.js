@@ -71,7 +71,7 @@ async function handleSubmit(e) {
     }
 
     try {
-        const cartItems = getCartItems().filter(e => { return { productId: e.id, quantity: e.quantity }; });
+        const cartItems = getCartItems().map(e => { return { productId: e.id, quantity: e.quantity }; });
 
         const data = {
             name,
@@ -88,7 +88,7 @@ async function handleSubmit(e) {
 
         console.log(data);
 
-        await Api.post('/api/order', data);
+        await Api.post('/api/orders', data);
 
         alert(`주문 및 결제가 완료되었습니다.`);
 
