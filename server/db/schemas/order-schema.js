@@ -10,32 +10,32 @@ const OrderSchema = new Schema({
         type: String,
         required: false,
     },
-    
     phoneNumber: {
-        type: Number,
+        type: String,
         required: false,
     },
-    cartItems: [{
+    products: [{
         type: new Schema(
             {
-            productId: {
-                type: Schema.Types.ObjectId,
-                ref: 'products',
-                required: true,
+                product: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'products',
+                    required: true,
+                },
+                quantity: {
+                    type: Number,
+                    required: true,
+                },
             },
-            quantity: {
-                type: Number,
-                required: true,
+            {
+                _id: false,
             },
-        },{
-            _id: false,
-        }
         )
     }],
-    total: {
-        type: Number,
-        required: true,
-    },
+    // total: {
+    //     type: Number,
+    //     required: true,
+    // },
     address: {
         type: new Schema(
             {
