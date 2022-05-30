@@ -56,7 +56,6 @@ function initDeleteHandler() {
 
 // async function formSubmit(e) {
 //   e.preventDefault();
-
 //   try {
 //     const title = titleInput.value;
 //     const largeCategory = largeCategoryInput.options[largeCategoryInput.selectedIndex].text;

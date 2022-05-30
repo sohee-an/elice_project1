@@ -12,6 +12,7 @@ const saveBtn = document.querySelector("#saveCompleteBtn");
 const closeBtn = document.querySelectorAll(".close");
 const userEmail = document.querySelector("#userEmail");
 
+const input = document.querySelectorAll(".input, .input-switch");
 const fullNameInput = document.querySelector("#name");
 const passwordInput = document.querySelector("#password");
 const passwordConfirmInput = document.querySelector("#password-confirm");
@@ -22,6 +23,7 @@ const phoneNumberInput = document.querySelector("#phoneNumber");
 const currentPasswordInput = document.querySelector('#currentPassword');
 
 initEventHandler();
+getUserInfo();
 
 function initEventHandler() {
   // input 스위치 기능
@@ -37,9 +39,21 @@ function initEventHandler() {
   saveBtn.addEventListener("click", saveUserInfo);
 }
 
-// TODO: 화면 로드 되었을 때 
-// 회원 정보를 input에 표시
-// 제목에 userEmail 표시
+// 화면 로드 되었을 때 
+// 회원 정보를 input에 표시, 제목에 userEmail 표시
+async function getUserInfo() {
+  const token = localStorage.getItem("token");
+  const userId = parseJwt(token).userId;
+
+  const { fullName, email, phoneNumber, address } = await Api.get('/api/basicUserInfo', userId);
+
+  fullNameInput.value = fullName;
+  postalCodeInput.value = address.postalCode;
+  address1Input.value = address.address1;
+  address2Input.value = address.address2;
+  phoneNumberInput.value = phoneNumber;
+  userEmail.innerText = email;
+}
 
 // 회원정보 저장
 async function saveUserInfo(e) {
@@ -84,7 +98,8 @@ async function saveUserInfo(e) {
     
     alert('회원정보가 안전하게 저장되었습니다.');
     modal.classList.remove("is-active");
-    switchBtn.forEach(el => { el.classList.remove("is-active") });
+    switchBtn.forEach(el => { el.classList.remove('is-active') });
+    input.forEach(el => { el.disabled = true;});
   } catch (err) {
     alert(`회원정보 저장 과정에서 오류가 발생하였습니다: ${err.message}`);
   }
