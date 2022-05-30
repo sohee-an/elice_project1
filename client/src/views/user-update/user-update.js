@@ -12,7 +12,7 @@ const saveBtn = document.querySelector("#saveCompleteBtn");
 const closeBtn = document.querySelectorAll(".close");
 const userEmail = document.querySelector("#userEmail");
 
-const input = document.querySelectorAll(".input, .input-switch");
+const input = document.querySelectorAll(".input:not(#currentPassword), button.input-switch");
 const fullNameInput = document.querySelector("#name");
 const passwordInput = document.querySelector("#password");
 const passwordConfirmInput = document.querySelector("#password-confirm");
@@ -24,6 +24,11 @@ const currentPasswordInput = document.querySelector('#currentPassword');
 
 initEventHandler();
 getUserInfo();
+
+// 로그인X -> 로그인 페이지로
+if (!localStorage.getItem("token")) {
+  window.location.href = "../../login";
+}
 
 function initEventHandler() {
   // input 스위치 기능
@@ -48,11 +53,14 @@ async function getUserInfo() {
   const { fullName, email, phoneNumber, address } = await Api.get('/api/basicUserInfo', userId);
 
   fullNameInput.value = fullName;
-  postalCodeInput.value = address.postalCode;
-  address1Input.value = address.address1;
-  address2Input.value = address.address2;
-  phoneNumberInput.value = phoneNumber;
   userEmail.innerText = email;
+  if (phoneNumber) {
+    phoneNumberInput.value = phoneNumber;
+  } else if (address) {
+    postalCodeInput.value = address.postalCode;
+    address1Input.value = address.address1;
+    address2Input.value = address.address2;
+  }
 }
 
 // 회원정보 저장
@@ -68,12 +76,17 @@ async function saveUserInfo(e) {
   const phoneNumber = phoneNumberInput.value;
   const currentPassword = currentPasswordInput.value;
 
-  // TODO: 입력값 변화 없을 때
-  // if () {
-  //   alert('업데이트 된 정보가 없습니다.');
-  // }
+  if (!password || !passwordConfirm) {
+    alert("비밀번호를 입력해주세요.");
+    return;
+  }
 
-  if (password.value || passwordConfirm.value && password.value !== passwordConfirm.value) {
+  if (password && password.length < 4) {
+    alert("비밀번호가 4글자 이상인지 확인해주세요.");
+    return;
+  }
+
+  if (password && passwordConfirm && password !== passwordConfirm) {
     alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
     return;
   }
