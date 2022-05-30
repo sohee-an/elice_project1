@@ -19,6 +19,11 @@ class ProductModel {
         return product;
     }
 
+    async findOneByNameAndBrand(productInfo) {
+        const product = await Product.findOne(productInfo);
+        return product;
+    }
+
     async update(product_id, updateProductInfo) { //updateProductInfo는 객체이다.
         const filter = { _id: product_id };
 
