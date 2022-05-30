@@ -12,11 +12,15 @@ const itemListElem = document.getElementById("item-list");
 document.getElementById("purchase-btn").addEventListener("click", async (e)=>{
     e.preventDefault();
   
-    if(localStorage.getItem('token')){  // 로그인 되어있는 경우
-        window.location = "/order";
-    } else {
+    if(!localStorage.getItem('token')){  // 로그인 되어있는 경우
         alert('로그인이 필요합니다.');
-        window.location = "/login";  
+        window.location.href = "/login";  
+    } else if(getCartItems().length==0) {
+        alert('구매할 물건을 선택하세요.');
+        window.location.href = "/";  
+    } else {
+        window.location.href = "/order";
+        
     }
     
 })
@@ -103,10 +107,10 @@ function deleteItem() {
     const selectAllElem = document.querySelector('#select-all');
     const deleteAllElem = document.querySelector('#delete-all');
     const deleteSelectedElem = document.querySelector('#delete-selected');
-    const allItemElem = document.querySelectorAll('.checked');
 
     // [ ] 체크박스 클릭 시
     selectAllElem.addEventListener('click', ()=> {
+        const allItemElem = document.querySelectorAll('.checked');
         allItemElem.forEach(e=>{
             e.checked=selectAllElem.checked;
         }) 
@@ -123,12 +127,14 @@ function deleteItem() {
 
     // 선택한 상품 삭제
     deleteSelectedElem.addEventListener('click', ()=>{
+        const allItemElem = document.querySelectorAll('.checked');
         allItemElem.forEach(e=>{
             if(e.checked){
                 removeFromCart(e.id.split('-')[1]);
                 createItemList();
             }
         })
+        if(getCartItems.empty())  itemListElem.innerHTML=`<li>장바구니가 비어있습니다.</li>`;
     })
 
 
