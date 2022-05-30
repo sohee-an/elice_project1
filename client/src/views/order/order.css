@@ -1,4 +1,5 @@
 @import "../common/sidebar/sidebar.css";
+@import '../common/navbar/navbar.css';
 @import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
 
 nav {
