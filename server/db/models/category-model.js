@@ -14,8 +14,8 @@ export class CategoryModel {
         return categories;
     }
 
-    async findCategory(categoryInfo) {
-        const category = await Category.find(categoryInfo);
+    async findOne(categoryInfo) {
+        const category = await Category.findOne(categoryInfo);
         return category;
     }
 
