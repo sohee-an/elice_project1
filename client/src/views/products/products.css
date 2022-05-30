@@ -1,5 +1,18 @@
 @import '../common/sidebar/sidebar.css';
 @import '../common/navbar/navbar.css';
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+
+nav {
+  border-bottom: 3px solid black;
+}
+.navbar-start {
+  flex-grow: 1;
+  justify-content: center;
+}
+.brandname {
+  font-family: 'Limelight',cursive;
+  font-size: 24px;
+}
 
 /* products(제품목록) */
 a {
@@ -31,6 +44,10 @@ button.primary {
   width: 100%;
 }
 
+h1 {
+  margin-top: 24px;
+}
+
 .products {
   display: flex;
   flex-wrap: wrap;
@@ -46,7 +63,8 @@ button.primary {
   margin: 1rem;
   margin-bottom: 0;
   height: 42rem;
-  border-top: 0.2rem #e0e0e0 solid;
+  display: flex;
+  justify-content: center;
 }
 
 .product {
@@ -54,6 +72,10 @@ button.primary {
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
+}
+
+.product-image {
+  border: 1px solid black;
 }
 
 .product img {
@@ -64,15 +86,26 @@ button.primary {
 
 .product-name {
   line-height: 2.2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.product-subtitle {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .product-brand {
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
   color: #808080;
+  font-weight: 700;
+  width: 70%;
 }
 
 .product-price {
-  font-size: 2rem;
+  /* font-size: 2rem; */
+  width: 30%;
 }
 
 /*product(제품상세) */
