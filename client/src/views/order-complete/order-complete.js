@@ -9,4 +9,11 @@ handleLogoutBtn();
 const historyBtnElem = document.querySelector("#history-btn");
 const continueBtnElem= document.querySelector("#continue-btn");
 
-function addE
+
+handleAllEvent();
+
+function handleAllEvent() {
+    continueBtnElem.addEventListener("click", ()=>{
+        window.location.href="/";
+    })
+}
