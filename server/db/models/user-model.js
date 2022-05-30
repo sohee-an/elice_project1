@@ -37,6 +37,7 @@ export class UserModel {
     return deleteUser;
 
   }
+
 }
 
 const userModel = new UserModel();

@@ -157,6 +157,12 @@ class UserService {
 
   }
 
+  async basicUserInfo(userId){
+    const basicUserInfo= await this.userModel.findById(userId);
+    console.log(basicUserInfo);
+    return basicUserInfo;
+  }
+
 }
 
 const userService = new UserService(userModel);
