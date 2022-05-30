@@ -36,7 +36,7 @@ function createItemList() {
        return acc + `<li id="item${cur.item}">
         <div class="item"> 
             <div> <input type="checkbox" class="checked" id="checkbox-${cur.id}" checked/> </div>
-            <input type="image" class="item-img" src="/uploads/${cur.image}">
+            <input type="image" class="item-img" src="/uploads/${cur.image}" onclick="window.location.href='/products/#/product/${cur.id}'">
             <div class="item-info">
                 <p>${cur.name}</p>
                 <div class="quantity">
@@ -95,6 +95,7 @@ function updateItemList() {
         })
     })
 }
+
 
 // 체크박스, 전체삭제, 선택삭제 클릭 시 로컬스토리지와 화면에 반영
 function deleteItem() {
