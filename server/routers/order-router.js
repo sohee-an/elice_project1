@@ -23,7 +23,7 @@ orderRouter.post('/', loginRequired, async function (req, res, next) {
 
     const products = cartItems.map(e => {
         return {
-            product: e.productId,
+            product: e.id,
             quantity: e.quantity
         }
     })
