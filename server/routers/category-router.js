@@ -15,6 +15,11 @@ categoryRouter.get('/', async (req, res, next) => {
 
 categoryRouter.post('/register', async (req, res, next) => {
     try {
+        if (is.emptyObject(req.body)) {
+            throw new Error(
+                'headers의 Content-Type을 application/json으로 설정해주세요'
+            );
+        }
         const { largeCategory, mediumCategory } = req.body;
         const newCategory = await categoryService.addCategory({ largeCategory, mediumCategory });
 
@@ -26,6 +31,11 @@ categoryRouter.post('/register', async (req, res, next) => {
 
 categoryRouter.patch('/:id', async (req, res, next) => {
     try {
+        if (is.emptyObject(req.body)) {
+            throw new Error(
+                'headers의 Content-Type을 application/json으로 설정해주세요'
+            );
+        }
         const category_id = req.params.id;
         const { largeCategory, mediumCategory } = req.body;
 
