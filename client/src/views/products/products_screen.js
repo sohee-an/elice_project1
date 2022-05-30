@@ -10,25 +10,32 @@ const Products_screen = {
     //어떤 필드가 들어있는지 확인용으로 보면 좋음 
     console.log(products);
     return `
+    <h1>
+      <strong>VIEW ALL</strong>
+    </h1>
     <ul class="products">
       ${products
         .map(
           (product) => `
         <li>
           <div class="product">
-          <a href="#/product/${product._id}">
-            <img src="/uploads/${product.image}" alt="${product.name}">
-          </a>
+          <div class="product-image">
+            <a href="#/product/${product._id}">
+              <img src="/uploads/${product.image}" alt="${product.name}">
+            </a>
+          </div>
           <div class="product-name">
             <a href="#/product/${product._id}">
               ${product.name}
             </a>
           </div>
-          <div class="product-brand">
-            ${product.brand}
-          </div>
-          <div class="product-price">
-            ${product.price} 원
+          <div class="product-subtitle">
+            <div class="product-brand">
+              ${product.brand}
+            </div>
+            <div class="product-price">
+              ${product.price} 원
+            </div>
           </div>
         </div>
         </li>
