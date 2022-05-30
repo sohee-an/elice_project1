@@ -18,10 +18,8 @@ orderRouter.post('/',loginRequired, async function(req, res, next)  {
     const total= req.body.total;
     const address= req.body.address;
     const orderRequest=req.body.orderRequest;
-    // 시간 저장하기 
-    const today= new Date();
+    
    
-
     //데이터를 넣음
     const newOrder= await orderService.addOrder({
         userId,
@@ -31,7 +29,6 @@ orderRouter.post('/',loginRequired, async function(req, res, next)  {
         address,
         total,
         orderRequest,
-        orderTime
     });
 
     res.status(201).json(newOrder);
@@ -39,17 +36,21 @@ orderRouter.post('/',loginRequired, async function(req, res, next)  {
 });
 
 // 상품조회하기 ㅜㅜ...
-orderRouter.get('/:userId',async function(req,res,next){
-    //const userId = req.currentUserId;// 유저 아이디 찾음 
-   
-    const userId = req.params.userId;
+orderRouter.get('/carItems',loginRequired,async function(req,res,next){
+    const userId = req.currentUserId;// 유저 아이디 찾음 
+    //const userId = req.params.userId;
     const  userOrder =await orderService.getUserOrder(userId);
 
 
     res.status(200).json(userOrder);
    
-})
+});
 
+// 관리자가 상품조회하기 
+orderRouter.get("/adminOrdersAll",async function(req,res){
+     const usersOrders= await orderService.usersOrders();
+     res.status(200).json(usersOrders);
+});
 
 
 orderRouter.delete('/', async (req, res, next) => {

@@ -7,20 +7,10 @@ class OrderService {
     //상품 주문한거 db에 저장
     async addOrder(newOrder){
         //객체에 할당함 // 
-        const { userId,name, phoneNumber,cartItems,total,address,orderRequest,orderTime} = newOrder;
-        
-        
-       // CartItems를  상품아이디랑 수량을 넣음 
-        for(let i =0; i <cartItems.length; i++){
-            const productId = cartItems[i].productId;
-            const quantity=Number(cartItems[i].quantity);
-
-            const newUserOrder= {userId,name,phoneNumber,productId,quantity,total,address,orderRequest,orderTime};
-            console.log(" 모음!!!!!!!!!!!!!")
-            console.log(newUserOrder);
-           const createdOrder=await this.orderModel.create(newUserOrder);
-
-        }
+       // const { userId,name, phoneNumber,cartItems,total,address,orderRequest} = newOrder;
+       console.log(newOrder);
+        const createdOrder=await this.orderModel.create(newOrder);
+        return createdOrder;
         
     }
 
@@ -34,6 +24,12 @@ class OrderService {
       
 
 }
+
+    async usersOrders(){
+        const usersOrder= await this.orderModel.findUsersOrder();
+        console.log(usersOrder);
+        return usersOrder;
+    }
 }
 
 const orderService = new OrderService(orderModel);

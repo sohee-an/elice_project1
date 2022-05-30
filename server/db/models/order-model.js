@@ -11,8 +11,12 @@ class OrderModel {
       }
       
     async findUserOrderAll(userOrderId){// 아이디로 찾아가지고 오기 그리고 상품도 찾아옴
-        const userOrder = await Order.find({userId:userOrderId}).populate('productId').populate('userId');
+        const userOrder = await Order.find({userId:userOrderId}).populate('cartItems').populate('userId');
         return userOrder;
+    }
+    async findUsersOrder(){
+        const userOrderAll =await Order.find({});
+        return userOrderAll;
     }
   
 
