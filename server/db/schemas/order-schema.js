@@ -29,7 +29,9 @@ const OrderSchema = new Schema({
             },
             {
                 _id: false,
-            })
+            },
+        ),
+        required: true,
     }],
     total: {
         type: Number,
@@ -50,10 +52,12 @@ const OrderSchema = new Schema({
     },
     orderRequest: {
         type: String,
+        required: true
     },
     state: {
         type: String,
         default: "배송 준비중",
+        required: true
     },
 }, {
     timestamps: true,
