@@ -16,14 +16,14 @@ nav {
 
 .div-container {
   display: flex;
-
   flex-direction: column;
+  margin-top: 5em;
+  margin-left: 5em;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  top: 100px;
-  left: 5%;
+  position: relative;
   width: 85%;
+  height: auto;
 }
 
 .order-header {
@@ -37,7 +37,7 @@ nav {
   border-collapse: collapse;
 }
 .order-header .cur-process {
-font: 30px bold;
+  font: 30px bold;
 }
 
 .order-body{
@@ -57,10 +57,10 @@ font: 30px bold;
 
 
 .select-container {
-margin: 10px;
-border-bottom: #000;
-border-bottom: 1px solid black;
-border-collapse: collapse;
+  margin: 10px;
+  border-bottom: #000;
+  border-bottom: 1px solid black;
+  border-collapse: collapse;
 }
 .select-container a {
   text-decoration:none;
@@ -85,21 +85,21 @@ border-collapse: collapse;
   align-items: center;
 }
 #ordersummary-table {
-width: 100%;
-margin: 10px 0px;
-border-top: 1px solid white;
-border-bottom: 1px solid white;
-border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  border-collapse: collapse;
 }
 #purchase-btn {
-width: 100%;
-height: auto;
-padding: 10px;
-margin-top: 10px;
-background-color: grey;
-border: none;
-color: white;
-font: 20px bold;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: grey;
+  border: none;
+  color: white;
+  font: 20px bold;
 }
 
 /** item info **/
@@ -126,12 +126,10 @@ width: 20em;
 display:inline;
 }
 
-
-
 @media screen and (max-width: 768px) {
   .div-container {
-    position: fixed;
-    top: 1em;
+    position: relative;
+    margin-left: 2em;
   }
   .order-body{
     flex-direction: column;
