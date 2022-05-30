@@ -2,7 +2,7 @@ import { sidebar } from '../common/sidebar/sidebar.js'
 import { changeNavbar, handleLogoutBtn } from '../common/navbar/navbar.js';
 import { getCartItems } from '../localStorage.js';
 import { addCommas } from '../useful-functions.js';
-//import { loginRequired } from '../../../../server/middlewares/login-required.js';
+//import jwt from 'jsonwebtoken';
 import * as Api from '../api.js';
 
 
@@ -25,6 +25,7 @@ function addAllEvents() {
 
 function getPaymentInfo() {
     let items = getCartItems();
+    console.log(items);
 
     const amountElem = document.getElementById('d-amount');
     const priceElem = document.getElementById('d-price');
@@ -44,9 +45,10 @@ function getPaymentInfo() {
 
 
 function getUseridFromJwt(){
-    const userToken = localStorage.getItem(token) || '';
+    const userToken = localStorage.getItem(token);
+    console.log(userToken);
 
-    if(userToken.length==0){ // 유저 토큰이 없을 경우
+    if(!userToken){ // 유저 토큰이 없을 경우
         console.log('서비스 사용 요청이 있습니다.하지만, Authorization 토큰: 없음');
         res.status(403).json({
             result: 'forbidden-approach',
@@ -59,8 +61,16 @@ function getUseridFromJwt(){
     const jwtDecoded = jwt.verify(userToken, secretKey);
 
     const userId = jwtDecoded.userId;
+
+    return userId;
 }
 
+
+/**** 추가 구현
+ * 입력된 값이 형태에 맞는지 확인
+ * 
+ * 
+ */
 async function handleSubmit(e) {
     e.preventDefault();
 
@@ -69,8 +79,9 @@ async function handleSubmit(e) {
     const postcode = document.querySelector('#d-postcode').value;
     const address = document.querySelector('#d-address').value;
     const detailAddress = document.querySelector('#d-detail-address').value;
-    const orderRequest = document.querySelector('#d-requests').value;
+    const orderRequest = document.querySelector('#d-requests').selected;
 
+    console.log(orderRequest);
     if(!localStorage.getItem('token')){ // 로그인 안되어있을 경우
         window.location = '/login';
         return;
@@ -89,8 +100,7 @@ async function handleSubmit(e) {
    
     try {
         const cartItems = getCartItems().filter(e=>{ return {productId: e.id, quantity: e.quantity}; });
-        const userId = loginRequired;
-        console.log(userId);
+        const userId = getUseridFromJwt();
 
         const data = { 
             userId,

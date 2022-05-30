@@ -32,9 +32,15 @@
   }
 
   #history-btn {
+    width: 20em;
+    height: 5em;
     background-color: white;
+    border: solid;
   }
   #continue-btn{
-    background-color: black;
-    color:white;
+    width: 20em;
+    height: 5em;
+    background-color: grey;
+    font:black bold;
+    border: none;
   }
