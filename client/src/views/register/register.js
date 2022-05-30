@@ -1,4 +1,5 @@
 import { sidebar } from '../common/sidebar/sidebar.js';
+import { changeNavbar, handleLogoutBtn } from "../../common/navbar/navbar.js";
 import * as Api from '../api.js';
 import { validateEmail } from '../useful-functions.js';
 
@@ -12,6 +13,13 @@ const submitButton = document.querySelector('#submitButton');
 addAllElements();
 addAllEvents();
 sidebar();
+changeNavbar();
+handleLogoutBtn();
+
+// 로그인 되어있으면 메인페이지로..
+if (localStorage.getItem("token")) {
+  window.location.href = "/";
+}
 
 // html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 async function addAllElements() { }

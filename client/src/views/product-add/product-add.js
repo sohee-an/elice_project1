@@ -1,6 +1,5 @@
 import { sidebar } from "../../common/sidebar/sidebar.js";
 import { changeNavbar, handleLogoutBtn } from "../../common/navbar/navbar.js";
-import * as Api from "../../api.js";
 sidebar();
 changeNavbar();
 handleLogoutBtn();
@@ -23,8 +22,6 @@ const submitBtn = document.querySelector("#submitBtn");
 imageInput.addEventListener("input", () => {
   fileNameSpan.innerText = imageInput.value.substr(12);
 })
-
-// submitBtn.addEventListener("click", formSubmit);
 
 // 검색 키워드 추가 버튼
 addKeywordBtn.addEventListener("click", (e) => {
@@ -53,22 +50,3 @@ function initDeleteHandler() {
     })
   })
 }
-
-// async function formSubmit(e) {
-//   e.preventDefault();
-//   try {
-//     const title = titleInput.value;
-//     const largeCategory = largeCategoryInput.options[largeCategoryInput.selectedIndex].text;
-//     const mediumCategory = mediumCategoryInput.options[mediumCategoryInput.selectedIndex].text;
-//     const brand = brandInput.value;
-//     const description = shortDescInput.value;
-//     const image = imageInput.value;
-//     const price = priceInput.value;
-
-//     const data = { title, largeCategory, mediumCategory, brand, description, image, price };
-//     await Api.post('/api/products/register', data);
-//     alert("판매할 제품 정보를 저장하였습니다.");
-//   } catch (err) {
-//     alert(`제품 저장 과정에서 오류가 발생하였습니다.: ${err.message}`);
-//   }
-// }

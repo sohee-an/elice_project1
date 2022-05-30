@@ -11,6 +11,11 @@ const modal = document.querySelector(".modal");
 const yesBtn = document.querySelector('#deleteCompleteBtn');
 const closeBtn = document.querySelectorAll('.close');
 
+// 로그인X -> 로그인 페이지로
+if (!localStorage.getItem("token")) {
+  window.location.href = "../../login";
+}
+
 // 회원정보 삭제 버튼 클릭시 모달창 띄움
 submitBtn.addEventListener('click', (e) => {
   e.preventDefault();
