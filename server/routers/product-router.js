@@ -53,6 +53,7 @@ productRouter.post('/register', upload.single('img'), async (req, res, next) => 
                 'headers의 Content-Type을 application/json으로 설정해주세요'
             );
         }
+        console.log(req.body);
         const image = req.file.filename;
         //나중에 폼으로 대분류, 소분류 카테고리를 받아서 카테고리서비스를 통해 아이디를 가져와서 저장한다.
         const { name, price, description, brand, largeCategory, mediumCategory } = req.body
