@@ -14,24 +14,22 @@ const OrderSchema = new Schema({
         type: Number,
         required: false,
     },
-    products: [{
+    cartItems: [{
         type: new Schema(
             {
-                productId: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'products',
-                    required: true,
-                },
-                quantity: {
-                    type: Number,
-                    required: true,
-                },
+            productId: {
+                type: Schema.Types.ObjectId,
+                ref: 'products',
+                required: true,
             },
-            {
-                _id: false,
+            quantity: {
+                type: Number,
+                required: true,
             },
-        ),
-        required: true,
+        },{
+            _id: false,
+        }
+        )
     }],
     total: {
         type: Number,
@@ -52,12 +50,10 @@ const OrderSchema = new Schema({
     },
     orderRequest: {
         type: String,
-        required: true
     },
     state: {
         type: String,
         default: "배송 준비중",
-        required: true
     },
 }, {
     timestamps: true,
