@@ -1,1 +1,24 @@
-@import '../common/sidebar/sidebar.css';
+@import '../../common/sidebar/sidebar.css';
+
+.account-header {
+  border-bottom: 1px solid #ddd;
+  display: block;
+  padding-bottom: 0.7rem;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-box {
+  width: 40rem;
+}
+
+.form-box .title {
+  text-align: center;
+}
+
+.form-box .button {
+  font-weight: 700;
+}
