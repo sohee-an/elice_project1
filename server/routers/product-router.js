@@ -48,11 +48,8 @@ productRouter.get('/:id', async (req, res, next) => {
 //single 메소드의 인자인 'img'는 form의 필드중 name속성의 value이다.
 productRouter.post('/register', upload.single('img'), async (req, res, next) => {
     try {
-        if (is.emptyObject(req.body)) {
-            throw new Error(
-                'headers의 Content-Type을 application/json으로 설정해주세요'
-            );
-        }
+        console.log(req.body);
+        console.log(req.file);
         const image = req.file.filename;
         //나중에 폼으로 대분류, 소분류 카테고리를 받아서 카테고리서비스를 통해 아이디를 가져와서 저장한다.
         const { name, price, description, brand, largeCategory, mediumCategory } = req.body
@@ -63,7 +60,7 @@ productRouter.post('/register', upload.single('img'), async (req, res, next) => 
             throw new Error("상품 정보를 모두 기입해 주세요")
         }
 
-        await productService.addProduct({
+        const product = await productService.addProduct({
             name,
             price,
             description,
@@ -72,7 +69,7 @@ productRouter.post('/register', upload.single('img'), async (req, res, next) => 
             image
         })
 
-        res.status(200).send("<script>alert('상품 등록이 완료 되었습니다.'); location.href='/admin';</script>");
+        res.status(200).json(product);
     } catch (err) {
         next(err);
     }
@@ -80,11 +77,6 @@ productRouter.post('/register', upload.single('img'), async (req, res, next) => 
 
 productRouter.patch('/:id', upload.single('img'), async (req, res, next) => {
     try {
-        if (is.emptyObject(req.body)) {
-            throw new Error(
-                'headers의 Content-Type을 application/json으로 설정해주세요'
-            );
-        }
 
         const id = req.params.id;
         const image = req.file.filename;
