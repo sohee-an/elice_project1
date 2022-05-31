@@ -106,9 +106,9 @@
         <h1 class="subtitle is-4">카테고리 추가</h1>
       </div>
       <div class="form-container">
-        <form class="box form-box" action="/api/products/register" method="post" enctype="multipart/form-data">
+        <form class="box form-box" action="/api/categories/register" method="post">
           <p class="title is-5 has-text-primary">카테고리 추가하기</p>
-          
+
           <!-- 대분류 선택 -->
           <div class="field">
             <label class="label" for="largeCategoryInput">대분류</label>
@@ -125,7 +125,8 @@
           <!-- 카테고리 이름 -->
           <div class="field">
             <label class="label" for="mediumCategoryInput">카테고리 이름</label>
-            <input id="mediumCategoryInput" class="input" type="text" name="name" placeholder="top" autocomplete="on" required />
+            <input id="mediumCategoryInput" class="input" type="text" name="mediumCategory" placeholder="top"
+              autocomplete="on" required />
           </div>
 
           <!-- 카테고리 설명 -->
@@ -166,7 +167,7 @@
 
           <!-- 버튼 -->
           <div class="mt-5">
-            <button type="submit" class="button is-primary is-fullwidth" id="submitBtn">제품 판매하기</button>
+            <button type="submit" class="button is-primary is-fullwidth" id="submitBtn">카테고리 추가</button>
           </div>
         </form>
       </div>

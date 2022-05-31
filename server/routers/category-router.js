@@ -1,5 +1,6 @@
 import { categoryService } from "../services";
 import { Router } from "express";
+import is from '@sindresorhus/is';
 
 const categoryRouter = Router();
 
@@ -23,7 +24,7 @@ categoryRouter.post('/register', async (req, res, next) => {
         const { largeCategory, mediumCategory } = req.body;
         const newCategory = await categoryService.addCategory({ largeCategory, mediumCategory });
 
-        res.status(200).json(newCategory);
+       res.status(200).send("<script>alert('카테고리 등록이 완료 되었습니다.'); location.href='/admin';</script>");
     } catch (err) {
         next(err);
     }
