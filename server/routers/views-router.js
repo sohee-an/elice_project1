@@ -23,6 +23,7 @@ viewsRouter.use('/users/update',serveStatic('user-update'))
 viewsRouter.use('/users/delete',serveStatic('user-delete'))
 viewsRouter.use('/product/add',serveStatic('product-add'))
 viewsRouter.use('/order/complete',serveStatic('order-complete'))
+viewsRouter.use('/order/history',serveStatic('order-history'))
 
 
 
