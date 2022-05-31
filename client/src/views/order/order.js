@@ -1,6 +1,6 @@
 import { sidebar } from '../common/sidebar/sidebar.js'
 import { changeNavbar, handleLogoutBtn } from '../common/navbar/navbar.js';
-import { getCartItems, } from '../localStorage.js';
+import { getCartItems,  setCartItems, getOrderInfo, setOrderInfo} from '../localStorage.js';
 import { addCommas } from '../useful-functions.js';
 import * as Api from '../api.js';
 
@@ -21,15 +21,22 @@ const postcodeElem = document.querySelector('#sample4_postcode');
 const addressElem = document.querySelector('#sample4_roadAddress');
 const detailAddressElem = document.querySelector('#sample4_detailAddress');
 const orderRequesElem = document.querySelector('#d-requests');
+const userInputElem = document.querySelector('#d-requests-input');
 
 
 /** 전역변수로 말고 재구현 **/
 let totalPrice=0;
 
 getPaymentInfo();
-purchaseBtn.addEventListener("click", handleSubmit);
-//storeOrderInfo();
+callOrderInfo();
+handleAllEvent();
 
+
+function handleAllEvent() {
+    purchaseBtn.addEventListener("click", handleSubmit);
+    orderRequesElem.addEventListener("change", handleSelect);
+    window.addEventListener('beforeunload', storeOrderInfo);
+}
 
 function getPaymentInfo() {
     let items = getCartItems();
@@ -45,24 +52,32 @@ function getPaymentInfo() {
     totalElem.innerText = '$'+addCommas(totalPrice);
 }
 
+function callOrderInfo() {
+    const orderInfo = getOrderInfo();
+
+    nameElem.value= orderInfo.name;
+    phoneNumberElem.value= orderInfo.phoneNumber;
+    postcodeElem.value= orderInfo.postcode;
+    addressElem.value= orderInfo.address;
+    detailAddressElem.value= orderInfo.detailAddress;
+}
+
 function storeOrderInfo() {
-    let orderInfo = getOrderInfo();
 
-    let name = nameElem.value||orderInfo.name;
-    let phoneNumber = phoneNumberElem.value||orderInfo;
-    let postcode = postcodeElem.value||``;
-    let address = addressElem.value||``;
-    let detailAddress = detailAddressElem.value||``;
-    let orderRequest = orderRequesElem.value||``;
+    let name = nameElem.value;
+    let phoneNumber = phoneNumberElem.value;
+    let postcode = postcodeElem.value;
+    let address = addressElem.value;
+    let detailAddress = detailAddressElem.value;
+    let orderRequest = orderRequesElem.value;
 
-    orderInfo = {
+    const orderInfo = {
         name,
         phoneNumber,
         postcode,
         address,
         detailAddress,
-        orderRequest,
-        totalPrice
+        orderRequest
     }
     setOrderInfo(orderInfo);
 }
@@ -82,6 +97,7 @@ async function handleSubmit(e) {
     const address = document.querySelector('#sample4_roadAddress').value;
     const detailAddress = document.querySelector('#sample4_detailAddress').value;
     const orderRequest = document.querySelector('#d-requests').value;
+    if(orderRequest == 'userInput') orderRequest = userInputElem.value;
 
     console.log(orderRequest);
     if(!localStorage.getItem('token')){ // 로그인 안되어있을 경우
@@ -99,6 +115,7 @@ async function handleSubmit(e) {
         window.location.href ='/products';
         return;
     }
+
    
     try {
         const cartItems = getCartItems().map( item => { return {id: item.id, quantity: item.quantity }});
@@ -122,6 +139,7 @@ async function handleSubmit(e) {
         await Api.post('/api/orders', data);
 
         alert(`주문 및 결제가 완료되었습니다.`);
+        setCartItems([]);
 
         // 로그인 페이지 이동
         window.location.href = './complete';
@@ -131,3 +149,11 @@ async function handleSubmit(e) {
     }
 }
   
+function handleSelect() {
+    if(orderRequesElem.value=="userinput"){
+        userInputElem.style.display = "block";
+        return;
+    }
+    userInputElem.style.display = "none";
+
+}

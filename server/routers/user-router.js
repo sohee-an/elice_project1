@@ -17,12 +17,14 @@ userRouter.post('/register', async (req, res, next) => {
       );
     }
 
+    console.log(req.body)
+
     // req (request)의 body 에서 데이터 가져오기
     const fullName = req.body.fullName;
     const email = req.body.email;
     const password = req.body.password;
-    const phoneNumber=req.body.phoneNumber;
-    const address=req.body.address;
+    const phoneNumber = req.body.phoneNumber;
+    const address = req.body.address;
 
 
     // 위 데이터를 유저 db에 추가하기
