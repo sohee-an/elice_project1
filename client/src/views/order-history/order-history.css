@@ -36,3 +36,26 @@ nav {
   border-bottom: 1px solid grey;
   border-collapse: collapse;
 }
+
+.order-body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.order-iteminfo {
+    width: 100%;
+}
+
+.list-header div {
+    display: flex;
+    flex-direction: row;
+    background-color: grey;
+    width: 100%;
+}
+
+.list-header div p {
+    display: inline-block;
+    width: 20%;
+    color: white;
+}

@@ -8,11 +8,11 @@ const OrderSchema = new Schema({
     },
     name: {
         type: String,
-        required: false,
+        required: true,
     },
     phoneNumber: {
         type: String,
-        required: false,
+        required: true,
     },
     products: [{
         type: new Schema(
@@ -32,10 +32,10 @@ const OrderSchema = new Schema({
             },
         )
     }],
-    // total: {
-    //     type: Number,
-    //     required: true,
-    // },
+     total: {
+         type: Number,
+         required: true,
+     },
     address: {
         type: new Schema(
             {
@@ -51,6 +51,7 @@ const OrderSchema = new Schema({
     },
     orderRequest: {
         type: String,
+        required: true,
     },
     state: {
         type: String,
