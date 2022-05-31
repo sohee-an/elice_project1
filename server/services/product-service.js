@@ -45,14 +45,24 @@ class ProductService {
     }
 
     async updateProduct(product_id, updateProductInfo) {
-        const foundProduct = await this.productModel.findOneByNameAndBrand({ name: updateProductInfo.name, brand: updateProductInfo.brand });
+        // const foundProduct = await this.productModel.findOneByNameAndBrand({ name: updateProductInfo.name, brand: updateProductInfo.brand });
 
-        if (foundProduct) {
-            throw new Error("이미 등록된 상품입니다. 상품의 이름 또는 브랜드를 바꿔주세요");
-        }
+        // if (foundProduct) {
+        //     throw new Error("이미 등록된 상품입니다. 상품의 이름 또는 브랜드를 바꿔주세요");
+        // }
 
         const updatedProduct = await this.productModel.update(product_id, updateProductInfo)
         return updatedProduct;
+    }
+
+    async getSearchedProducts(productName) {
+        const searchedProducts = await this.productModel.findByString(productName);
+
+        if (searchedProducts.length === 0) {
+            throw new Error("조회된 상품이 없습니다.")
+        }
+
+        return searchedProducts;
     }
 
 }

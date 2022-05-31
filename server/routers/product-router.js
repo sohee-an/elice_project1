@@ -111,4 +111,20 @@ productRouter.delete('/:id', async (req, res, next) => {
     }
 })
 
+/////////////////////////////////////기능 추가/////////////////////////////////////
+//상품 검색
+productRouter.get('/:productName/search', async (req, res, next) => {
+    try {
+        const { productName } = req.params
+
+        const searchedProducts = await productService.getSearchedProducts(productName);
+
+        res.status(200).json(searchedProducts);
+
+    } catch (err) {
+        next(err);
+    }
+})
+/////////////////////////////////////기능 추가/////////////////////////////////////
+
 export { productRouter };

@@ -39,6 +39,14 @@ class ProductModel {
 
         return removedProduct;
     }
+
+    async findByString(productName) {
+        const filter = { name: new RegExp(productName) }
+
+        const searchedProducts = await Product.find(filter);
+
+        return searchedProducts;
+    }
 }
 
 const productModel = new ProductModel();
