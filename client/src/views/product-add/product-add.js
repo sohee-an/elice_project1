@@ -4,19 +4,28 @@ sidebar();
 changeNavbar();
 handleLogoutBtn();
 
-const titleInput = document.querySelector('#titleInput');
-const largeCategoryInput = document.querySelector('#largeCategory');
-const mediumCategoryInput = document.querySelector('#mediumCategory');
-const brandInput = document.querySelector('#brandInput');
-const shortDescInput = document.querySelector('#shortDescInput');
 const imageInput = document.querySelector("#imageInput");
-const priceInput = document.querySelector('#priceInput');
-
 const searchKeywordInput = document.querySelector("#searchKeywordInput");
 const fileNameSpan = document.querySelector("#fileNameSpan");
 const addKeywordBtn = document.querySelector("#addKeywordBtn");
 const keywordContainer = document.querySelector("#keywordContainer");
 const submitBtn = document.querySelector("#submitBtn");
+
+// 관리자 로그인 X -> 접근 불가
+if (localStorage.getItem("role") !== "admin") {
+  alert('관리자 전용 페이지입니다.');
+  window.location.href = "/";
+}
+
+// submitBtn.addEventListener('click', async (e) => {
+//   e.preventDefault();
+
+//   try {
+
+//   } catch (err) {
+//     alert(`상품 추가 과정에서 오류가 발생하였습니다: ${err.message}`);
+//   }
+// })
 
 // 사진 업로드 하면 fileNameSpan.innerText = 파일 이름
 imageInput.addEventListener("input", () => {
