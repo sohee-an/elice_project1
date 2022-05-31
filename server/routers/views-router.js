@@ -26,6 +26,7 @@ viewsRouter.use('/admin',serveStatic('admin'))
 viewsRouter.use('/products',serveStatic('products'));
 viewsRouter.use('/product/add',serveStatic('product-add'))
 viewsRouter.use('/category/add',serveStatic('category-add'))
+viewsRouter.use('/admin/users',serveStatic('admin-users'))
 
 
 
