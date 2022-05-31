@@ -72,7 +72,7 @@ productRouter.post('/register', upload.single('img'), async (req, res, next) => 
             image
         })
 
-        res.status(200).redirect('/users');
+        res.status(200).send("<script>alert('상품 등록이 완료 되었습니다.'); location.href='/admin';</script>");
     } catch (err) {
         next(err);
     }
@@ -85,7 +85,7 @@ productRouter.patch('/:id', upload.single('img'), async (req, res, next) => {
                 'headers의 Content-Type을 application/json으로 설정해주세요'
             );
         }
-        
+
         const id = req.params.id;
         const image = req.file.filename;
         const { name, price, description, brand, largeCategory, mediumCategory } = req.body
