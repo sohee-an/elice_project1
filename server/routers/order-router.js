@@ -29,6 +29,15 @@ orderRouter.post('/', loginRequired, async function (req, res, next) {
         }
     })
 
+    //시간가져오기 
+    const today= new Date();
+    const year = today.getFullYear(); // 년도
+    const month = today.getMonth() + 1;  // 월
+    const date = today.getDate();  // 날짜
+    
+    const ordrTime= (`${year}-${month}-${date}`);
+    
+
     //데이터를 넣음
     const newOrder = await orderService.addOrder({
         userId,
@@ -38,6 +47,7 @@ orderRouter.post('/', loginRequired, async function (req, res, next) {
         address,
         total,
         orderRequest,
+        ordrTime
     });
     
 

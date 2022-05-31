@@ -53,9 +53,13 @@ const OrderSchema = new Schema({
         type: String,
         required: true,
     },
+    ordrTime:{
+        type:String,
+        required:true,
+    },
     state: {
         type: String,
-        default: "배송 준비중",
+        default: "상품 준비중",
     },
 }, {
     timestamps: true,
