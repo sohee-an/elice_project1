@@ -1,0 +1,61 @@
+@import "../../common/sidebar/sidebar.css";
+@import '../common/navbar/navbar.css';
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+
+nav {
+  border-bottom: 3px solid black;
+}
+.navbar-start {
+  flex-grow: 1;
+  justify-content: center;
+}
+.brandname {
+  font-family: 'Limelight',cursive;
+  font-size: 24px;
+}
+
+.div-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5em;
+  margin-left: 5em;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 85%;
+  height: auto;
+}
+
+.order-header {
+  width: 100%;
+  margin: 30px;
+  padding: 20px;
+  display: flex;
+  flex: row;
+  text-align: bottom;
+  border-bottom: 1px solid grey;
+  border-collapse: collapse;
+}
+
+.order-body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.order-iteminfo {
+    width: 100%;
+}
+
+.list-header div {
+    display: flex;
+    flex-direction: row;
+    background-color: grey;
+    width: 100%;
+}
+
+.list-header div p {
+    display: inline-block;
+    width: 20%;
+    color: white;
+}
