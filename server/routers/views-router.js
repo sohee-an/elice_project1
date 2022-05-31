@@ -13,17 +13,21 @@ viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/home',serveStatic('home'));
 viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
+
 viewsRouter.use('/cart', serveStatic('cart'));
 viewsRouter.use('/order', serveStatic('order'));
-viewsRouter.use('/products',serveStatic('products'));
+viewsRouter.use('/order/complete',serveStatic('order-complete'))
+viewsRouter.use('/order/history',serveStatic('order-history'))
 viewsRouter.use('/users',serveStatic('user'))
-viewsRouter.use('/admin',serveStatic('admin'))
 viewsRouter.use('/users/update',serveStatic('user-update'))
 viewsRouter.use('/users/delete',serveStatic('user-delete'))
+viewsRouter.use('/admin',serveStatic('admin'))
+
+viewsRouter.use('/products',serveStatic('products'));
 viewsRouter.use('/product/add',serveStatic('product-add'))
-viewsRouter.use('/order/complete',serveStatic('order-complete'))
 viewsRouter.use('/category/add',serveStatic('category-add'))
 viewsRouter.use('/admin/users',serveStatic('admin-users'))
+
 
 
 

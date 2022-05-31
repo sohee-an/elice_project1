@@ -131,15 +131,16 @@
                 </li>
                 <li>
                   <p>요청사항</p>
-                  <select name="requests" id="d-requests" form="form id" onchange="selectBoxChange(this.value)">
+                  <select name="requests" id="d-requests" form="form id">
                     <option value="">배송시 요청사항을 선택해 주세요.</option>
                     <option value="직접 수령하겠습니다.">직접 수령하겠습니다.</option>
                     <option value="배송 전 연락바랍니다.">배송 전 연락바랍니다.</option>
                     <option value="부재 시 경비실에 맡겨주세요.">부재 시 경비실에 맡겨주세요.</option>
                     <option value="부재 시 문앞에 놓아주세요.">부재 시 문앞에 놓아주세요.</option>
                     <option value="부재 시 택배함에 넣어주세요.">부재 시 택배함에 넣어주세요.</option>
-                    <option value="">직접 입력</option>
+                    <option value="userinput">직접 입력</option>
                   </select>
+                  <input type="text" id="d-requests-input" placeholder="요청 사항을 입력하세요 (20자 이내)" maxlength=20 style="display: none">
                 </li>
               </ol>
             </div>
@@ -169,7 +170,7 @@
             <p>총 결제금액 </p>
             <p id="d-total-price" align="right"> </p>
           </div>
-          <input type="button" value="결제하기" id="purchase-btn" form="delivery-form">
+          <input type="button" value="결제하기" id="purchase-btn" form="delivery-form" >
         </div>
       </div>
     </div>

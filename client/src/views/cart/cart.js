@@ -17,7 +17,7 @@ document.getElementById("purchase-btn").addEventListener("click", async (e)=>{
         window.location.href = "/login";  
     } else if(getCartItems().length==0) {
         alert('구매할 물건을 선택하세요.');
-        window.location.href = "/";  
+        window.location.href = "/?beforePage='/'";  
     } else {
         window.location.href = "/order";
         
