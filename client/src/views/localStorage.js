@@ -25,7 +25,14 @@ export const removeFromCart = (id)=>{
   setCartItems(getCartItems().filter(x=>x.id !== id));
 }
 
-export const storeOrderInfo = (orderInfo) => {
-  localStorage.setItem("orderInfo", JSON.stringify());
+export const setOrderInfo = (orderInfo) => {
+  localStorage.setItem("orderInfo", JSON.stringify(orderInfo));
+}
+
+export const getOrderIntfo = ()=>{
+  const orderInfo = localStorage.setItem('orderInfo')?
+  JSON.parse(localStorage.getItem('orderInfo')):{};
+
+  return orderInfo;
 }
 
