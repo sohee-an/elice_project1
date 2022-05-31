@@ -1,6 +1,7 @@
 import { sidebar } from '../common/sidebar/sidebar.js'
 import * as Api from '../api.js';
 import { validateEmail } from '../useful-functions.js';
+import { changeNavbar, handleLogoutBtn } from '../common/navbar/navbar.js';
 
 // 요소(element), input 혹은 상수
 const emailInput = document.querySelector('#emailInput');
@@ -10,6 +11,8 @@ const submitButton = document.querySelector('#submitButton');
 addAllElements();
 addAllEvents();
 sidebar();
+changeNavbar();
+handleLogoutBtn();
 
 // html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 async function addAllElements() { }
