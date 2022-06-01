@@ -38,3 +38,28 @@ export const getOrderInfo = ()=>{
   return orderInfo;
 }
 
+/*최근에 본 상품들 관련 로컬 스토리지 */
+export const getViewedItems = ()=>{
+  const viewedItems = localStorage.getItem('viewedItems') ?
+                      JSON.parse(localStorage.getItem('viewedItems')) : [];
+  return viewedItems;
+}
+
+export const setViewedItems = (viewedItems)=>{
+  localStorage.setItem('viewedItems',JSON.stringify(viewedItems))
+}
+
+export const addToViewedItems = (item) => {
+  let viewedItems = getViewedItems();
+  const existItem = viewedItems.find(x=>x.name === item.name);
+  if (existItem) {
+    viewedItems = viewedItems.map(x=>x.name === existItem.name ? item : x);
+  } else {
+    viewedItems = [...viewedItems, item];
+  }
+  if (viewedItems.length >3) {
+    let result = viewedItems.shift();
+    setViewedItems(result);
+  }
+  setViewedItems(viewedItems);
+}
