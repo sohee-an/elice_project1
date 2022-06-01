@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express from 'express';
-import { viewsRouter, userRouter, categoryRouter, productRouter, orderRouter, paymentRouter } from './routers'
+import { viewsRouter, userRouter, categoryRouter, productRouter, orderRouter,reviwRouter } from './routers'
 import { errorHandler } from './middlewares';
 
 
@@ -32,12 +32,8 @@ app.use('/api/products', productRouter);
 // order 관련 api 라우팅
 app.use('/api/orders', orderRouter);
 
-/////////////////////////////////////기능 추가/////////////////////////////////////
-
-// payment 관련 api 라우팅
-app.use('/api/payments', paymentRouter);
-
-/////////////////////////////////////기능 추가/////////////////////////////////////
+//review 관련 api 라우팅
+app.use('/api/reviews', reviwRouter);
 
 // 순서 중요 (errorHandler은 다른 일반 라우팅보다 나중에 있어야 함)
 // 그래야, 에러가 났을 때 next(error) 했을 때 여기로 오게 됨
