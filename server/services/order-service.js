@@ -33,6 +33,20 @@ class OrderService {
         const deletedOrder = await this.orderModel.remove(orderId);
         return deletedOrder;
     }
+
+    /////////////////////////////////////기능 추가/////////////////////////////////////
+
+    async getSpecificOrder(orderId) {
+        const order = await this.orderModel.findOrder(orderId);
+        return order;
+    }
+
+    async updateSpecificOrder(orderId, paymentData) {
+        const order = await this.orderModel.updateOrder(orderId, paymentData);
+        return order;
+    }
+
+    /////////////////////////////////////기능 추가/////////////////////////////////////
 }
 
 const orderService = new OrderService(orderModel);

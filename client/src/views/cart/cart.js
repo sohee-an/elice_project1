@@ -1,7 +1,7 @@
 // import * as Api from '/api.js'
 import { sidebar } from '../common/sidebar/sidebar.js'
 import { changeNavbar, handleLogoutBtn } from '../common/navbar/navbar.js';
-import { getCartItems, setCartItems, addToCart, removeFromCart} from '../localStorage.js';
+import { getCartItems, setCartItems, addToCart, removeFromCart } from '../localStorage.js';
 import { addCommas, convertToNumber } from '../useful-functions.js';
 
 sidebar();
@@ -9,20 +9,20 @@ changeNavbar();
 handleLogoutBtn();
 
 const itemListElem = document.getElementById("item-list");
-document.getElementById("purchase-btn").addEventListener("click", async (e)=>{
+document.getElementById("purchase-btn").addEventListener("click", async (e) => {
     e.preventDefault();
-  
-    if(!localStorage.getItem('token')){  // 로그인 되어있는 경우
+
+    if (!localStorage.getItem('token')) {  // 로그인 되어있는 경우
         alert('로그인이 필요합니다.');
-        window.location.href = "/login";  
-    } else if(getCartItems().length==0) {
+        window.location.href = "/login";
+    } else if (getCartItems().length == 0) {
         alert('구매할 물건을 선택하세요.');
-        window.location.href = "/?beforePage='/'";  
+        window.location.href = "/?beforePage='/'";
     } else {
         window.location.href = "/order";
-        
+
     }
-    
+
 })
 
 createItemList();
@@ -37,7 +37,7 @@ function createItemList() {
     let newItems = ``;
     if (items.length == 0) newItems = `<li>장바구니가 비어있습니다.</li>`;
     else newItems = items.reduce((acc, cur) => {
-       return acc + `<li id="item${cur.item}">
+        return acc + `<li id="item${cur.item}">
         <div class="item"> 
             <div> <input type="checkbox" class="checked" id="checkbox-${cur.id}" checked/> </div>
             <input type="image" class="item-img" src="/uploads/${cur.image}" onclick="window.location.href='/products/#/product/${cur.id}'">
@@ -75,26 +75,26 @@ function updateItemList() {
         const quantityElem = elem.querySelector('.p-quantity');
         const priceElem = elem.querySelector('.p-price');
 
-        let item = items.find( e => e.id==elem_id );
+        let item = items.find(e => e.id == elem_id);
 
-        minusElem.addEventListener("click", () =>{
-            if(inputElem.value > 1){   // 아이템이 1개 이상일 때 수량 감소가능
+        minusElem.addEventListener("click", () => {
+            if (inputElem.value > 1) {   // 아이템이 1개 이상일 때 수량 감소가능
                 inputElem.value--;
                 item.quantity--;
                 addToCart(item);
                 getPaymentInfo();
                 quantityElem.innerText = `${addCommas(item.quantity)}개`;
-                priceElem.innerText = `${addCommas( item.quantity * item.price)}개`;
+                priceElem.innerText = `${addCommas(item.quantity * item.price)}개`;
             }
         })
-        plusElem.addEventListener("click", () =>{
-            if(inputElem.value < 100){   // 아이템이 100개 이하일 때 수량 증가가능
+        plusElem.addEventListener("click", () => {
+            if (inputElem.value < 100) {   // 아이템이 100개 이하일 때 수량 증가가능
                 inputElem.value++;
                 item.quantity++;
                 addToCart(item);
                 getPaymentInfo();
                 quantityElem.innerText = `${addCommas(item.quantity)}개`;
-                priceElem.innerText = `${addCommas( item.quantity * item.price)}개`;
+                priceElem.innerText = `${addCommas(item.quantity * item.price)}개`;
             }
         })
     })
@@ -109,32 +109,32 @@ function deleteItem() {
     const deleteSelectedElem = document.querySelector('#delete-selected');
 
     // [ ] 체크박스 클릭 시
-    selectAllElem.addEventListener('click', ()=> {
+    selectAllElem.addEventListener('click', () => {
         const allItemElem = document.querySelectorAll('.checked');
-        allItemElem.forEach(e=>{
-            e.checked=selectAllElem.checked;
-        }) 
+        allItemElem.forEach(e => {
+            e.checked = selectAllElem.checked;
+        })
     })
 
     // 모든 상품 삭제시 -> 경고 창 확인 클릭시 장바구니 비우기
-    deleteAllElem.addEventListener('click', ()=> {
-        if(confirm("장바구니의 모든 상품을 삭제합니다.")){
+    deleteAllElem.addEventListener('click', () => {
+        if (confirm("장바구니의 모든 상품을 삭제합니다.")) {
             setCartItems([]);
             getPaymentInfo();
-            itemListElem.innerHTML=`<li>장바구니가 비어있습니다.</li>`;
+            itemListElem.innerHTML = `<li>장바구니가 비어있습니다.</li>`;
         }
     })
 
     // 선택한 상품 삭제
-    deleteSelectedElem.addEventListener('click', ()=>{
+    deleteSelectedElem.addEventListener('click', () => {
         const allItemElem = document.querySelectorAll('.checked');
-        allItemElem.forEach(e=>{
-            if(e.checked){
+        allItemElem.forEach(e => {
+            if (e.checked) {
                 removeFromCart(e.id.split('-')[1]);
                 createItemList();
             }
         })
-        if(getCartItems.empty())  itemListElem.innerHTML=`<li>장바구니가 비어있습니다.</li>`;
+        if (getCartItems.empty()) itemListElem.innerHTML = `<li>장바구니가 비어있습니다.</li>`;
     })
 
 
@@ -155,12 +155,12 @@ function getPaymentInfo() {
 
     let itemAmount = items.reduce((acc, cur) => acc + Number(cur.quantity), 0);
     let itemPrice = items.reduce((acc, cur) => acc + Number((cur.price * cur.quantity)), 0);
-    let shippingPrice = itemPrice? 3000:0;
+    let shippingPrice = itemPrice ? 100 : 0;
     let totalPrice = itemPrice + shippingPrice;
 
-    amountElem.innerText = addCommas(itemAmount)+'개';
-    priceElem.innerText = '$'+addCommas(itemPrice);
-    shippingElem.innerText = '$'+addCommas(shippingPrice);
-    totalElem.innerText = '$'+addCommas(totalPrice);
+    amountElem.innerText = addCommas(itemAmount) + '개';
+    priceElem.innerText = '$' + addCommas(itemPrice);
+    shippingElem.innerText = '$' + addCommas(shippingPrice);
+    totalElem.innerText = '$' + addCommas(totalPrice);
 }
 

@@ -163,6 +163,15 @@ class UserService {
     return basicUserInfo;
   }
 
+  /////////////////////////////////////기능 추가/////////////////////////////////////
+
+  async updateUser(userId, paymentData) {
+    const user = await this.userModel.updatePaymentData(userId, paymentData);
+    return user;
+  }
+
+  /////////////////////////////////////기능 추가/////////////////////////////////////
+
 }
 
 const userService = new UserService(userModel);

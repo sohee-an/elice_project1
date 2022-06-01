@@ -32,10 +32,10 @@ const OrderSchema = new Schema({
             },
         )
     }],
-     total: {
-         type: Number,
-         required: true,
-     },
+    total: {
+        type: Number,
+        required: true,
+    },
     address: {
         type: new Schema(
             {
@@ -53,9 +53,9 @@ const OrderSchema = new Schema({
         type: String,
         required: true,
     },
-    ordrTime:{
-        type:String,
-        required:true,
+    ordrTime: {
+        type: String,
+        required: true,
     },
     state: {
         type: String,

@@ -38,6 +38,15 @@ export class UserModel {
 
   }
 
+  /////////////////////////////////////기능 추가/////////////////////////////////////
+
+  async updatePaymentData(userId, paymentData) {
+    const user = await User.findOneAndUpdate({ _id: userId }, { $set: paymentData });
+    return user;
+  }
+
+  /////////////////////////////////////기능 추가/////////////////////////////////////
+
 }
 
 const userModel = new UserModel();

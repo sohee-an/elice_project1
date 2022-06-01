@@ -24,6 +24,19 @@ class OrderModel {
         return deletedOrder
     }
 
+    /////////////////////////////////////기능 추가/////////////////////////////////////
+
+    async findOrder(orderId) {
+        const order = await Order.findOne({ _id: orderId });
+        return order;
+    }
+
+    async updateOrder(orderId, paymentData) {
+        const order = await Order.findOneAndUpdate({ _id: orderId }, { $set: paymentData });
+        return order;
+    }
+
+    /////////////////////////////////////기능 추가/////////////////////////////////////
 }
 
 const orderModel = new OrderModel();
