@@ -33,6 +33,18 @@ class OrderService {
         const deletedOrder = await this.orderModel.remove(orderId);
         return deletedOrder;
     }
+
+    /////관리자용 상태 업데이트
+    async stateUpdate(orderId,state){
+        const update={state:state};
+        const updateOrder= await this.orderModel.update(
+            orderId,
+            update
+        );
+        return updateOrder;
+        //console.log(updateOrder);
+       
+    }
 }
 
 const orderService = new OrderService(orderModel);
