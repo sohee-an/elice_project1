@@ -95,6 +95,9 @@ async function renderViewed () {
 
 async function after_renderViewed () {
   let viewedItems = getViewedItems();
+  if (viewedItems.length >3) {
+    viewedItems = viewedItems.slice(viewedItems.length-4,viewedItems.length-1);
+  }
   const detailsViewed = document.querySelector('.details-viewed');
   let result = viewedItems.map((product)=>`
               <div class="content-viewed">

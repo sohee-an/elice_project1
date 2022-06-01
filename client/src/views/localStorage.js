@@ -57,9 +57,6 @@ export const addToViewedItems = (item) => {
   } else {
     viewedItems = [...viewedItems, item];
   }
-  if (viewedItems.length >3) {
-    let result = viewedItems.shift();
-    setViewedItems(result);
-  }
+
   setViewedItems(viewedItems);
 }
