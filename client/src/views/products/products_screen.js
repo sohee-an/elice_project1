@@ -8,7 +8,7 @@ const Products_screen = {
     const products = await response.json();
     //브라우저 console창에서 products를 확인할 수 있음 
     //어떤 필드가 들어있는지 확인용으로 보면 좋음 
-    console.log(products);
+    // console.log(products);
     return `
     <h1>
       <strong>VIEW ALL</strong>

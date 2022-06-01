@@ -1,10 +1,11 @@
 import { parseRequestUrl } from '../utils.js'
 import { getProduct } from '../../api.js';
-import { addToCart } from '../../localStorage.js';
+import { addToCart, addToViewedItems, getViewedItems } from '../../localStorage.js';
 import { addCommas } from '../../useful-functions.js';
 
 export const ProductScreen = {
   after_render: () => {
+    after_renderViewed();
     const addbutton = document.querySelector('.add-button');
     addbutton.addEventListener('click', () => {
       renderCart();
@@ -12,6 +13,7 @@ export const ProductScreen = {
     });
   },
   render: async () => {
+    renderViewed()
     const request = parseRequestUrl();
     const product = await getProduct(request.id);
     if (product.error) {
@@ -55,6 +57,9 @@ export const ProductScreen = {
                 </button>
             </ul>
           </div>
+          <h1>Recently Viewed</h1>
+          <div class="details-viewed">
+          </div>
         </div>
       </div>
     </div>
@@ -76,5 +81,34 @@ async function renderCart () {
   }
 }
 
+async function renderViewed () {
+  const request = parseRequestUrl();
+  if (request.id) {
+    const product = await getProduct(request.id);
+    addToViewedItems({
+      id: product._id,
+      image: product.image,
+      name: product.name,
+    })
+  }
+}
+
+async function after_renderViewed () {
+  let viewedItems = getViewedItems();
+  const detailsViewed = document.querySelector('.details-viewed');
+  let result = viewedItems.map((product)=>`
+              <div class="content-viewed">
+                <a href="#/product/${product.id}">
+                  <div class="details-viewedimg">
+                    <img src="/uploads/${product.image}" alt="">
+                  </div>
+                  <div class="details-viewedname">
+                    ${product.name}
+                  </div>
+                </a>
+              </div>
+               `).join('\n')
+  detailsViewed.innerHTML = result;
+}
 
 export default ProductScreen;
