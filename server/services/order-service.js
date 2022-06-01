@@ -17,9 +17,7 @@ class OrderService {
     async getUserOrder(userOrderId) {// 상품구매한 유저 아이디 들어감 
         // 상품 정보다 찾아옴. 유저 정보다 다 찾아옴
         const userOrder = await this.orderModel.findUserOrderAll(userOrderId);
-        console.log(userOrder);
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1');
-        console.log(userOrder[0].orderTime);
+       return userOrder;
 
     }
 
