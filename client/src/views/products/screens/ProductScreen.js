@@ -8,7 +8,7 @@ export const ProductScreen = {
     const addbutton = document.querySelector('.add-button');
     addbutton.addEventListener('click', () => {
       renderCart();
-      addbutton.innerHTML = `<a href="/cart">PROCEED TO CHECKOUT</a>`
+      addbutton.innerHTML = `<a href="/cart">CHECKOUT</a>`
     });
   },
   render: async () => {
@@ -18,12 +18,12 @@ export const ProductScreen = {
       return `<div>${product.error}</div>`;
     }
     return `
+    <div class="back-to-result">
+      <a href="#/">
+        <i class="fa-solid fa-chevron-left"></i>
+      </a>
+    </div>
     <div class="content">
-      <div class="back-to-result">
-        <a href="#/">
-          <i class="fa-solid fa-chevron-left"></i>
-        </a>
-      </div>
       <div class="details">
         <div class="details-image details-left">
           <img src="/uploads/${product.image}" alt="${product.name}">

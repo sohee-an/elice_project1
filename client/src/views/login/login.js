@@ -2,7 +2,6 @@ import { sidebar } from '../common/sidebar/sidebar.js';
 import { changeNavbar, handleLogoutBtn } from "../../common/navbar/navbar.js";
 import * as Api from '../api.js';
 import { validateEmail } from '../useful-functions.js';
-import { changeNavbar, handleLogoutBtn } from '../common/navbar/navbar.js';
 
 // 요소(element), input 혹은 상수
 const emailInput = document.querySelector('#emailInput');
