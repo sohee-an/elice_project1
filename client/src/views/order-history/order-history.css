@@ -1,5 +1,5 @@
 @import "../../common/sidebar/sidebar.css";
-@import '../common/navbar/navbar.css';
+@import '../../common/navbar/navbar.css';
 @import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
 
 nav {
@@ -38,8 +38,10 @@ nav {
 }
 
 .order-body {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
 }
 
 
@@ -47,15 +49,32 @@ nav {
     width: 100%;
 }
 
-.list-header div {
-    display: flex;
-    flex-direction: row;
-    background-color: grey;
-    width: 100%;
+.o-list-header {
+  display: flex;
+  flex-direction: row;
+  background-color: grey;
+  width: 100%;
+  color: white;
+  font-size: 15px; 
+  text-align: center;
+  border-bottom: solid black 5px;
+  padding: 1em;
+}
+.o-list-main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  color: black;
+  font-size: 15px; 
+  text-align: center;
+  border-bottom: grey 2px;
+  padding: 1em;
+}
+.o-list-header div {
+  width: 25%;
+}
+.o-list-main div {
+  width: 25%;
 }
 
-.list-header div p {
-    display: inline-block;
-    width: 20%;
-    color: white;
-}
+
