@@ -149,8 +149,8 @@ userRouter.delete('/del/:userId', loginRequired, async function (req, res, next)
     const pwd = req.body.password;// 현재 적은 비밀번호가지고옴 
     console.log(pwd);
 
-    const findPassword = await userService.delteUser(userId, pwd);// 로그인 된 비밀번호와  현재 적은 비밀번호를 보낸다 .
-    res.status(200).json(findPassword);
+    const delEmail = await userService.delteUser(userId, pwd);// 로그인 된 비밀번호와  현재 적은 비밀번호를 보낸다 .
+    res.status(200).json(delEmail);
   } catch (error) {
     next(error);
   }
@@ -168,5 +168,7 @@ userRouter.get('/basicUserInfo/:userId', async function (req, res, next) {
   }
 
 })
+
+
 
 export { userRouter };
