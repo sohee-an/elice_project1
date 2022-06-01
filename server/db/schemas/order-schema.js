@@ -53,7 +53,7 @@ const OrderSchema = new Schema({
         type: String,
         required: true,
     },
-    ordrTime: {
+    orderTime: {
         type: String,
         required: true,
     },

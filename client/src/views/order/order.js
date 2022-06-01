@@ -59,6 +59,7 @@ function getPaymentInfo() {
     totalElem.innerText = '$' + addCommas(totalPrice);
 }
 
+// 사용자가 기존에 입력한 배송지정보 local Storage 에
 function callOrderInfo() {
     const orderInfo = getOrderInfo();
 
@@ -69,6 +70,7 @@ function callOrderInfo() {
     detailAddressElem.value = orderInfo.detailAddress;
 }
 
+// 사용자가 기존에 입력한 배송지정보 local Storage 에
 function storeOrderInfo() {
 
     let name = nameElem.value;
