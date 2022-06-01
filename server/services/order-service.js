@@ -17,7 +17,6 @@ class OrderService {
     async getUserOrder(userOrderId) {// 상품구매한 유저 아이디 들어감 
         // 상품 정보다 찾아옴. 유저 정보다 다 찾아옴
         const userOrder = await this.orderModel.findUserOrderAll(userOrderId);
-        
         return userOrder;
     }
 
@@ -32,16 +31,30 @@ class OrderService {
         return deletedOrder;
     }
 
+    /////////////////////////////////////기능 추가/////////////////////////////////////
+
+    async getSpecificOrder(orderId) {
+        const order = await this.orderModel.findOrder(orderId);
+        return order;
+    }
+
+    async updateSpecificOrder(orderId, paymentData) {
+        const order = await this.orderModel.updateOrder(orderId, paymentData);
+        return order;
+    }
+
+    /////////////////////////////////////기능 추가/////////////////////////////////////
+
     /////관리자용 상태 업데이트
-    async stateUpdate(orderId,state){
-        const update={state:state};
-        const updateOrder= await this.orderModel.update(
+    async stateUpdate(orderId, state) {
+        const update = { state: state };
+        const updateOrder = await this.orderModel.update(
             orderId,
             update
         );
         return updateOrder;
         //console.log(updateOrder);
-       
+
     }
 }
 

@@ -25,7 +25,7 @@ submitBtn.addEventListener('click', async (e) => {
     const formData = new FormData(submitForm);
     const res = await fetch("/api/products/register", {
       method: "POST",
-      body: formData
+      body: formData 
     })
     const data = await res.json();
     console.log(data);
