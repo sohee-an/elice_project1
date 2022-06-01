@@ -95,5 +95,17 @@ orderRouter.delete('/:id', async (req, res, next) => {
         next(error);
     }
 })
+        // 배송상태 수정하는 코드
+orderRouter.patch('/stateUpdate/:orderId',async(req,res,next)=>{
+    try{
+        const orderId= req.params.orderId;
+        const state= req.body.state;
+        const stateUpdate = await orderService.stateUpdate(orderId,state);
+        res.status(200).json(stateUpdate);
+    }catch(error){
+        next(error);
+    }
+    //
+})
 
 export { orderRouter }

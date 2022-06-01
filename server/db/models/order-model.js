@@ -23,6 +23,19 @@ class OrderModel {
         const deletedOrder = await Order.deleteOne({ _id: orderId });
         return deletedOrder
     }
+        //orderId로 상품 찾기 
+    async findOrder(orderId){
+        const findOrder=await Order.findOne({_id:orderId});
+        return findOrder;
+
+    }
+    async update(orderId,state){
+        const filter={_id :orderId}
+        console.log(filter);
+        const option = { returnOriginal: false };
+        const updateState = await Order.findOneAndUpdate(filter,state,option);
+        return updateState;
+    }
 
 }
 
