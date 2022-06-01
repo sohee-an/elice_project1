@@ -28,6 +28,8 @@ viewsRouter.use('/product/add',serveStatic('product-add'))
 viewsRouter.use('/category/add',serveStatic('category-add'))
 viewsRouter.use('/admin/users',serveStatic('admin-users'))
 
+//viewsRouter.use('/reviews',serveStatic('reviews'))
+
 
 
 
