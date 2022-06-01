@@ -29,45 +29,77 @@
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
-        <div class="navbar-menu is-fullheight" id="navMenu">
+        <div class="navbar-menu">
           <div class="navbar-start">
-            <a href="#" class="navbar-item">MENS</a>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="/products/#/?lc=men">
+                MEN
+              </a>
+              <div class="navbar-dropdown is-boxed">
+                <a class="navbar-item" href="/products/#/?lc=men&mc=outer">
+                  OUTER
+                </a>
+                <a class="navbar-item" href="/products/#/?lc=men&mc=top">
+                  TOP
+                </a>
+                <a class="navbar-item" href="/products/#/?lc=men&mc=bottom">
+                  BOTTOM
+                </a>
+              </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="/products/#/?lc=men">
+                WOMEN
+              </a>
+              <div class="navbar-dropdown is-boxed">
+                <a class="navbar-item" href="/products/#/?lc=women&mc=outer">
+                  OUTER
+                </a>
+                <a class="navbar-item" href="/products/#/?lc=women&mc=top">
+                  TOP
+                </a>
+                <a class="navbar-item" href="/products/#/?lc=women&mc=bottom">
+                  BOTTOM
+                </a>
+              </div>
+            </div>
+            <a href="" class="navbar-item">
+              <span class="icon">
+                <i class="fa-solid fa-magnifying-glass has-text-link"></i>
+              </span>
+            </a>
           </div>
-          <div class="navbar-end">
-            <a href="#" class="navbar-item">WOMENS</a>
+          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+            <!-- 로그인 안했을 때 -->
+            <ul id="navbar" class="login-hidden">
+              <li><a href="/products">VIEW ALL</a></li>
+              <li><a href="/login">로그인</a></li>
+              <li><a href="/register">회원가입</a></li>
+              <li>
+                <a href="/cart" aria-current="page">
+                  <span class="icon">
+                    <i class="fas fa-cart-shopping"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <!-- 로그인 했을 때 -->
+            <ul id="navbar" class="logout-hidden hidden">
+              <li><a href="/products">VIEW ALL</a></li>
+              <li><a href="/users">계정관리</a></li>
+              <li><a class="logout-btn" href="/">로그아웃</a></li>
+              <li>
+                <a href="/cart" aria-current="page">
+                  <span class="icon">
+                    <i class="fas fa-cart-shopping"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-
-      <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-        <!-- 로그인 안했을 때 -->
-        <ul id="navbar" class="login-hidden">
-          <li><a href="../login/login.html">로그인</a></li>
-          <li><a href="../register/register.html">회원가입</a></li>
-          <li>
-            <a href="#cart" aria-current="page">
-              <span class="icon">
-                <i class="fas fa-cart-shopping"></i>
-              </span>
-            </a>
-          </li>
-        </ul>
-        <!-- 로그인 했을 때 -->
-        <ul id="navbar" class="logout-hidden hidden">
-          <li><a href="../user">계정관리</a></li>
-          <li><a class="logout-btn" href="/">로그아웃</a></li>
-          <!-- 공통 -->
-          <li>
-            <a href="#cart" aria-current="page">
-              <span class="icon">
-                <i class="fas fa-cart-shopping"></i>
-              </span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    </nav>
 
     <!-- 사이드 메뉴 -->
     <aside class="side-menu hidden">
