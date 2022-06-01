@@ -10,7 +10,7 @@ class OrderModel {
     }
 
     async findUserOrderAll(userOrderId) {// 아이디로 찾아가지고 오기 그리고 상품도 찾아옴
-        const userOrder = await Order.find({ userId: userOrderId }).populate('userId').populate('products.product');
+        const userOrder = await Order.find({ userId: userOrderId }).populate('products.product');
         return userOrder;
     }
 
@@ -22,6 +22,19 @@ class OrderModel {
     async remove(orderId) {
         const deletedOrder = await Order.deleteOne({ _id: orderId });
         return deletedOrder
+    }
+        //orderId로 상품 찾기 
+    async findOrder(orderId){
+        const findOrder=await Order.findOne({_id:orderId});
+        return findOrder;
+
+    }
+    async update(orderId,state){
+        const filter={_id :orderId}
+        console.log(filter);
+        const option = { returnOriginal: false };
+        const updateState = await Order.findOneAndUpdate(filter,state,option);
+        return updateState;
     }
 
     /////////////////////////////////////기능 추가/////////////////////////////////////

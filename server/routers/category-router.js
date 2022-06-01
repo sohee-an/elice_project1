@@ -24,7 +24,7 @@ categoryRouter.post('/register', async (req, res, next) => {
         const { largeCategory, mediumCategory } = req.body;
         const newCategory = await categoryService.addCategory({ largeCategory, mediumCategory });
 
-       res.status(200).send("<script>alert('카테고리 등록이 완료 되었습니다.'); location.href='/admin';</script>");
+      res.status(200).json(newCategory);
     } catch (err) {
         next(err);
     }
@@ -44,7 +44,7 @@ categoryRouter.patch('/:id', async (req, res, next) => {
 
         res.status(200).json(updatedCategory);
     } catch (err) {
-        next
+        next(err)
     }
 });
 

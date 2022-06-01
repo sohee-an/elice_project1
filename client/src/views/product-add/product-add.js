@@ -22,7 +22,6 @@ submitBtn.addEventListener('click', async (e) => {
   e.preventDefault();
 
   try {
-
     const formData = new FormData(submitForm);
     const res = await fetch("/api/products/register", {
       method: "POST",
@@ -30,6 +29,7 @@ submitBtn.addEventListener('click', async (e) => {
     })
     const data = await res.json();
     console.log(data);
+    alert('상품 추가가 완료되었습니다.');
   } catch (err) {
     alert(`상품 추가 과정에서 오류가 발생하였습니다: ${err.message}`);
   }
@@ -41,29 +41,29 @@ imageInput.addEventListener("input", () => {
 })
 
 // 검색 키워드 추가 버튼
-addKeywordBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (searchKeywordInput.value) {
-    const tagId = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 6);
-    keywordContainer.innerHTML += `
-      <div class="control" id="${tagId}">
-        <div class="tags has-addons">
-          <span class="tag is-link is-light">${searchKeywordInput.value}</span>
-          <a class="tag is-link is-light is-delete"></a>
-        </div>
-      </div>
-    `
-    searchKeywordInput.value = "";
-    initDeleteHandler();
-  }
-})
+// addKeywordBtn.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   if (searchKeywordInput.value) {
+//     const tagId = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 6);
+//     keywordContainer.innerHTML += `
+//       <div class="control" id="${tagId}">
+//         <div class="tags has-addons">
+//           <span class="tag is-link is-light">${searchKeywordInput.value}</span>
+//           <a class="tag is-link is-light is-delete"></a>
+//         </div>
+//       </div>
+//     `
+//     searchKeywordInput.value = "";
+//     initDeleteHandler();
+//   }
+// })
 
 // 검색 키워드 삭제 버튼
-function initDeleteHandler() {
-  const deleteTagBtns = document.querySelectorAll(".tag.is-delete");
-  deleteTagBtns.forEach(el => {
-    el.addEventListener("click", (e) => {
-      e.target.closest(".control").remove()
-    })
-  })
-}
+// function initDeleteHandler() {
+//   const deleteTagBtns = document.querySelectorAll(".tag.is-delete");
+//   deleteTagBtns.forEach(el => {
+//     el.addEventListener("click", (e) => {
+//       e.target.closest(".control").remove()
+//     })
+//   })
+// }

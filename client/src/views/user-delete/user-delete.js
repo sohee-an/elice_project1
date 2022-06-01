@@ -43,7 +43,7 @@ yesBtn.addEventListener('click', async (e) => {
     alert('회원 정보가 안전하게 삭제되었습니다.');
     localStorage.removeItem("token");
     localStorage.removeItem("role");
-    window.location.href = '/'
+    window.location.href = "/"
   } catch (err) {
     alert(`회원정보 삭제 과정에서 오류가 발생하였습니다: ${err.message}`);
   }
