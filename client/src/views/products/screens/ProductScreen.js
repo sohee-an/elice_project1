@@ -1,6 +1,6 @@
 import { parseRequestUrl } from '../utils.js'
 import { getProduct } from '../../api.js';
-import { addToCart, addToViewedItems, getViewedItems } from '../../localStorage.js';
+import { addToCart, addToViewedItems, getViewedItems, setViewedItems } from '../../localStorage.js';
 import { addCommas } from '../../useful-functions.js';
 
 export const ProductScreen = {
@@ -96,6 +96,8 @@ async function renderViewed () {
 async function after_renderViewed () {
   let viewedItems = getViewedItems();
   if (viewedItems.length >3) {
+    localStorage.removeItem('viewedItems')
+    setViewedItems(viewedItems.slice(viewedItems.length-3))
     viewedItems = viewedItems.slice(viewedItems.length-4,viewedItems.length-1);
   }
   const detailsViewed = document.querySelector('.details-viewed');
