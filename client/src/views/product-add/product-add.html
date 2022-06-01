@@ -34,12 +34,38 @@
       </div>
       <div class="navbar-menu">
         <div class="navbar-start">
-          <a href="" class="navbar-item">
-            <span class="has-text-link">WOMEN</span>
-          </a>
-          <a href="" class="navbar-item">
-            <span class="has-text-link">MEN</span>
-          </a>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="/products/#/?lc=men">
+              MEN
+            </a>
+            <div class="navbar-dropdown is-boxed">
+              <a class="navbar-item" href="/products/#/?lc=men&mc=outer">
+                OUTER
+              </a>
+              <a class="navbar-item" href="/products/#/?lc=men&mc=top">
+                TOP
+              </a>
+              <a class="navbar-item" href="/products/#/?lc=men&mc=bottom">
+                BOTTOM
+              </a>
+            </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="/products/#/?lc=men">
+              WOMEN
+            </a>
+            <div class="navbar-dropdown is-boxed">
+              <a class="navbar-item" href="/products/#/?lc=women&mc=outer">
+                OUTER
+              </a>
+              <a class="navbar-item" href="/products/#/?lc=women&mc=top">
+                TOP
+              </a>
+              <a class="navbar-item" href="/products/#/?lc=women&mc=bottom">
+                BOTTOM
+              </a>
+            </div>
+          </div>
           <a href="" class="navbar-item">
             <span class="icon">
               <i class="fa-solid fa-magnifying-glass has-text-link"></i>
@@ -76,7 +102,6 @@
         </div>
       </div>
     </div>
-
   </nav>
 
   <!-- 사이드 메뉴 -->
@@ -171,10 +196,10 @@
           </div>
 
           <!-- 재고 수 -->
-          <div class="field">
+          <!-- <div class="field">
             <label for="inventoryInput" class="label">재고 수</label>
             <input class="input" id="inventoryInput" type="number" placeholder="10" autocomplete="on">
-          </div>
+          </div> -->
 
           <!-- 가격 -->
           <div class="field">

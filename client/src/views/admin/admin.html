@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,132 +22,189 @@
     <div class="container mt-3">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <img src="../images/elice-rabbit.png" width="30" height="30" />
-          <span class="has-text-link">쇼핑-3팀</span>
+          <img src="" alt="">
+          <span class="has-text-link brandname">SHOPAHOLIC</span>
         </a>
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
-        <div class="navbar-menu is-fullheight" id="navMenu">
+        <div class="navbar-menu">
           <div class="navbar-start">
-            <a href="#" class="navbar-item">MENS</a>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="/products/#/?lc=men">
+                MEN
+              </a>
+              <div class="navbar-dropdown is-boxed">
+                <a class="navbar-item" href="/products/#/?lc=men&mc=outer">
+                  OUTER
+                </a>
+                <a class="navbar-item" href="/products/#/?lc=men&mc=top">
+                  TOP
+                </a>
+                <a class="navbar-item" href="/products/#/?lc=men&mc=bottom">
+                  BOTTOM
+                </a>
+              </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="/products/#/?lc=women">
+                WOMEN
+              </a>
+              <div class="navbar-dropdown is-boxed">
+                <a class="navbar-item" href="/products/#/?lc=women&mc=outer">
+                  OUTER
+                </a>
+                <a class="navbar-item" href="/products/#/?lc=women&mc=top">
+                  TOP
+                </a>
+                <a class="navbar-item" href="/products/#/?lc=women&mc=bottom">
+                  BOTTOM
+                </a>
+              </div>
+            </div>
+            <a href="" class="navbar-item">
+              <span class="icon">
+                <i class="fa-solid fa-magnifying-glass has-text-link"></i>
+              </span>
+            </a>
           </div>
-          <div class="navbar-end">
-            <a href="#" class="navbar-item">WOMENS</a>
+          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+            <!-- 로그인 안했을 때 -->
+            <ul id="navbar" class="login-hidden">
+              <li><a href="/products">VIEW ALL</a></li>
+              <li><a href="/login">로그인</a></li>
+              <li><a href="/register">회원가입</a></li>
+              <li>
+                <a href="/cart" aria-current="page">
+                  <span class="icon">
+                    <i class="fas fa-cart-shopping"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <!-- 로그인 했을 때 -->
+            <ul id="navbar" class="logout-hidden hidden">
+              <li><a href="/products">VIEW ALL</a></li>
+              <li><a href="/users">계정관리</a></li>
+              <li><a class="logout-btn" href="/">로그아웃</a></li>
+              <li>
+                <a href="/cart" aria-current="page">
+                  <span class="icon">
+                    <i class="fas fa-cart-shopping"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-
-      <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-        <!-- 로그인 안했을 때 -->
-        <ul id="navbar" class="login-hidden">
-          <li><a href="../login/login.html">로그인</a></li>
-          <li><a href="../register/register.html">회원가입</a></li>
-          <li>
-            <a href="#cart" aria-current="page">
-              <span class="icon">
-                <i class="fas fa-cart-shopping"></i>
-              </span>
-            </a>
-          </li>
-        </ul>
-        <!-- 로그인 했을 때 -->
-        <ul id="navbar" class="logout-hidden hidden">
-          <li><a href="../user">계정관리</a></li>
-          <li><a class="logout-btn" href="/">로그아웃</a></li>
-          <!-- 공통 -->
-          <li>
-            <a href="#cart" aria-current="page">
-              <span class="icon">
-                <i class="fas fa-cart-shopping"></i>
-              </span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
   </nav>
 
-    <!-- 사이드 메뉴 -->
-    <aside class="side-menu hidden">
-      <h3 class="sr-only">사이드 메뉴</h3>
-      <div class="top">
-        <i class="fa-duotone fa-x"></i>
-      </div>
-      <ul class="login-hidden">
-        <!-- 로그인 안했을 때 -->
-        <li><a href="/register">회원가입</a></li>
-        <li><a href="/login">로그인</a></li>
-        <li><a href="/cart">카트</a></li>
-      </ul>
-      <ul class="logout-hidden">
-        <!-- 로그인 했을 때 -->
-        <li class="admin-menu hidden"><a href="/admin">페이지관리</a></li>
-        <li><a href="../user">계정관리</a></li>
-        <li><a class="logout-btn" href="/">로그아웃</a></li>
-        <li><a href="/cart">카트</a></li>
-      </ul>
-    </aside>
+  <!-- 사이드 메뉴 -->
+  <aside class="side-menu hidden">
+    <h3 class="sr-only">사이드 메뉴</h3>
+    <div class="top">
+      <i class="fa-duotone fa-x"></i>
+    </div>
+    <ul class="login-hidden">
+      <!-- 로그인 안했을 때 -->
+      <li><a href="/register">회원가입</a></li>
+      <li><a href="/login">로그인</a></li>
+      <li><a href="/cart">카트</a></li>
+    </ul>
+    <ul class="logout-hidden">
+      <!-- 로그인 했을 때 -->
+      <li class="admin-menu hidden"><a href="/admin">페이지관리</a></li>
+      <li><a href="../user">계정관리</a></li>
+      <li><a class="logout-btn" href="/">로그아웃</a></li>
+      <li><a href="/cart">카트</a></li>
+    </ul>
+  </aside>
 
-    <!-- 웹서비스 관리 메뉴 -->
-    <section class="section">
-      <div class="container">
-        <div class="block account-header">
-          <h1 class="title">웹서비스 관리</h1>
-        </div>
-        <div class="menu-container">
-          <!-- 주문관리 -->
-          <a href="/admin/orders" class="menu-card">
-            <div class="menu-icon">
-              <span class="icon has-text-info">
-                <i class="fa-solid fa-credit-card"></i>
-              </span>
-            </div>
-            <div class="menu-body">
-              <p class="title is-3">주문관리</p>
-              <p class="subtitle is-5">모든 주문 내역을 확인 및 관리할 수 있습니다.</p>
-            </div>
-          </a>
-          <!-- 회원관리 -->
-          <a href="/admin/users" class="menu-card">
-            <div class="menu-icon">
-              <span class="icon has-text-info">
-                <i class="fa-solid fa-address-book"></i>
-              </span>
-            </div>
-            <div class="menu-body">
-              <p class="title is-3">회원관리</p>
-              <p class="subtitle is-5">모든 회원 정보를 확인 및 관리할 수 있습니다.</p>
-            </div>
-          </a>
-          <!-- 카테고리 추가 -->
-          <a href="/category/add" class="menu-card">
-            <div class="menu-icon">
-              <span class="icon has-text-info">
-                <i class="fa-solid fa-table-list"></i>
-              </span>
-            </div>
-            <div class="menu-body">
-              <p class="title is-3">카테고리 추가</p>
-              <p class="subtitle is-5">제품이 속할 수 있는, 카테고리 정보를 추가할 수 있습니다.</p>
-            </div>
-          </a>
-          <!-- 상품추가 -->
-          <a href="/product/add" class="menu-card">
-            <div class="menu-icon">
-              <span class="icon has-text-info">
-                <i class="fa-solid fa-gift"></i>
-              </span>
-            </div>
-            <div class="menu-body">
-              <p class="title is-3">제품 추가</p>
-              <p class="subtitle is-5">제품 정보를 추가할 수 있습니다.</p>
-            </div>
-          </a>
-        </div>
+  <!-- 웹서비스 관리 메뉴 -->
+  <section class="section">
+    <div class="container">
+      <div class="block account-header">
+        <h1 class="title">웹서비스 관리</h1>
       </div>
-    </section>
-  </body>
+      <div class="menu-container">
+        <!-- 주문관리 -->
+        <a href="/admin/orders" class="menu-card">
+          <div class="menu-icon">
+            <span class="icon has-text-info">
+              <i class="fa-solid fa-credit-card"></i>
+            </span>
+          </div>
+          <div class="menu-body">
+            <p class="title is-3">주문관리</p>
+            <p class="subtitle is-5">모든 주문 내역을 확인 및 관리할 수 있습니다.</p>
+          </div>
+        </a>
+        <!-- 회원관리 -->
+        <a href="/admin/users" class="menu-card">
+          <div class="menu-icon">
+            <span class="icon has-text-info">
+              <i class="fa-solid fa-address-book"></i>
+            </span>
+          </div>
+          <div class="menu-body">
+            <p class="title is-3">회원관리</p>
+            <p class="subtitle is-5">모든 회원 정보를 확인 및 관리할 수 있습니다.</p>
+          </div>
+        </a>
+        <!-- 카테고리 추가 -->
+        <a href="/category/add" class="menu-card">
+          <div class="menu-icon">
+            <span class="icon has-text-info">
+              <i class="fa-solid fa-table-list"></i>
+            </span>
+          </div>
+          <div class="menu-body">
+            <p class="title is-3">카테고리 추가</p>
+            <p class="subtitle is-5">카테고리 정보를 추가할 수 있습니다.</p>
+          </div>
+        </a>
+        <!-- 상품추가 -->
+        <a href="/product/add" class="menu-card">
+          <div class="menu-icon">
+            <span class="icon has-text-info">
+              <i class="fa-solid fa-gift"></i>
+            </span>
+          </div>
+          <div class="menu-body">
+            <p class="title is-3">제품 추가</p>
+            <p class="subtitle is-5">제품 정보를 추가할 수 있습니다.</p>
+          </div>
+        </a>
+        <!-- 카테고리 수정 -->
+        <a href="/category/update" class="menu-card">
+          <div class="menu-icon">
+            <span class="icon has-text-info">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </span>
+          </div>
+          <div class="menu-body">
+            <p class="title is-3">카테고리 수정</p>
+            <p class="subtitle is-5">카테고리 정보를 수정할 수 있습니다.</p>
+          </div>
+        </a>
+        <!-- 상품 수정 -->
+        <a href="/product/update" class="menu-card">
+          <div class="menu-icon">
+            <span class="icon has-text-info">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </span>
+          </div>
+          <div class="menu-body">
+            <p class="title is-3">제품 수정</p>
+            <p class="subtitle is-5">제품 정보를 수정할 수 있습니다.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</body>
+
 </html>

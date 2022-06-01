@@ -32,12 +32,38 @@
       </div>
       <div class="navbar-menu">
         <div class="navbar-start">
-          <a href="" class="navbar-item">
-            <span class="has-text-link">WOMEN</span>
-          </a>
-          <a href="" class="navbar-item">
-            <span class="has-text-link">MEN</span>
-          </a>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="/products/#/?lc=men">
+              MEN
+            </a>
+            <div class="navbar-dropdown is-boxed">
+              <a class="navbar-item" href="/products/#/?lc=men&mc=outer">
+                OUTER
+              </a>
+              <a class="navbar-item" href="/products/#/?lc=men&mc=top">
+                TOP
+              </a>
+              <a class="navbar-item" href="/products/#/?lc=men&mc=bottom">
+                BOTTOM
+              </a>
+            </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="/products/#/?lc=men">
+              WOMEN
+            </a>
+            <div class="navbar-dropdown is-boxed">
+              <a class="navbar-item" href="/products/#/?lc=women&mc=outer">
+                OUTER
+              </a>
+              <a class="navbar-item" href="/products/#/?lc=women&mc=top">
+                TOP
+              </a>
+              <a class="navbar-item" href="/products/#/?lc=women&mc=bottom">
+                BOTTOM
+              </a>
+            </div>
+          </div>
           <a href="" class="navbar-item">
             <span class="icon">
               <i class="fa-solid fa-magnifying-glass has-text-link"></i>
@@ -47,11 +73,11 @@
         <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
           <!-- 로그인 안했을 때 -->
           <ul id="navbar" class="login-hidden">
-            <li><a href="../../products">VIEW ALL</a></li>
-            <li><a href="../../login">로그인</a></li>
-            <li><a href="../../register">회원가입</a></li>
+            <li><a href="/products">VIEW ALL</a></li>
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/register">회원가입</a></li>
             <li>
-              <a href="../../cart" aria-current="page">
+              <a href="/cart" aria-current="page">
                 <span class="icon">
                   <i class="fas fa-cart-shopping"></i>
                 </span>
@@ -60,11 +86,11 @@
           </ul>
           <!-- 로그인 했을 때 -->
           <ul id="navbar" class="logout-hidden hidden">
-            <li><a href="../../products">VIEW ALL</a></li>
-            <li><a href="./">계정관리</a></li>
+            <li><a href="/products">VIEW ALL</a></li>
+            <li><a href="/users">계정관리</a></li>
             <li><a class="logout-btn" href="/">로그아웃</a></li>
             <li>
-              <a href="../../cart" aria-current="page">
+              <a href="/cart" aria-current="page">
                 <span class="icon">
                   <i class="fas fa-cart-shopping"></i>
                 </span>
@@ -74,7 +100,6 @@
         </div>
       </div>
     </div>
-
   </nav>
 
   <!-- 사이드 메뉴 -->
@@ -113,22 +138,20 @@
       </button>
 
         <!-- 모달창 -->
-        <div class="modal">
-          <div class="modal-background close"></div>
-          <div class="modal-content">
-            <div class="box">
-              <p class="mb-3">
-                회원정보 삭제 시 복구할 수 없습니다. 정말로 삭제하시겠습니까?
-              </p>
-              <div class="buttons">
-                <button id="deleteCompleteBtn" class="button mt-5">네</button>
-                <button class="button is-primary mt-5 close">아니오</button>
-              </div>
+      <div class="modal">
+        <div class="modal-background close"></div>
+        <div class="modal-content">
+          <div class="box">
+            <p class="mb-3">
+              회원정보 삭제 시 복구할 수 없습니다. 정말로 삭제하시겠습니까?
+            </p>
+            <div class="buttons">
+              <button id="deleteCompleteBtn" class="button mt-5">네</button>
+              <button class="button is-primary mt-5 close">아니오</button>
             </div>
           </div>
-          <button class="modal-close is-large close"></button>
         </div>
-        <button class="modal-close is-large"></button>
+        <button class="modal-close is-large close"></button>
       </div>
     </form>
   </div>

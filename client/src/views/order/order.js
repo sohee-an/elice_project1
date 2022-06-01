@@ -1,9 +1,16 @@
 import { sidebar } from '../common/sidebar/sidebar.js'
 import { changeNavbar, handleLogoutBtn } from '../common/navbar/navbar.js';
-import { getCartItems,  setCartItems, getOrderInfo, setOrderInfo} from '../localStorage.js';
+import { getCartItems, setCartItems, getOrderInfo, setOrderInfo } from '../localStorage.js';
 import { addCommas } from '../useful-functions.js';
 import * as Api from '../api.js';
 
+/////////////////////////////////////기능 추가/////////////////////////////////////
+
+//결제 기능 iamport와 연동
+const IMP = window.IMP; // 생략 가능
+IMP.init("imp85022909"); // 예: imp00000000
+
+/////////////////////////////////////기능 추가/////////////////////////////////////
 
 sidebar();
 changeNavbar();
@@ -25,7 +32,7 @@ const userInputElem = document.querySelector('#d-requests-input');
 
 
 /** 전역변수로 말고 재구현 **/
-let totalPrice=0;
+let totalPrice = 0;
 
 getPaymentInfo();
 callOrderInfo();
@@ -43,25 +50,27 @@ function getPaymentInfo() {
 
     let itemAmount = items.reduce((acc, cur) => acc + Number(cur.quantity), 0);
     let itemPrice = items.reduce((acc, cur) => acc + Number((cur.price * cur.quantity)), 0);
-    let shippingPrice = itemPrice? 3000:0;
+    let shippingPrice = itemPrice ? 100 : 0;
     totalPrice = itemPrice + shippingPrice;
 
-    amountElem.innerText = addCommas(itemAmount)+'개';
-    priceElem.innerText = '$'+addCommas(itemPrice);
-    shippingElem.innerText = '$'+addCommas(shippingPrice);
-    totalElem.innerText = '$'+addCommas(totalPrice);
+    amountElem.innerText = addCommas(itemAmount) + '개';
+    priceElem.innerText = '$' + addCommas(itemPrice);
+    shippingElem.innerText = '$' + addCommas(shippingPrice);
+    totalElem.innerText = '$' + addCommas(totalPrice);
 }
 
+// 사용자가 기존에 입력한 배송지정보 local Storage 에
 function callOrderInfo() {
     const orderInfo = getOrderInfo();
 
-    nameElem.value= orderInfo.name;
-    phoneNumberElem.value= orderInfo.phoneNumber;
-    postcodeElem.value= orderInfo.postcode;
-    addressElem.value= orderInfo.address;
-    detailAddressElem.value= orderInfo.detailAddress;
+    nameElem.value = orderInfo.name;
+    phoneNumberElem.value = orderInfo.phoneNumber;
+    postcodeElem.value = orderInfo.postcode;
+    addressElem.value = orderInfo.address;
+    detailAddressElem.value = orderInfo.detailAddress;
 }
 
+// 사용자가 기존에 입력한 배송지정보 local Storage 에
 function storeOrderInfo() {
 
     let name = nameElem.value;
@@ -92,39 +101,39 @@ async function handleSubmit(e) {
     e.preventDefault();
 
     const name = document.querySelector('#d-name').value;
-    const phoneNumber= document.querySelector('#d-phoneNumber').value;
+    const phoneNumber = document.querySelector('#d-phoneNumber').value;
     const postcode = document.querySelector('#sample4_postcode').value;
     const address = document.querySelector('#sample4_roadAddress').value;
     const detailAddress = document.querySelector('#sample4_detailAddress').value;
     const orderRequest = document.querySelector('#d-requests').value;
-    if(orderRequest == 'userInput') orderRequest = userInputElem.value;
+    if (orderRequest == 'userInput') orderRequest = userInputElem.value;
 
     console.log(orderRequest);
-    if(!localStorage.getItem('token')){ // 로그인 안되어있을 경우
+    if (!localStorage.getItem('token')) { // 로그인 안되어있을 경우
         window.location = '/login';
         return;
     }
 
     if (!name || !phoneNumber || !postcode || !detailAddress || !address) { // 주문 정보 필드 입력이 완료되지 않았을 경우
-        
-      return alert(`주문 정보를 입력해주세요.`);
+
+        return alert(`주문 정보를 입력해주세요.`);
     }
-    
-    if (getCartItems().length==0) {   // 장바구니에 물건이 담겨있지 않는 경우
+
+    if (getCartItems().length == 0) {   // 장바구니에 물건이 담겨있지 않는 경우
         alert(`구매할 제품이 없습니다. 제품을 선택해주세요.`);
-        window.location.href ='/products';
+        window.location.href = '/products';
         return;
     }
 
-   
+
     try {
-        const cartItems = getCartItems().map( item => { return {id: item.id, quantity: item.quantity }});
+        const cartItems = getCartItems().map(item => { return { id: item.id, quantity: item.quantity } });
         console.log(cartItems);
 
-        const data = { 
+        const data = {
             name,
             phoneNumber,
-            address : {
+            address: {
                 postalCode: postcode,
                 address1: address,
                 address2: detailAddress,
@@ -135,25 +144,74 @@ async function handleSubmit(e) {
         };
 
         console.log(data);
-        
-        await Api.post('/api/orders', data);
 
-        alert(`주문 및 결제가 완료되었습니다.`);
-        setCartItems([]);
+        const order = await Api.post('/api/orders', data);
+        const user = await Api.get(`/api/basicUserInfo/${order.userId}`);
+
+
+        /////////////////////////////////////기능 추가/////////////////////////////////////
+
+        // IMP.request_pay(param, callback) 결제창 호출
+        IMP.request_pay({ // param
+            pg: "html5_inicis",
+            pay_method: "card",
+            merchant_uid: order._id,
+            name: `${getCartItems()[0].name} 외 ${getCartItems().length - 1} 건`,
+            amount: totalPrice,
+            buyer_email: user.email,
+            buyer_name: order.name,
+            buyer_tel: order.phoneNumber,
+            buyer_addr: `${order.address.address1} ${order.address.address2}`,
+            buyer_postcode: `${order.address.postalCode}`
+        }, function (rsp) { // callback
+            console.log(rsp);
+            if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+                // jQuery로 HTTP 요청
+                // jQuery.ajax({
+                //     url: "/api/payments/complete", // 예: https://www.myservice.com/payments/complete
+                //     method: "POST",
+                //     headers: { "Content-Type": "application/json" },
+                //     data: {
+                //         imp_uid: rsp.imp_uid,
+                //         merchant_uid: rsp.merchant_uid
+                //     }
+                // }).done(function (data) {
+                //     console.log(data);
+                //     // 가맹점 서버 결제 API 성공시 로직
+                //     switch (data.status) {
+                //         case "vbankIssued":
+                //             // 가상계좌 발급 시 로직
+                //             break;
+                //         case "success":
+
+
+                //             break;
+                //     }
+                // })
+                alert(`주문 및 결제가 완료되었습니다.`);
+                setCartItems([]);
+                window.location.href = '/order/complete';
+            } else {
+                alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+            }
+        });
+
+        /////////////////////////////////////기능 추가/////////////////////////////////////
 
         // 로그인 페이지 이동
-        window.location.href = './complete';
+
     } catch (err) {
-      console.error(err.stack);
-      alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+        console.error(err.stack);
+        alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
     }
 }
-  
+
 function handleSelect() {
-    if(orderRequesElem.value=="userinput"){
+    if (orderRequesElem.value == "userinput") {
         userInputElem.style.display = "block";
         return;
     }
     userInputElem.style.display = "none";
 
 }
+

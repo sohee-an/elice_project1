@@ -33,12 +33,38 @@
       </div>
       <div class="navbar-menu">
         <div class="navbar-start">
-          <a href="" class="navbar-item">
-            <span class="has-text-link">WOMEN</span>
-          </a>
-          <a href="" class="navbar-item">
-            <span class="has-text-link">MEN</span>
-          </a>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="/products/#/?lc=men">
+              MEN
+            </a>
+            <div class="navbar-dropdown is-boxed">
+              <a class="navbar-item" href="/products/#/?lc=men&mc=outer">
+                OUTER
+              </a>
+              <a class="navbar-item" href="/products/#/?lc=men&mc=top">
+                TOP
+              </a>
+              <a class="navbar-item" href="/products/#/?lc=men&mc=bottom">
+                BOTTOM
+              </a>
+            </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="/products/#/?lc=men">
+              WOMEN
+            </a>
+            <div class="navbar-dropdown is-boxed">
+              <a class="navbar-item" href="/products/#/?lc=women&mc=outer">
+                OUTER
+              </a>
+              <a class="navbar-item" href="/products/#/?lc=women&mc=top">
+                TOP
+              </a>
+              <a class="navbar-item" href="/products/#/?lc=women&mc=bottom">
+                BOTTOM
+              </a>
+            </div>
+          </div>
           <a href="" class="navbar-item">
             <span class="icon">
               <i class="fa-solid fa-magnifying-glass has-text-link"></i>
@@ -62,7 +88,7 @@
           <!-- 로그인 했을 때 -->
           <ul id="navbar" class="logout-hidden hidden">
             <li><a href="/products">VIEW ALL</a></li>
-            <li><a href="/">계정관리</a></li>
+            <li><a href="/users">계정관리</a></li>
             <li><a class="logout-btn" href="/">로그아웃</a></li>
             <li>
               <a href="/cart" aria-current="page">
@@ -75,7 +101,6 @@
         </div>
       </div>
     </div>
-
   </nav>
 
   <!-- 사이드 메뉴 -->
@@ -106,14 +131,17 @@
     <div class="order-body">
 
       <!-- 장바구니 정보 -->
-      <div class="order-iteminfo" id="iteminfoDiv">
-        <ol style="list-style: none;" id="item-list">
-            <li class="list-header"> 
-                <div>
-                    <p class="o-date">날짜</p> <p class="o-info">주문정보</p> <p class="i-state">상태</p> <p class="o-">신청</p>
+      <div class="myorder-div" id="myorderDiv">
+        <ul style="list-style: none;" id="order-list">
+            <li class="myorder-list-header"> 
+                <div class="o-list-header">
+                    <div class="o-date">주문일</div> 
+                    <div class="o-info">주문정보</div> 
+                    <div class="o-price">결제금액</div> 
+                    <div class="o-state">상태</div>
                 </div>
             </li>
-        </ol>
+        </ul>
       </div>
     </div>
   </div>

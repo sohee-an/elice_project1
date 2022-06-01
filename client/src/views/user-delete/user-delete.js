@@ -43,6 +43,7 @@ yesBtn.addEventListener('click', async (e) => {
     alert('회원 정보가 안전하게 삭제되었습니다.');
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    window.location.href = "/"
   } catch (err) {
     alert(`회원정보 삭제 과정에서 오류가 발생하였습니다: ${err.message}`);
   }
@@ -52,7 +53,7 @@ yesBtn.addEventListener('click', async (e) => {
 function parseJwt(token) {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
 
