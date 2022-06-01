@@ -19,8 +19,7 @@ document.getElementById("purchase-btn").addEventListener("click", async (e)=>{
         alert('구매할 물건을 선택하세요.');
         window.location.href = "/?beforePage='/'";  
     } else {
-        window.location.href = "/order";
-        
+        window.location.href = "/order";     
     }
     
 })
@@ -50,7 +49,7 @@ function createItemList() {
                 </div>
             </div>
             <div class="item-price">
-                <p>$${addCommas(cur.price)}</p> X <p class="p-quantity">${cur.quantity}개</p> = <p class="p-price"> $${addCommas(cur.price * cur.quantity)} </p>
+                <p>${addCommas(cur.price)} 원</p> X <p class="p-quantity">${cur.quantity}개</p> = <p class="p-price"> ${addCommas(cur.price * cur.quantity)} 원</p>
             </div>
             <input type="hidden" class="item-id" name="itemId" value="${cur.id}">
         </div>
@@ -108,13 +107,14 @@ function deleteItem() {
     const deleteAllElem = document.querySelector('#delete-all');
     const deleteSelectedElem = document.querySelector('#delete-selected');
 
-    // [ ] 체크박스 클릭 시
+   // [ ] 체크박스 클릭 시
     selectAllElem.addEventListener('click', ()=> {
         const allItemElem = document.querySelectorAll('.checked');
         allItemElem.forEach(e=>{
             e.checked=selectAllElem.checked;
         }) 
     })
+
 
     // 모든 상품 삭제시 -> 경고 창 확인 클릭시 장바구니 비우기
     deleteAllElem.addEventListener('click', ()=> {
@@ -159,8 +159,8 @@ function getPaymentInfo() {
     let totalPrice = itemPrice + shippingPrice;
 
     amountElem.innerText = addCommas(itemAmount)+'개';
-    priceElem.innerText = '$'+addCommas(itemPrice);
-    shippingElem.innerText = '$'+addCommas(shippingPrice);
-    totalElem.innerText = '$'+addCommas(totalPrice);
+    priceElem.innerText = addCommas(itemPrice)+' 원';
+    shippingElem.innerText = addCommas(shippingPrice)+' 원';
+    totalElem.innerText = addCommas(totalPrice)+' 원';
 }
 

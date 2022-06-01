@@ -71,7 +71,7 @@ async function renderCart () {
       name:product.name,
       image:product.image,
       price: product.price,
-      quantity:1,
+      quantity:1
     })
   }
 }

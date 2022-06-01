@@ -35,7 +35,7 @@ orderRouter.post('/', loginRequired, async function (req, res, next) {
     const month = today.getMonth() + 1;  // 월
     const date = today.getDate();  // 날짜
     
-    const ordrTime= (`${year}-${month}-${date}`);
+    const orderTime= (`${year}-${month}-${date}`);
     
 
     //데이터를 넣음
@@ -47,7 +47,7 @@ orderRouter.post('/', loginRequired, async function (req, res, next) {
         address,
         total,
         orderRequest,
-        ordrTime
+        orderTime
     });
     
 
@@ -55,8 +55,6 @@ orderRouter.post('/', loginRequired, async function (req, res, next) {
     }catch(error){
         next(error);
     }
-
-
 
 });
 
@@ -91,11 +89,12 @@ orderRouter.delete('/:id', async (req, res, next) => {
     const deletedOrder = await orderService.deleteOrder(id);
 
     res.status(200).json(deletedOrder);
-    }catch(error){
+    } catch(error){
         next(error);
     }
 })
-        // 배송상태 수정하는 코드
+
+// 배송상태 수정하는 코드
 orderRouter.patch('/stateUpdate/:orderId',async(req,res,next)=>{
     try{
         const orderId= req.params.orderId;
