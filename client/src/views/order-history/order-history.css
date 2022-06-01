@@ -77,4 +77,13 @@ nav {
   width: 25%;
 }
 
+.cancel-order-btn {
+  border: none;
+
+}
+
+
+.order-list :hover {
+  background-color: lightgrey;
+}
 

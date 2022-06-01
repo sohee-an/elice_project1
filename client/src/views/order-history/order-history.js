@@ -21,32 +21,37 @@ async function createOrderList() {
 
     const listHeader = orderListElem.innerHTML;
     const orderList = orders.reduce((acc, cur) => {
-        let orderInfo = `${cur.products[0]}`;
+        let orderInfo = `${cur.products[0].product.name}`;
         if(cur.products.length>1) orderInfo += ` 외  <strong>${cur.products.length-1}</strong> 건`;
 
-        return acc + `<li id="item${cur.item}">
+        let str = acc + `<li class="order-list">
             <div class="o-list-main">
                 <div class="o-date"> ${cur.orderTime}</div> 
                 <div class="o-info"> ${orderInfo} </div> 
-                <div class="o-price">${addCommas(cur.total)}</div> 
-                <div class="o-state">${cur.state} 
-                    <input type="button" value="주문 취소" class="cancel-order-btn" id="order-${cur._id}">
-                </div>
+                <div class="o-price">${addCommas(cur.total)} 원</div> 
+                <div class="o-state">${cur.state} `;
+
+        if(cur.state =='상품 준비중') {
+            str+=` &nbsp <input type="button" value="주문 취소" class="cancel-order-btn" id="order-${cur._id}">`
+        }
+        str+=`  </div>
             </div>
-     </li>
-     `}, listHeader);
+        </li>
+        `
+        return str;
+    }, listHeader);
      orderListElem.innerHTML=orderList;
     
      handleAllEvent();
 
 }
 
-async function handleAllEvent(){
+function handleAllEvent(){
     const cancelOrderBtn = document.querySelector(".cancel-order-btn");
     const orderElem = document.querySelectorAll(".o-list-main");
 
-    await cancelOrderBtn.addEventListener("click", (e)=>{
+    cancelOrderBtn.addEventListener("click", async (e)=>{
         const orderId=e.target.id.split('-')[1];
-        Api.delete("/api/orders", orderId);
+        await Api.delete("/api/orders", orderId);
     })
 }

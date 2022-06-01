@@ -37,6 +37,18 @@ export class UserModel {
     return deleteUser;
 
   }
+  async adminDelete(userId){
+    const adminDelete= await User.findOneAndDelete({_id:userId});
+    return adminDelete;
+  }
+
+  async roleUpdate(userId,update){
+    const filter={_id:userId};
+    const option={ returnOriginal: false };
+
+    const roleUpdate= await User.findOneAndUpdate(filter, update, option);
+    return roleUpdate;
+  }
 
 }
 
