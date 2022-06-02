@@ -175,30 +175,28 @@ async function handleSubmit(e) {
             console.log(rsp);
             if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
                 // jQuery로 HTTP 요청
-                // await jQuery.ajax({
-                //     url: "/api/payments/complete", // 예: https://www.myservice.com/payments/complete
-                //     method: "POST",
-                //     headers: { "Content-Type": "application/json" },
-                //     data: {
-                //         imp_uid: rsp.imp_uid,
-                //         merchant_uid: rsp.merchant_uid
-                //     }
-                // }).done(function (data) {
-                //     console.log(data);
-                //     // 가맹점 서버 결제 API 성공시 로직
-                //     switch (data.status) {
-                //         case "vbankIssued":
-                //             // 가상계좌 발급 시 로직
-                //             break;
-                //         case "success":
-
-
-                //             break;
-                //     }
-                // })
-                alert(`주문 및 결제가 완료되었습니다.`);
-                setCartItems([]);
-                window.location.href = '/order/complete';
+                const rspData = {
+                    imp_uid: rsp.imp_uid,
+                    merchant_uid: rsp.merchant_uid
+                }
+                await jQuery.ajax({
+                    url: "/api/payments/complete", // 예: https://www.myservice.com/payments/complete
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    data: JSON.stringify(rspData)
+                }).done(function (data) {
+                    // 가맹점 서버 결제 API 성공시 로직
+                    switch (data.status) {
+                        case "vbankIssued":
+                            // 가상계좌 발급 시 로직
+                            break;
+                        case "success":
+                            alert(`주문 및 결제가 완료되었습니다.`);
+                            setCartItems([]);
+                            window.location.href = '/order/complete';
+                            break;
+                    }
+                })
             } else {
                 alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
             }
