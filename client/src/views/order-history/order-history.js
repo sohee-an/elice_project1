@@ -72,9 +72,22 @@ function handleAllEvent() {
 
     cancelOrderBtn && cancelOrderBtn.addEventListener("click", async (e) => {
         const orderId = e.target.id.split('-')[1];
-        await Api.delete("/api/orders/", orderId);
-        alert('주문이 취소 되었습니다.');
+        const order = await Api.get('/api/orders');
+        const result = await jQuery.ajax({
+            url: "/api/payments/cancel", // 예: http://www.myservice.com/payments/cancel
+            type: "POST",
+            headers: { "Content-Type": "application/json" },
+            data: JSON.stringify({
+                merchant_uid: orderId, // 예: ORD20180131-0000011
+                cancel_request_amount: order.total, // 환불금액
+                reason: "테스트 결제 환불", // 환불사유
+            }),
+        })
+        console.log(result);
+        await Api.delete("/api/orders", orderId);
+        alert("주문취소 및 환불 완료");
         window.location.reload();
+
     })
 
     orderElem.forEach(item => item.addEventListener("click", (e) => {

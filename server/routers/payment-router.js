@@ -7,8 +7,6 @@ const paymentRouter = Router();
 // "/payments/complete"에 대한 POST 요청을 처리
 paymentRouter.post("/complete", async (req, res) => {
     try {
-        console.log("입장");
-
         const { imp_uid, merchant_uid } = req.body; // req의 body에서 imp_uid, merchant_uid 추출
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,8 +73,6 @@ paymentRouter.post("/complete", async (req, res) => {
 
 paymentRouter.post("/iamport-webhook", async (req, res) => {
     try {
-        console.log("입장");
-
         const { imp_uid, merchant_uid } = req.body; // req의 body에서 imp_uid, merchant_uid 추출
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -140,5 +136,53 @@ paymentRouter.post("/iamport-webhook", async (req, res) => {
         res.status(400).send(e);
     }
 });
+
+paymentRouter.post('/cancel', async (req, res, next) => {
+
+    try {
+        console.log("입장");
+        const { merchant_uid, cancel_request_amount, reason } = req.body; // req의 body에서 imp_uid, merchant_uid 추출
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // 액세스 토큰(access token) 발급 받기
+        const getToken = await axios({
+            url: "https://api.iamport.kr/users/getToken",
+            method: "post", // POST method
+            headers: { "Content-Type": "application/json" }, // "Content-Type": "application/json"
+            data: {
+                imp_key: "5682936732856580", // REST API 키
+                imp_secret: "768ef3c0a9394b3f9920957e75dc644f7f3c382668ea8932715cdc817ce33dc50e2cde69d554deee" // REST API Secret
+            }
+        });
+
+        const { access_token } = getToken.data.response; // 인증 토큰
+        console.log("access_token", access_token);
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /* 아임포트 REST API로 결제환불 요청 */
+        const getCancelData = await axios({
+            url: "https://api.iamport.kr/payments/cancel",
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": access_token // 아임포트 서버로부터 발급받은 엑세스 토큰
+            },
+            data: {
+                reason, // 가맹점 클라이언트로부터 받은 환불사유
+                merchant_uid, // merchant_uid를 환불 `unique key`로 입력
+                amount: cancel_request_amount, // 가맹점 클라이언트로부터 받은 환불금액
+            }
+        });
+
+        const { response } = getCancelData.data; // 환불 결과
+        console.log("response", response);
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        res.send(response);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+})
 
 export { paymentRouter }
