@@ -32,6 +32,7 @@ viewsRouter.use('/category/add',serveStatic('category-add'))
 viewsRouter.use('/product/update',serveStatic('product-update'))
 viewsRouter.use('/category/update',serveStatic('category-update'))
 viewsRouter.use('/account/password',serveStatic('password-find'))
+viewsRouter.use('/login/temporary',serveStatic('login-temporary'))
 
 //viewsRouter.use('/reviews',serveStatic('reviews'))
 

@@ -12,8 +12,8 @@
   <!-- 폰트 어썸: 아이콘 -->
   <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
   <!-- 커스텀 css, js -->
-  <link rel="stylesheet" href="password-find.css" />
-  <script src="password-find.js" type="module" defer></script>
+  <link rel="stylesheet" href="login-temporary.css" />
+  <script src="login-temporary.js" type="module" defer></script>
 </head>
 
 <body>
@@ -124,41 +124,29 @@
     </ul>
   </aside>
 
-  <!-- 이메일 입력 폼 -->
+  <!-- 로그인 폼(Form) -->
   <div class="login-form-container">
     <form class="box login-form-box" id="loginForm">
-      <span class="icon has-text-info icon-title">
-        <i class="fa-solid fa-key"></i>
-      </span>
-      <p class="title is-5 has-text-info">비밀번호 찾기</p>
-      <p class="desc has-text-centered mb-5 has-text-grey">가입한 이메일 주소를 입력해 주세요.</p>
+      <p class="title is-5 has-text-info">어서오세요!</p>
       <div class="field">
+        <label class="label" for="emailInput">이메일</label>
         <div class="control">
-          <input class="input" id="emailInput" type="email" placeholder="abc@example.com" autocomplete="on" required />
+          <input class="input" id="emailInput" type="email" placeholder="abc@example.com" autocomplete="on" />
         </div>
       </div>
 
-      <button class="button is-info is-fullwidth" id="submitBtn">
-        임시 비밀번호 발급
-      </button>
-    </form>
-  </div>
-
-  <!-- 모달창 -->
-  <div class="modal">
-    <div class="modal-background close"></div>
-    <div class="modal-content">
-      <div class="box">
-        <span class="icon has-text-info icon-title">
-          <i class="fa-regular fa-circle-check"></i>
-        </span>
-        <p class="has-text-black-ter" id="userEmail">abc@abc.com</p>
-        <p class="has-text-black-ter">위 주소로 임시 비밀번호가 전송되었습니다.</p>
-        <p class="has-text-black-ter">메일을 확인해주세요. 💌</p>
-        <button class="button is-info mt-5" id="confirmBtn">확인</button>
+      <div class="field mb-5">
+        <label class="label" for="passwordInput">비밀번호</label>
+        <div class="control">
+          <input class="input" id="passwordInput" type="password" placeholder="********" autocomplete="on" />
+        </div>
       </div>
-      <button class="modal-close is-large close"></button>
-    </div>
+
+      <button class="button is-info is-fullwidth" id="submitButton">
+        로그인하기
+      </button>
+      <a class="link-small" href="../account/password">비밀번호 찾기</a>
+    </form>
   </div>
 </body>
 
