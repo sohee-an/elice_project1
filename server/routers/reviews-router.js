@@ -7,11 +7,11 @@ import { reviewService } from '../services';
 const reviwRouter = Router();
 
 //리뷰한거 저장하는거 
-reviwRouter.post('/:userId', async (req,res,next)=>{
+reviwRouter.post('/',loginRequired,async (req,res,next)=>{
   
     try{
-    
-    const userId= req.params.userId;
+    const userId= req.currentUserId;
+    //const userId= req.params.userId;
     const reviewText= req.body.reviewText;
     const rating =req.body.rating
     const productId= req.body.productId;

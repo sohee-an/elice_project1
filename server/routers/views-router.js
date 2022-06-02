@@ -23,11 +23,14 @@ viewsRouter.use('/users/update',serveStatic('user-update'))
 viewsRouter.use('/users/delete',serveStatic('user-delete'))
 viewsRouter.use('/admin',serveStatic('admin'))
 viewsRouter.use('/admin/users',serveStatic('admin-users'))
+viewsRouter.use('/admin/orders',serveStatic('admin-orders'))
+
 
 viewsRouter.use('/products',serveStatic('products'));
 viewsRouter.use('/product/add',serveStatic('product-add'))
 viewsRouter.use('/category/add',serveStatic('category-add'))
-viewsRouter.use('/admin/users',serveStatic('admin-users'))
+viewsRouter.use('/product/update',serveStatic('product-update'))
+viewsRouter.use('/category/update',serveStatic('category-update'))
 
 //viewsRouter.use('/reviews',serveStatic('reviews'))
 
