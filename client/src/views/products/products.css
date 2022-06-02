@@ -174,3 +174,31 @@ h1 {
   align-items: center;
   text-align: center;
 }
+
+/* 제품 리뷰 작성 페이지 */
+.section {
+  margin: 4rem 0;
+  padding: 2rem 0;
+}
+.review-header {
+  border-bottom: 1px solid #ddd;
+  display: block;
+  padding-bottom: 0.7rem;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-box {
+  width: 40rem;
+}
+
+.form-box .title {
+  text-align: center;
+}
+
+.form-box .button {
+  font-weight: 700;
+}

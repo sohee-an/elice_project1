@@ -14,8 +14,10 @@ createOrderList();
 // db 에서 유저의 주문내역 가져오기
 async function createOrderList() {
     // const orders = await getOrderList();
-    const orders =  await Api.get('/api/orders');
-    console.log(orders)
+    try{
+    let orders =  await Api.get('/api/orders/admin');
+    orders = orders.reverse();
+    console.log(orders)     ///  ===>>>배포시 삭제
 
     const orderListElem = document.querySelector('#order-list');
     
@@ -69,8 +71,12 @@ async function createOrderList() {
     }, listHeader);
     orderListElem.innerHTML=orderList;
     
+    
+    } catch(err) {
+        console.log("error message: "+ err.message);
+    }
+    
     handleAllEvent();
-
 }
 
 function handleAllEvent(){

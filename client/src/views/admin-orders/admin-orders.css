@@ -33,7 +33,7 @@ nav {
   display: flex;
   flex: row;
   text-align: bottom;
-  border-bottom: solid black 5px ;
+  border-bottom: 1px solid grey;
   border-collapse: collapse;
 }
 
@@ -54,7 +54,6 @@ nav {
   display: flex;
   flex-direction: row;
   background-color: grey;
-  border-bottom: solid black 5px ;
   width: 100%;
   color: white;
   font-size: 15px; 

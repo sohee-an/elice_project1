@@ -183,18 +183,33 @@ userRouter.delete('/adminDel/:userId', async function (req, res, next) {
 
 });
 
-userRouter.patch('/adminRole/:userId',async function (req,res,next){
-  try{
-    const userId =req.params.userId;
+userRouter.patch('/adminRole/:userId', async function (req, res, next) {
+  try {
+    const userId = req.params.userId;
     console.log(userId);
-    const role= req.body.role;
-    const adminRoleUpdate= await userService.adminRoleUpdate(userId,role);
-    
+    const role = req.body.role;
+    const adminRoleUpdate = await userService.adminRoleUpdate(userId, role);
+
     res.status(200).json(adminRoleUpdate);
-  }catch(error){
+  } catch (error) {
     next(error);
   }
 })
 
+/////////////////////////////////기능추가/////////////////////////////////
+//비밀번호 초기화
+userRouter.post("/reset-pwd", async (req, res, next) => {
+  try {
+    const { email } = req.body;
+
+    const userToFindPassword = await userService.resetPassword(email);
+
+    res.status(200).json(userToFindPassword);
+
+  } catch (err) {
+    next(err)
+  }
+})
+/////////////////////////////////기능추가/////////////////////////////////
 
 export { userRouter };
