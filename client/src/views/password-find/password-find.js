@@ -23,18 +23,21 @@ function initEventHandlers() {
   })
 
   confirmBtn.addEventListener('click', () => {
-    window.location.href = "/login";
+    window.location.href = "/login/temporary";
   })
 }
 
-// 이메일 있으면 모달창
 async function findEmail(e) {
   e.preventDefault();
-  modal.classList.add("is-active");
   try {
     const email = emailInput.value;
+    if (!email) {
+      alert('이메일 주소를 입력해주세요.');
+      return;
+    }
     await Api.post('/api/reset-pwd', { email });
     userEmail.innerText = email;
+    modal.classList.add("is-active");
 
   } catch (err) {
     alert(err.message);

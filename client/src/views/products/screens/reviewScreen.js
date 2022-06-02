@@ -20,9 +20,7 @@ export const reviewScreen = {
         if (!rating || !reviewText) {
           return alert('리뷰 정보를 모두 기입해주세요');
         }
-        
-        formData.append("rating", rating);
-        formData.append("reviewText",reviewText);
+
         formData.append("productId",productId);
 
        let response = await fetch("/api/reviews",{
