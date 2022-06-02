@@ -31,14 +31,14 @@ function initEventHandlers() {
 async function findEmail(e) {
   e.preventDefault();
   modal.classList.add("is-active");
-  // try {
-  //   const email = emailInput.value;
-  //   await Api.get('', { email });
-  //   userEmail.innerText = email;
-    
-  // } catch (err) {
-  //   alert(err.message);
-  // }
+  try {
+    const email = emailInput.value;
+    await Api.post('/api/reset-pwd', { email });
+    userEmail.innerText = email;
+
+  } catch (err) {
+    alert(err.message);
+  }
 }
 
 function closeModal(e) {

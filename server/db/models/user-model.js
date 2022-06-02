@@ -57,6 +57,11 @@ export class UserModel {
     return user;
   }
 
+  async updateResetPassword(userId, resetPassword) {
+    const user = await User.findOneAndUpdate({ _id: userId }, { $set: { password: resetPassword } })
+    return user;
+  }
+
   /////////////////////////////////////기능 추가/////////////////////////////////////
 
 }
