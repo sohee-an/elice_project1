@@ -100,12 +100,6 @@ nav {
   border: black 3px;
 } */
 
-.product-footer {
-  border-bottom: solid black 3px ;
-  padding: 1rem;
-  text-align: right;
-}
-
 .product {
   width: 100%;
   border: black 3px;

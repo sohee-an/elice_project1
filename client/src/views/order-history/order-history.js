@@ -56,7 +56,14 @@ async function createOrderList() {
             str+=`  </div>
             </div>
         </li>
-        <div class="o-list-specific" id="specific-${cur._id}">${productList}</div>
+        <div class="o-list-specific" id="specific-${cur._id}">
+            ${productList}
+            <div class="product-footer">
+                <div class="o-name"> 받는사람: ${cur.name}</div>
+                <div class="o-address"> 주소: ${cur.address.address1} ${cur.address.address2} (${cur.address.postalCode})</div>
+                <div class="o-name"> 배송 요청사항: ${cur.orderRequest}</div>
+            </div>
+        </div>
         `
         return str;
     }, listHeader);
@@ -70,7 +77,7 @@ function handleAllEvent(){
     const cancelOrderBtn = document.querySelector(".cancel-order-btn");
     const orderElem = document.querySelectorAll(".order");
 
-    cancelOrderBtn.addEventListener("click", async (e)=>{
+    cancelOrderBtn.addEventListener("click", async (e)=>{   // 주문 취소하기
         const orderId=e.target.id.split('-')[1];
         await Api.delete("/api/orders", orderId);
     })
