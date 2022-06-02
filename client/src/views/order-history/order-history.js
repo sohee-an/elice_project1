@@ -14,7 +14,7 @@ createOrderList();
 // db 에서 유저의 주문내역 가져오기
 async function createOrderList() {
     // const orders = await getOrderList();
-    let orders =  await Api.get('/api/orders');
+    let orders = await Api.get('/api/orders');
     orders = orders.reverse();
 
     console.log(orders)
@@ -27,13 +27,13 @@ async function createOrderList() {
         let orderInfo = `${cur.products[0].product.name}`;
         if (cur.products.length > 1) orderInfo += ` 외  <strong>${cur.products.length - 1}</strong> 건`;
 
-        const productListHeader =`<div class="product-header">
+        const productListHeader = `<div class="product-header">
             주문 상품 정보
         </div>
         `;
         // 해당 주문 클릭시 보일 제품별 상세 내역
-        let productList = cur.products.reduce((acc, item)=>{
-            return acc +`<div class="product-div" id="product-${item.product._id}">
+        let productList = cur.products.reduce((acc, item) => {
+            return acc + `<div class="product-div" id="product-${item.product._id}">
                 <div class="p-img">
                     <input type="image" class="productImg" src="/uploads/${item.product.image}" onclick="window.location.href='/products/#/product/${item.product._id}'">
                 </div>
