@@ -2,6 +2,10 @@
 @import '../common/navbar/navbar.css';
 @import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
 
+body {
+  margin-top: 67px;
+}
+
 nav {
   border-bottom: 3px solid black;
 }
