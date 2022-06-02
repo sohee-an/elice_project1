@@ -27,7 +27,7 @@ const phoneNumberElem = document.querySelector('#d-phoneNumber');
 const postcodeElem = document.querySelector('#sample4_postcode');
 const addressElem = document.querySelector('#sample4_roadAddress');
 const detailAddressElem = document.querySelector('#sample4_detailAddress');
-const orderRequesElem = document.querySelector('#d-requests');
+const orderRequestElem = document.querySelector('#d-requests');
 const userInputElem = document.querySelector('#d-requests-input');
 
 
@@ -39,9 +39,16 @@ callOrderInfo();
 handleAllEvent();
 
 
+function init() {
+    if(getCartItems.empty()){
+        alert('결제할 상품이 없습니다.');
+        window.location.href='/';
+    }
+}
+
 function handleAllEvent() {
     purchaseBtn.addEventListener("click", handleSubmit);
-    orderRequesElem.addEventListener("change", handleSelect);
+    orderRequestElem.addEventListener("change", handleSelect);
     window.addEventListener('beforeunload', storeOrderInfo);
 }
 
@@ -53,13 +60,14 @@ function getPaymentInfo() {
     let shippingPrice = itemPrice ? 100 : 0;
     totalPrice = itemPrice + shippingPrice;
 
-    amountElem.innerText = addCommas(itemAmount) + '개';
-    priceElem.innerText = addCommas(itemPrice) + ' 원';
-    shippingElem.innerText = addCommas(shippingPrice) + ' 원';
-    totalElem.innerText = addCommas(totalPrice) + ' 원';
+    amountElem.innerText = addCommas(itemAmount)+'개';
+    priceElem.innerText = addCommas(itemPrice)+' 원';
+    shippingElem.innerText = addCommas(shippingPrice)+' 원';
+    totalElem.innerText = addCommas(totalPrice)+' 원';
+
 }
 
-// 사용자가 기존에 입력한 배송지정보 local Storage 에
+// 사용자가 기존에 입력한 배송지정보 local storage에서 불러오기
 function callOrderInfo() {
     const orderInfo = getOrderInfo();
 
@@ -70,7 +78,7 @@ function callOrderInfo() {
     detailAddressElem.value = orderInfo.detailAddress;
 }
 
-// 사용자가 기존에 입력한 배송지정보 local Storage 에
+// 사용자가 입력한 배송지정보 local Storage에 저장하기
 function storeOrderInfo() {
 
     let name = nameElem.value;
@@ -78,7 +86,7 @@ function storeOrderInfo() {
     let postcode = postcodeElem.value;
     let address = addressElem.value;
     let detailAddress = detailAddressElem.value;
-    let orderRequest = orderRequesElem.value;
+    let orderRequest = orderRequestElem.value;
 
     const orderInfo = {
         name,
@@ -100,13 +108,13 @@ function storeOrderInfo() {
 async function handleSubmit(e) {
     e.preventDefault();
 
-    const name = document.querySelector('#d-name').value;
-    const phoneNumber = document.querySelector('#d-phoneNumber').value;
-    const postcode = document.querySelector('#sample4_postcode').value;
-    const address = document.querySelector('#sample4_roadAddress').value;
-    const detailAddress = document.querySelector('#sample4_detailAddress').value;
-    const orderRequest = document.querySelector('#d-requests').value;
-    if (orderRequest == 'userInput') orderRequest = userInputElem.value;
+    let name = document.querySelector('#d-name').value;
+    let phoneNumber = document.querySelector('#d-phoneNumber').value;
+    let postcode = document.querySelector('#sample4_postcode').value;
+    let address = document.querySelector('#sample4_roadAddress').value;
+    let detailAddress = document.querySelector('#sample4_detailAddress').value;
+    let orderRequest = document.querySelector('#d-requests').value;
+    if (orderRequest == 'userinput') orderRequest = userInputElem.value;
 
     console.log(orderRequest);
     if (!localStorage.getItem('token')) { // 로그인 안되어있을 경우
@@ -205,11 +213,12 @@ async function handleSubmit(e) {
 }
 
 function handleSelect() {
-    if (orderRequesElem.value == "userinput") {
-        userInputElem.style.display = "block";
+
+    if (orderRequestElem.value == "userinput") {
+        userInputElem.classList.remove("user-input-hide");
         return;
     }
-    userInputElem.style.display = "none";
+    userInputElem.addd("user-input-hide");
 
 }
 
