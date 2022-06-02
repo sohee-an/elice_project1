@@ -21,7 +21,7 @@ export const ProductScreen = {
     }
     return `
     <div class="back-to-result">
-      <a href="#/">
+      <a href="javascript:history.back()">
         <i class="fa-solid fa-chevron-left"></i>
       </a>
     </div>
