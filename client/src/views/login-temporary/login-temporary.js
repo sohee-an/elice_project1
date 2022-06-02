@@ -1,7 +1,7 @@
-import { sidebar } from '../common/sidebar/sidebar.js';
+import { sidebar } from '../../common/sidebar/sidebar.js';
 import { changeNavbar, handleLogoutBtn } from "../../common/navbar/navbar.js";
-import * as Api from '../api.js';
-import { validateEmail } from '../useful-functions.js';
+import * as Api from '../../api.js';
+import { validateEmail } from '../../useful-functions.js';
 
 // 요소(element), input 혹은 상수
 const emailInput = document.querySelector('#emailInput');
@@ -58,11 +58,10 @@ async function handleSubmit(e) {
     localStorage.setItem('token', token);
     localStorage.setItem('role', role);
 
-    alert(`정상적으로 로그인되었습니다.`);
-    // 로그인 성공
+    alert(`정상적으로 로그인되었습니다. 비밀번호를 변경해주세요.`);
 
     // 기본 페이지로 이동
-    window.location.href = '/';
+    window.location.href = '../../users/update';
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
