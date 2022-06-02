@@ -33,14 +33,16 @@ async function createOrderList() {
         </div>
         `;
         // 해당 주문 클릭시 보일 제품별 상세 내역
-        let productList = cur.products.reduce((acc, item) => {
-            return acc + ` <div class="product" id="product-${item.product._id}">
-                <div class="p-img"><input type="image" class="productImg" src="/uploads/${item.product.image}" onclick="window.location.href='/products/#/product/${item.product._id}'"></div>
-                <div class="p-info">${item.product.name} <br /> ${addCommas(item.product.price)} 원</div>
-                <div class="p-quantity">${item.quantity}</div>
-                <a href="/products/#/reviews/${item.product._id}">
+        let productList = cur.products.reduce((acc, item)=>{
+            return acc +`<div class="product-div" id="product-${item.product._id}">
+                <div class="p-img">
+                    <input type="image" class="productImg" src="/uploads/${item.product.image}" onclick="window.location.href='/products/#/product/${item.product._id}'">
+                </div>
+                <div class="p-contents">    
+                    <div class="p-info"> <p class="p-brand"> ${item.product.brand} </p> <strong > ${item.product.name} </strong> <br /> ${addCommas(item.product.price)} 원 / ${item.quantity} 개</div>
                     <div class="p-review"><input type="button" class="reviewBtn" value="리뷰 작성하기"></div>
-                </a>
+                </div>
+
             </div>
             `
         }, productListHeader);
