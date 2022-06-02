@@ -33,8 +33,9 @@ const Products_screen = {
           </div>
           <div class="product-rating">
           ${Rating.render({
-                           value : product.ratingAvg, 
-                           text : `${product.reviewTotal} reviews`,})}
+            value: product.ratingAvg,
+            text: `${product.reviewTotal} reviews`,
+          })}
         </div>
           <div class="product-subtitle">
             <div class="product-brand">
