@@ -171,11 +171,11 @@ async function handleSubmit(e) {
             buyer_tel: order.phoneNumber,
             buyer_addr: `${order.address.address1} ${order.address.address2}`,
             buyer_postcode: `${order.address.postalCode}`
-        }, function (rsp) { // callback
+        }, async function (rsp) { // callback
             console.log(rsp);
             if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
                 // jQuery로 HTTP 요청
-                // jQuery.ajax({
+                // await jQuery.ajax({
                 //     url: "/api/payments/complete", // 예: https://www.myservice.com/payments/complete
                 //     method: "POST",
                 //     headers: { "Content-Type": "application/json" },

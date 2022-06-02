@@ -16,15 +16,16 @@ async function createOrderList() {
     // const orders = await getOrderList();
     let orders =  await Api.get('/api/orders');
     orders = orders.reverse();
+
     console.log(orders)
 
     const orderListElem = document.querySelector('#order-list');
-    
+
 
     const listHeader = orderListElem.innerHTML;
     const orderList = orders.reduce((acc, cur) => {
         let orderInfo = `${cur.products[0].product.name}`;
-        if(cur.products.length>1) orderInfo += ` 외  <strong>${cur.products.length-1}</strong> 건`;
+        if (cur.products.length > 1) orderInfo += ` 외  <strong>${cur.products.length - 1}</strong> 건`;
 
         const productListHeader =`<div class="product-header">
             주문 상품 정보
@@ -40,6 +41,7 @@ async function createOrderList() {
                     <div class="p-info"> <p class="p-brand"> ${item.product.brand} </p> <strong > ${item.product.name} </strong> <br /> ${addCommas(item.product.price)} 원 / ${item.quantity} 개</div>
                     <div class="p-review"><input type="button" class="reviewBtn" value="리뷰 작성하기"></div>
                 </div>
+
             </div>
             `
         }, productListHeader);
@@ -51,10 +53,10 @@ async function createOrderList() {
                 <div class="o-price" id="price-${cur._id}">${addCommas(cur.total)} 원</div> 
                 <div class="o-state" id="state-${cur._id}">${cur.state} `;
 
-        if(cur.state =='상품 준비중') {
-            str+=` &nbsp <input type="button" value="주문 취소" class="cancel-order-btn" id="orderBtn-${cur._id}">`
+        if (cur.state == '상품 준비중') {
+            str += ` &nbsp <input type="button" value="주문 취소" class="cancel-order-btn" id="orderBtn-${cur._id}">`
         }
-            str+=`  </div>
+        str += `  </div>
             </div>
         </li>
         <div class="o-list-specific" id="specific-${cur._id}">
@@ -68,35 +70,38 @@ async function createOrderList() {
         `
         return str;
     }, listHeader);
-    orderListElem.innerHTML=orderList;
-    
+    orderListElem.innerHTML = orderList;
+
     handleAllEvent();
 
 }
 
-function handleAllEvent(){
+function handleAllEvent() {
     const cancelOrderBtn = document.querySelector(".cancel-order-btn");
     const orderElem = document.querySelectorAll(".order");
 
-    cancelOrderBtn.addEventListener("click", async (e)=>{   // 주문 취소하기
-        const orderId=e.target.id.split('-')[1];
-        await Api.delete("/api/orders", orderId);
+
+    cancelOrderBtn && cancelOrderBtn.addEventListener("click", async (e) => {
+        const orderId = e.target.id.split('-')[1];
+        await Api.delete("/api/orders/", orderId);
+        alert('주문이 취소 되었습니다.');
+        window.location.reload();
     })
 
-    orderElem.forEach(item => item.addEventListener("click", (e)=>{
+    orderElem.forEach(item => item.addEventListener("click", (e) => {
         let targetIdElem = document.querySelector('#target_id');
-        let before_id=targetIdElem.value;
+        let before_id = targetIdElem.value;
         let target_id = e.target.id.split('-')[1];
-        console.log(before_id+"  "+ target_id);
+        console.log(before_id + "  " + target_id);
 
 
-        if(target_id==before_id){
+        if (target_id == before_id) {
             const beforeElem = document.querySelector(`#specific-${before_id}`);
             beforeElem.classList.add("o-list-specific");
-            targetIdElem.value="";
+            targetIdElem.value = "";
             return;
         }
-        if(targetIdElem.value){  // 이미 선택된 주문내역이 있다면
+        if (targetIdElem.value) {  // 이미 선택된 주문내역이 있다면
             const beforeElem = document.querySelector(`#specific-${before_id}`);
             beforeElem.classList.add("o-list-specific");
         }

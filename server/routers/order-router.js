@@ -79,11 +79,11 @@ orderRouter.get("/admin", async function (req, res, next) {
     }
 });
 
-orderRouter.delete('/:id', async (req, res, next) => {
+orderRouter.delete('/:orderId', async (req, res, next) => {
     try {
-        const id = req.params.id
+        const orderId = req.params.orderId
 
-        const deletedOrder = await orderService.deleteOrder(id);
+        const deletedOrder = await orderService.deleteOrder(orderId);
 
         res.status(200).json(deletedOrder);
     } catch (error) {
