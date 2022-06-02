@@ -83,10 +83,10 @@ nav {
   margin-bottom: 1rem;
 }
 .o-list-header div, .product-header div{
-  width: 25%;
+  width: 20%;
 }
 .o-list-main div {
-  width: 25%;
+  width: 20%;
 }
 
 .o-list-specific {
@@ -150,7 +150,7 @@ nav {
 
 /* 상품별 상세 정보 */
 .productImg {
-  width: 10rem;
+  width: 5rem;
 }
 .reviewBtn {
   height: 5rem;

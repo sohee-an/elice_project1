@@ -10,6 +10,11 @@ handleLogoutBtn();
 
 createOrderList();
 
+// 관리자 로그인 X -> 접근 불가
+if (localStorage.getItem("role") !== "admin") {
+    alert('관리자 전용 페이지입니다.');
+    window.location.href = "/";
+  }
 
 // db 에서 유저의 주문내역 가져오기
 async function createOrderList() {
@@ -39,15 +44,16 @@ async function createOrderList() {
                 </div>
                 <div class="p-contents">    
                     <div class="p-info"> <p class="p-brand"> ${item.product.brand} </p> <strong > ${item.product.name} </strong> <br /> ${addCommas(item.product.price)} 원 / ${item.quantity} 개</div>
-                    <div class="p-review"><input type="button" class="reviewBtn" value="리뷰 작성하기"></div>
                 </div>
             </div>
             `
         }, productListHeader);
 
+        // 전체 주문내역
         let str = acc + `<li class="order" id="order-${cur._id}">
             <div class="o-list-main" id="main-${cur._id}">
-                <div class="o-date" id="date-${cur._id}"> ${cur.orderTime}</div> 
+                <div class="o-user" id="date-${cur._id}"> ${cur.orderTime}</div> 
+                <div class="o-date" id="date-${cur._id}"> ${cur.userId.email}</div> 
                 <div class="o-info" id="info-${cur._id}"> ${orderInfo} </div> 
                 <div class="o-price" id="price-${cur._id}">${addCommas(cur.total)} 원</div> 
                 <div class="o-state" id="state-${cur._id}">${cur.state} `;
@@ -83,11 +89,13 @@ function handleAllEvent(){
     const cancelOrderBtn = document.querySelector(".cancel-order-btn");
     const orderElem = document.querySelectorAll(".order");
 
-    cancelOrderBtn.addEventListener("click", async (e)=>{   // 주문 취소하기
+    // 주문 취소하기
+    cancelOrderBtn.addEventListener("click", async (e)=>{   
         const orderId=e.target.id.split('-')[1];
         await Api.delete("/api/orders", orderId);
     })
 
+    // 주문 내역 토글 형태로 띄우기
     orderElem.forEach(item => item.addEventListener("click", (e)=>{
         let targetIdElem = document.querySelector('#target_id');
         let before_id=targetIdElem.value;
@@ -95,17 +103,18 @@ function handleAllEvent(){
         console.log(before_id+"  "+ target_id);
 
 
-        if(target_id==before_id){
+        if(target_id==before_id){   // 해당 토글 다시 클릭시
             const beforeElem = document.querySelector(`#specific-${before_id}`);
             beforeElem.classList.add("o-list-specific");
             targetIdElem.value="";
             return;
         }
-        if(targetIdElem.value){  // 이미 선택된 주문내역이 있다면
+        if(targetIdElem.value){  // 이전에 띄워진 토글 접기
             const beforeElem = document.querySelector(`#specific-${before_id}`);
             beforeElem.classList.add("o-list-specific");
         }
 
+        // 클릭한 토글 열기
         targetIdElem.value = target_id;
         const targetElem = document.querySelector(`#specific-${target_id}`);
         targetElem.classList.remove("o-list-specific");
