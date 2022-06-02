@@ -54,16 +54,22 @@ function getPaymentInfo() {
     totalPrice = itemPrice + shippingPrice;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9927d80b7e7cb44f03b120c9a46e803415ae37ce
     amountElem.innerText = addCommas(itemAmount)+'개';
     priceElem.innerText = addCommas(itemPrice)+' 원';
     shippingElem.innerText = addCommas(shippingPrice)+' 원';
     totalElem.innerText = addCommas(totalPrice)+' 원';
+<<<<<<< HEAD
 =======
     amountElem.innerText = addCommas(itemAmount) + '개';
     priceElem.innerText = '$' + addCommas(itemPrice);
     shippingElem.innerText = '$' + addCommas(shippingPrice);
     totalElem.innerText = '$' + addCommas(totalPrice);
 >>>>>>> 3568490d19838506f3bda9223d4f7559a877a35f
+=======
+>>>>>>> 9927d80b7e7cb44f03b120c9a46e803415ae37ce
 }
 
 // 사용자가 기존에 입력한 배송지정보 local Storage 에
