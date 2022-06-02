@@ -11,7 +11,7 @@ class ReviewService {
 
   // 리뷰 저장하기 
   async addReview(reviews) {
-      console.log(reviews);
+    //console.log(reviews);
     const addedReview = await this.reviewModel.addReview(reviews);
     return addedReview;
 
@@ -19,7 +19,7 @@ class ReviewService {
 
   async reviewData(productId){
     // 상품 총 갯수 구함 
-    const  productTotalData =await this.reviewModel.totalRevew(productId);
+   const  productTotalData =await this.reviewModel.totalRevew(productId);
    console.log(productTotalData); 
    const reviewTotal= productTotalData.length;
     let ratingTotals = 0;

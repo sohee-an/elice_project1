@@ -39,6 +39,13 @@ callOrderInfo();
 handleAllEvent();
 
 
+function init() {
+    if(getCartItems.empty()){
+        alert('결제할 상품이 없습니다.');
+        window.location.href='/';
+    }
+}
+
 function handleAllEvent() {
     purchaseBtn.addEventListener("click", handleSubmit);
     orderRequesElem.addEventListener("change", handleSelect);
@@ -59,7 +66,7 @@ function getPaymentInfo() {
     totalElem.innerText = addCommas(totalPrice)+' 원';
 }
 
-// 사용자가 기존에 입력한 배송지정보 local Storage 에
+// 사용자가 기존에 입력한 배송지정보 local storage에서 불러오기
 function callOrderInfo() {
     const orderInfo = getOrderInfo();
 
@@ -70,7 +77,7 @@ function callOrderInfo() {
     detailAddressElem.value = orderInfo.detailAddress;
 }
 
-// 사용자가 기존에 입력한 배송지정보 local Storage 에
+// 사용자가 입력한 배송지정보 local Storage에 저장하기
 function storeOrderInfo() {
 
     let name = nameElem.value;
@@ -106,7 +113,8 @@ async function handleSubmit(e) {
     const address = document.querySelector('#sample4_roadAddress').value;
     const detailAddress = document.querySelector('#sample4_detailAddress').value;
     const orderRequest = document.querySelector('#d-requests').value;
-    if (orderRequest == 'userInput') orderRequest = userInputElem.value;
+    const userInputElem = document.querySelector('');
+    if (orderRequest == 'userInput') orderRequestElem.value = userInputElem.value;
 
     console.log(orderRequest);
     if (!localStorage.getItem('token')) { // 로그인 안되어있을 경우
