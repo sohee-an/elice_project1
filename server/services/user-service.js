@@ -2,6 +2,7 @@ import { userModel } from '../db';
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import nodemailer from 'nodemailer'
 
 class UserService {
   // 본 파일의 맨 아래에서, new UserService(userModel) 하면, 이 함수의 인자로 전달됨
@@ -167,6 +168,42 @@ class UserService {
   async updateUser(userId, paymentData) {
     const user = await this.userModel.updatePaymentData(userId, paymentData);
     return user;
+  }
+
+  async resetPassword(email) {
+    const user = await this.userModel.findByEmail(email);
+
+    if (!user) {
+      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+
+    const userId = user._id;
+
+    const resetPassword = Math.floor(Math.random() * (10 ** 8)).toString();
+    const hashedResetPassword = await bcrypt.hash(resetPassword, 10);
+
+    console.log(resetPassword);
+    console.log(hashedResetPassword);
+
+    const userToResetPassword = await this.userModel.updateResetPassword(userId, hashedResetPassword);
+
+    //바뀐 비밀번호 메일 보내기
+    const transporter = new nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: 'seogyeonghwan48@gmail.com',
+        pass: 'sddeyoazcwavbtli',
+      }
+    });
+
+    transporter.sendMail({
+      from: "seogyeonghwan48@gmail.com",
+      to: email,
+      subject: "SHOPAHOLIC 임시 비밀번호",
+      text: `SHOPAHOLIC 에서 발급된 임시 비밀번호는 ${resetPassword} 입니다.`,
+    });
+
+    return userToResetPassword;
   }
 
   /////////////////////////////////////기능 추가/////////////////////////////////////
