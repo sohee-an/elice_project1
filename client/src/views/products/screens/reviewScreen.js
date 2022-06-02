@@ -25,10 +25,11 @@ export const reviewScreen = {
         // formData.append("productId",productId);
         // formData.append("userId",userId);
 
-       await fetch("/api/reviews",{
+       let response = await fetch("http://localhost:5000/api/reviews",{
           method:"POST",
           headers: {
-            Authorization: localStorage.getItem("token") 
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}` 
           },
           body: JSON.stringify({
             rating,
@@ -36,8 +37,8 @@ export const reviewScreen = {
             productId,
           })
         });
-        // let result = await response.json();
-
+        let result = await response.json();
+        console.log(result);
         alert('리뷰가 완료되었습니다.');
         window.location.href = "/order/history";
 
@@ -76,10 +77,6 @@ export const reviewScreen = {
           <label for="reviewText" class="label">리뷰를 적어주세요!</label>
           <textarea class="textarea" id="reviewText" name="reviewText" rows="3"
             placeholder="제품에 대한 1~2문장의 평가를 적어 주세요." autocomplete="on" required></textarea>
-        </div>
-        <div class="field is-hidden">
-          <label class="label" for="productId">상품 ID</label>
-          <input id="productId" class="input" type="text" name="productId" placeholder="상품 ID" autocomplete="on" required />
         </div>
         <div class="mt-5">
           <button type="submit" class="button is-primary is-fullwidth" id="submitBtn">리뷰 작성</button>
