@@ -13,6 +13,7 @@ import mensTopScreen from './screens/mensTopScreen.js';
 import womensTopScreen from './screens/womensTopScreen.js';
 import mensBottomScreen from './screens/mensBottomScreen.js';
 import womensBottomScreen from './screens/womensBottomScreen.js';
+import reviewScreen from './screens/reviewScreen.js';
 
 sidebar();
 changeNavbar();
@@ -28,7 +29,8 @@ const routes = {
   "/?lc=men&mc=top":mensTopScreen,
   "/?lc=women&mc=top":womensTopScreen,
   "/?lc=men&mc=bottom":mensBottomScreen,
-  "/?lc=women&mc=bottom":womensBottomScreen
+  "/?lc=women&mc=bottom":womensBottomScreen,
+  "/reviews/:id": reviewScreen,
 }
 
 
