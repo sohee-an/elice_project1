@@ -39,7 +39,9 @@ async function createOrderList() {
                 </div>
                 <div class="p-contents">    
                     <div class="p-info"> <p class="p-brand"> ${item.product.brand} </p> <strong > ${item.product.name} </strong> <br /> ${addCommas(item.product.price)} 원 / ${item.quantity} 개</div>
-                    <div class="p-review"><input type="button" class="reviewBtn" value="리뷰 작성하기"></div>
+                    <a href="/products/#/reviews/${item.product._id}">
+                        <div class="p-review"><input type="button" class="reviewBtn" value="리뷰 작성하기"></div>
+                    </a>
                 </div>
 
             </div>
