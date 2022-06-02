@@ -13,16 +13,14 @@ export const reviewScreen = {
       try {
         const formData = new FormData(submitForm);
 
-        const rating = e.target.rating.value;
-        const reviewText = e.target.reviewText.value;
+        const rating = formData.get("rating");
+        const reviewText = formData.get("reviewText");
         const productId = request.id;
         
         if (!rating || !reviewText) {
           return alert('리뷰 정보를 모두 기입해주세요');
         }
-        
-        formData.append("rating", rating);
-        formData.append("reviewText",reviewText);
+
         formData.append("productId",productId);
 
        let response = await fetch("/api/reviews",{
@@ -39,7 +37,7 @@ export const reviewScreen = {
         window.location.href = "/order/history";
 
       } catch (e) {
-        alert('상품을 리뷰하는 과정에서 오류가 발생하였습니다: ${e.message}')
+        alert(`상품을 리뷰하는 과정에서 오류가 발생하였습니다: ${e.message}`)
       }
 })
   },
