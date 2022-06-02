@@ -38,7 +38,9 @@ async function createOrderList() {
                 <div class="p-img"><input type="image" class="productImg" src="/uploads/${item.product.image}" onclick="window.location.href='/products/#/product/${item.product._id}'"></div>
                 <div class="p-info">${item.product.name} <br /> ${addCommas(item.product.price)} 원</div>
                 <div class="p-quantity">${item.quantity}</div>
-                <div class="p-review"><input type="button" class="reviewBtn" value="리뷰 작성하기"></div>
+                <a href="/products/#/reviews/${item.product._id}">
+                    <div class="p-review"><input type="button" class="reviewBtn" value="리뷰 작성하기"></div>
+                </a>
             </div>
             `
         }, productListHeader);
