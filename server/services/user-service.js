@@ -130,7 +130,7 @@ class UserService {
 
   async delteUser(userId, currentPassword) {
     let user = await this.userModel.findById(userId);
-   // console.log(userId);
+    // console.log(userId);
     // 유저 비밀번호 가지고 옴 
     const correctPasswordHash = user.password; // 유저 패스워드를  찾음 
     console.log(correctPasswordHash);
@@ -158,25 +158,34 @@ class UserService {
 
   async basicUserInfo(userId) {
     const basicUserInfo = await this.userModel.findById(userId);
-    console .log(basicUserInfo);
+    console.log(basicUserInfo);
     return basicUserInfo;
   }
+
+  /////////////////////////////////////기능 추가/////////////////////////////////////
+
+  async updateUser(userId, paymentData) {
+    const user = await this.userModel.updatePaymentData(userId, paymentData);
+    return user;
+  }
+
+  /////////////////////////////////////기능 추가/////////////////////////////////////
 
   //관리자가 회원 삭제하는거 
   async adminDelteUser(userId) {
     const adminDeluser = await this.userModel.adminDelete(userId);
     return adminDeluser;
   }
-  
+
   //관리자 role update하는 거 
-  async adminRoleUpdate(userId,role){
-    const update= {role:role};
-    const adminRoleUpdate=await this.userModel.roleUpdate(userId,update);
+  async adminRoleUpdate(userId, role) {
+    const update = { role: role };
+    const adminRoleUpdate = await this.userModel.roleUpdate(userId, update);
     return adminRoleUpdate;
   }
 
 }
- 
+
 const userService = new UserService(userModel);
 
 export { userService };

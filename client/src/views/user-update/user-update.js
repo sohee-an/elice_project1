@@ -27,7 +27,7 @@ getUserInfo();
 
 // 로그인X -> 로그인 페이지로
 if (!localStorage.getItem("token")) {
-  window.location.href =ww "../../login";
+  window.location.href = "../../login";
 }
 
 function initEventHandler() {

@@ -23,13 +23,27 @@ submitBtn.addEventListener('click', async (e) => {
 
   try {
     const formData = new FormData(submitForm);
-    const res = await fetch("/api/products/register", {
+
+    const name = formData.get("name")
+    const price = formData.get("price");
+    const description = formData.get("description");
+    const brand = formData.get("brand");
+    const largeCategory = formData.get("largeCategory");
+    const mediumCategory = formData.get("mediumCategory");
+    const img = formData.get("img");
+
+    if (!name || !price || !description || !brand || !largeCategory || !mediumCategory || !img) {
+      return alert('상품 정보를 모두 기입해 주세요')
+    }
+
+    await fetch("/api/products/register", {
       method: "POST",
       body: formData
     })
-    const data = await res.json();
-    console.log(data);
+
     alert('상품 추가가 완료되었습니다.');
+    window.location.href = "/admin";
+
   } catch (err) {
     alert(`상품 추가 과정에서 오류가 발생하였습니다: ${err.message}`);
   }
