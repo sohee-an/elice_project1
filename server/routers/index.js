@@ -7,3 +7,4 @@ export * from './category-router';
 export * from './product-router';
 export * from './order-router';
 export * from './reviews-router';
+export * from './payment-router'
