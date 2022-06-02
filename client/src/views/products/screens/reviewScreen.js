@@ -13,8 +13,8 @@ export const reviewScreen = {
       try {
         const formData = new FormData(submitForm);
 
-        const rating = e.target.rating.value;
-        const reviewText = e.target.reviewText.value;
+        const rating = formData.get("rating");
+        const reviewText = formData.get("reviewText");
         const productId = request.id;
         
         if (!rating || !reviewText) {
@@ -39,7 +39,7 @@ export const reviewScreen = {
         window.location.href = "/order/history";
 
       } catch (e) {
-        alert('상품을 리뷰하는 과정에서 오류가 발생하였습니다: ${e.message}')
+        alert(`상품을 리뷰하는 과정에서 오류가 발생하였습니다: ${e.message}`)
       }
 })
   },
