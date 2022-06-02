@@ -7,31 +7,36 @@ export const reviewScreen = {
 
     const submitBtn = document.getElementById('submitBtn');
     const submitForm = document.querySelector("#submitForm");
+    const ratingInput = document.getElementById('rating');
+    const reviewTextInput = document.getElementById('reviewText');
 
     submitBtn.addEventListener('click',async (e)=>{
       e.preventDefault();
       try {
-        const formData = new FormData(submitForm);
-
-        const rating = formData.get("rating");
-        const reviewText = formData.get("reviewText");
+        const rating = ratingInput.value;
+        const reviewText = reviewTextInput.value;
         const productId = request.id;
-        
+        // const userId = localStorage.getItem('token');
+
         if (!rating || !reviewText) {
           return alert('리뷰 정보를 모두 기입해주세요');
         }
 
-        formData.append("productId",productId);
+        // formData.append("productId",productId);
+        // formData.append("userId",userId);
 
-       let response = await fetch("/api/reviews",{
+       await fetch("/api/reviews",{
           method:"POST",
-          cache: 'no-cache',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            Authorization: localStorage.getItem("token") 
           },
-          body: formData
+          body: JSON.stringify({
+            rating,
+            reviewText,
+            productId,
+          })
         });
-        let result = await response.json();
+        // let result = await response.json();
 
         alert('리뷰가 완료되었습니다.');
         window.location.href = "/order/history";
