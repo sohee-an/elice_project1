@@ -12,9 +12,7 @@ const womenScreen = {
     //어떤 필드가 들어있는지 확인용으로 보면 좋음 
     console.log(products);
     return `
-    <h1>
-      <strong>VIEW ALL</strong>
-    </h1>
+
     <ul class="products">
       ${products
         .map(
