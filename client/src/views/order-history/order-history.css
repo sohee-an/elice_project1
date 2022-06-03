@@ -142,6 +142,10 @@ nav {
 .productImg {
   width: 10rem;
 }
+.cancel-order-btn {
+  width: 5em;
+  height: 2em;
+}
 .reviewBtn {
   height: 5rem;
   border: none;
