@@ -2,6 +2,7 @@ import { parseRequestUrl } from '../utils.js'
 import { getProduct, getProductReview } from '../../api.js';
 import { addToCart, addToViewedItems, getViewedItems, setViewedItems } from '../../localStorage.js';
 import { addCommas } from '../../useful-functions.js';
+import Rating from '../components/Rating.js';
 
 export const ProductScreen = {
   after_render: () => {
@@ -63,15 +64,31 @@ export const ProductScreen = {
           </div>
         </div>
       </div>
-      <h2>Reviews</h2>
-      <div class="details-reviews">
-        ${productReveiews
-                        .map(
-                          (review)=>`
-                          ${review.fullName}, ${review.reviewText},${review.rating}
-                          `
-                        ).join('\n')
-                      }
+      <div class="review-container my-1">
+        <h2>Reviews</h2>
+        <div class="details-reviews">
+          ${productReveiews
+                          .map(
+                            (review)=>`
+                            <div class="details-review my-3">
+                              <div class="details-review_column">
+                                <div class="details-review-fullName">
+                                  ${review.fullName}
+                                </div>
+                                <div class="details-review-rating">
+                                  ${Rating.render({value:review.rating,text:''})}
+                                </div>
+                              </div>
+                              <div class="details-review_column">
+                                <div class="details-review-text">
+                                  <p>${review.reviewText}</p>
+                                </div>
+                              </div>
+                            </div>
+                            `
+                          ).join('\n')
+                        }
+        </div>
       </div>
     </div>
     `;
