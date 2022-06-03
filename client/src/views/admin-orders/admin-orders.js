@@ -59,12 +59,21 @@ async function createOrderList() {
                     <div class="o-date" id="date-${cur._id}"> ${cur.orderTime}</div> 
                     <div class="o-info" id="info-${cur._id}"> ${orderInfo} </div> 
                     <div class="o-price" id="price-${cur._id}">${addCommas(cur.total)} 원</div> 
-                    <div class="o-state" id="state-${cur._id}">${cur.state} `;
+                    <div class="o-state" id="state-${cur._id}-${cur._state}">
+                        <select name="orderstate" class="o-state-select" id="select-${cur._id}">
+                            <option value="상품 준비중" selected>상품 준비중</option>
+                            <option value="결제완료">결제완료</option>
+                            <option value="배송시작">배송시작</option>
+                            <option value="배송중">배송중</option>
+                            <option value="배송완료">배송완료</option>
+                        </select>
+                    `;
     
             if (cur.state == '상품 준비중') {
                 str += ` &nbsp <input type="button" value="주문 취소" class="cancel-order-btn" id="orderBtn-${cur._id}" style="border: none;">`
             }
-            str += `  </div>
+            str += `  
+                    </div>
                 </div>
             </li>
             <div class="o-list-specific" id="specific-${cur._id}">
@@ -79,6 +88,7 @@ async function createOrderList() {
             return str;
         }, listHeader);
         orderListElem.innerHTML = orderList;
+
         handleAllEvent();
 
     } catch(err){   
@@ -88,10 +98,16 @@ async function createOrderList() {
 }
 
 function handleAllEvent() {
-    const cancelOrderBtn = document.querySelector(".cancel-order-btn");
+    const cancelOrderBtn = document.querySelectorAll(".cancel-order-btn");
     const orderElem = document.querySelectorAll(".order");
+    const selectElem = document.querySelectorAll(".o-state-select");
 
-    cancelOrderBtn && cancelOrderBtn.addEventListener("click", async (e) => {
+    selectElem.forEach(elem=>{
+        let cur_state=elem.id.split('-')[2];
+        selectElem[value=cur_state].option = selected;
+    })
+
+    cancelOrderBtn.forEach(btn => btn.addEventListener("click", async (e) => {
         const orderId = e.target.id.split('-')[1];
 
         const order = await Api.get('/api/orders');
@@ -109,7 +125,7 @@ function handleAllEvent() {
         await Api.delete("/api/orders", orderId);
         alert("주문취소 및 환불 완료");
         window.location.reload();
-    })
+    }))
 
     orderElem.forEach(item => item.addEventListener("click", (e) => {
         let targetIdElem = document.querySelector('#target_id');
@@ -133,5 +149,16 @@ function handleAllEvent() {
         const targetElem = document.querySelector(`#specific-${target_id}`);
         targetElem.classList.remove("o-list-specific");
     }));
+
+    selectElem.forEach(select => {
+        select.addEventListener("change", async (e)=>{
+            
+            let order_id = e.target.id.split('-')[1];
+            console.log(e.target.id);
+            await Api.patch('api/orders/stateUpdate', order_id, e.target.value);
+            
+            window.location.reload();
+        })
+    })
 
 }
