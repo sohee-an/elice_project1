@@ -30,16 +30,10 @@ nav {
   width: 100%;
   margin: 30px;
   padding: 20px;
-  display: flex;
-  flex: row;
-  text-align: bottom;
   border-bottom: 1px solid grey;
   border-collapse: collapse;
+  vertical-align: bottom;
 }
-.order-header .cur-process {
-font: 30px bold;
-}
-
 .order-body{
   width: 100%;
   display: flex;
@@ -54,9 +48,7 @@ font: 30px bold;
   border-radius: 10px;
   box-shadow: 5px 5px 10px lightgray;
 }
-.delivery-info {
-  width: 100%;
-}
+
 
 #delivery-info-list li input, #d-requests{
   width: 100%;
@@ -67,7 +59,7 @@ font: 30px bold;
 .order-summary {
   width: 40em;
   height: 20em;
-  margin : 20px;
+  margin : 10px;
   padding: 20px;
   color: white;
   background-color: black;
@@ -79,21 +71,26 @@ font: 30px bold;
 #ordersummary-table {
   width: 100%;
   margin: 10px 0px;
+  padding: 10px 0px;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
   border-collapse: collapse;
 }
+
 #purchase-btn {
   width: 100%;
   height: auto;
   padding: 10px;
-  margin-top: 10px;
+  margin-top: 30px;
   background-color: grey;
   border: none;
   color: white;
-  font: 20px bold;
+  font: 30px bold;
+  font-weight: 700;
 }
-
+#purchase-btn:hover {
+  color: aquamarine;
+}
 /** item info **/
 
 .item {
@@ -121,6 +118,12 @@ display:inline;
 .user-input-hide {
   display: none;
 }
+.user-input-show {
+  display: block;
+}
+
+
+
 
 @media screen and (max-width: 768px) {
   .div-container {

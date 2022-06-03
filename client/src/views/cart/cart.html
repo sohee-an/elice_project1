@@ -118,7 +118,7 @@
     </ul>
     <ul class="logout-hidden">
       <!-- 로그인 했을 때 -->
-      <li><a href="/">계정관리</a></li>
+      <li><a href="/users">계정관리</a></li>
       <li><a class="logout-btn" href="/">로그아웃</a></li>
       <li><a href="/cart">카트</a></li>
     </ul>
@@ -127,8 +127,8 @@
   <!--- 카트 구현 --->
   <div class="div-container">
     <div class="order-header" id="processDiv">
-      <p class="cur-process"> 장바구니 </p>
-      <p> &gt; 주문결제 &gt; 주문완료 </p>
+      <span style="font-size: 40px;" onclick="location.href='/cart"> 장바구니 </span>
+      <span> &gt; 주문결제 &gt; 주문완료 </span>
     </div>
     <div class="order-body">
 
@@ -137,6 +137,8 @@
         <div class="select-container">
           <input type="checkbox" id="select-all"/>
           <a href="#" id="delete-all">전체삭제</a> | <a href="#" id="delete-selected">선택삭제</a>
+        </div>
+        <div>
 
         </div>
         <ol style="list-style: none;" id="item-list">

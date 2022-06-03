@@ -27,7 +27,15 @@ async function createOrderList() {
     const orderListElem = document.querySelector('#order-list');
     
 
-    const listHeader = orderListElem.innerHTML;
+    const listHeader = `<li class="myorder-list-header"> 
+        <div class="o-list-header">
+            <div class="o-date">주문일</div> 
+            <div class="o-user">주문한 유저</div>
+            <div class="o-info">주문정보</div> 
+            <div class="o-price">결제금액</div> 
+            <div class="o-state">상태</div>
+        </div>
+    </li>`
     const orderList = orders.reduce((acc, cur) => {
         let orderInfo = `${cur.products[0].product.name}`;
         if(cur.products.length>1) orderInfo += ` 외  <strong>${cur.products.length-1}</strong> 건`;
@@ -87,7 +95,7 @@ async function createOrderList() {
 
 function handleAllEvent(){
     const cancelOrderBtn = document.querySelector(".cancel-order-btn");
-    const orderElem = document.querySelectorAll(".order");
+    const orderElem = document.querySelector("#order-list");
 
     // 주문 취소하기
     cancelOrderBtn.addEventListener("click", async (e)=>{   
@@ -96,12 +104,11 @@ function handleAllEvent(){
     })
 
     // 주문 내역 토글 형태로 띄우기
-    orderElem.forEach(item => item.addEventListener("click", (e)=>{
+    orderElem.addEventListener("click", (e)=>{
         let targetIdElem = document.querySelector('#target_id');
         let before_id=targetIdElem.value;
         let target_id = e.target.id.split('-')[1];
         console.log(before_id+"  "+ target_id);
-
 
         if(target_id==before_id){   // 해당 토글 다시 클릭시
             const beforeElem = document.querySelector(`#specific-${before_id}`);
@@ -118,5 +125,6 @@ function handleAllEvent(){
         targetIdElem.value = target_id;
         const targetElem = document.querySelector(`#specific-${target_id}`);
         targetElem.classList.remove("o-list-specific");
-    }));
+    })
+
 }
