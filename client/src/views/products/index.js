@@ -22,14 +22,14 @@ handleLogoutBtn();
 const routes = {
   "/": Products_screen,
   "/product/:id": ProductScreen,
-  "/?lc=men":menScreen,
-  "/?lc=women":womenScreen,
-  "/?lc=men&mc=outer":mensOuterScreen,
-  "/?lc=women&mc=outer":womensOuterScreen,
-  "/?lc=men&mc=top":mensTopScreen,
-  "/?lc=women&mc=top":womensTopScreen,
-  "/?lc=men&mc=bottom":mensBottomScreen,
-  "/?lc=women&mc=bottom":womensBottomScreen,
+  "/?lc=men": menScreen,
+  "/?lc=women": womenScreen,
+  "/?lc=men&mc=outer": mensOuterScreen,
+  "/?lc=women&mc=outer": womensOuterScreen,
+  "/?lc=men&mc=top": mensTopScreen,
+  "/?lc=women&mc=top": womensTopScreen,
+  "/?lc=men&mc=bottom": mensBottomScreen,
+  "/?lc=women&mc=bottom": womensBottomScreen,
   "/reviews/:id": reviewScreen,
 }
 

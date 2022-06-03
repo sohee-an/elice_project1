@@ -44,22 +44,14 @@ class ProductService {
         return deletedProduct;
     }
 
-    async updateProduct(product_id, updateProductInfo) {
-        // const foundProduct = await this.productModel.findOneByNameAndBrand({ name: updateProductInfo.name, brand: updateProductInfo.brand });
-
-        // if (foundProduct) {
-        //     throw new Error("이미 등록된 상품입니다. 상품의 이름 또는 브랜드를 바꿔주세요");
-        // }
-
-        // 
+    async updateProductInfo(product_id, updateProductInfo) {
 
         const updatedProduct = await this.productModel.update(product_id, updateProductInfo)
         return updatedProduct;
     }
 
-    ////////////////
-    async updateProduct(productId,reviewsDate){
-        const updateReview=await this.productModel.updateReview(productId,reviewsDate)
+    async updateProduct(productId, reviewsDate) {
+        const updateReview = await this.productModel.updateReview(productId, reviewsDate)
         console.log(updateReview);
     }
 

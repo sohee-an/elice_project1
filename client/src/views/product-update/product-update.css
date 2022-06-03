@@ -9,14 +9,17 @@ body {
 .navbar {
   border-bottom: 3px solid black;
 }
+
 .navbar-start {
   flex-grow: 1;
   justify-content: center;
 }
+
 .brandname {
-  font-family: 'Limelight',cursive;
+  font-family: 'Limelight', cursive;
   font-size: 24px;
 }
+
 .account-header {
   border-bottom: 1px solid #ddd;
   display: block;
@@ -49,8 +52,8 @@ body {
 
 .orders-item .column {
   text-overflow: ellipsis;
-  white-space:nowrap;
-  overflow:hidden;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .orders-item:not(:last-child) {
@@ -73,7 +76,7 @@ body {
 }
 
 .form-container.is-active .form-content::-webkit-scrollbar {
-  display:none;
+  display: none;
 }
 
 .form-content .title {

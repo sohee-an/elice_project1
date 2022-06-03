@@ -15,7 +15,7 @@ export class ReviewsModel {
     return total;
   }
 
-  async productReveiew(productId){
+  async productReveiew(productId) {
     const productReveiew = await Reviews.find({ productId: productId }).populate('userId');
     return productReveiew;
   }

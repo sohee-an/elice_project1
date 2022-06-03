@@ -9,7 +9,7 @@ handleLogoutBtn();
 if (localStorage.getItem("role") !== "admin") {
   alert('관리자 전용 페이지입니다.');
   window.location.href = "/";
-  
+
 }
 
 const submitBtn = document.querySelector('#submitBtn');

@@ -31,7 +31,7 @@ async function getUsers() {
     const setDate = (createdAt) => createdAt.slice(0, 10);
     const setEmail = (email) => email.slice(0, 3) + "*".repeat(email.length - 3);
     const setName = (fullName) => fullName.slice(0, 1) + "*".repeat(fullName.length - 1);
-    
+
     const column = `<div class="columns orders-item" id="user-${_id}">
       <div class="column">${setDate(createdAt)}</div>
       <div class="column">${setEmail(email)}</div>

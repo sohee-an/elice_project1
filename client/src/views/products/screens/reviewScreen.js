@@ -6,30 +6,25 @@ export const reviewScreen = {
     const request = parseRequestUrl();
 
     const submitBtn = document.getElementById('submitBtn');
-    const submitForm = document.querySelector("#submitForm");
     const ratingInput = document.getElementById('rating');
     const reviewTextInput = document.getElementById('reviewText');
 
-    submitBtn.addEventListener('click',async (e)=>{
+    submitBtn.addEventListener('click', async (e) => {
       e.preventDefault();
       try {
         const rating = ratingInput.value;
         const reviewText = reviewTextInput.value;
         const productId = request.id;
-        // const userId = localStorage.getItem('token');
 
         if (!rating || !reviewText) {
           return alert('리뷰 정보를 모두 기입해주세요');
         }
 
-        // formData.append("productId",productId);
-        // formData.append("userId",userId);
-
-       let response = await fetch("http://localhost:5000/api/reviews",{
-          method:"POST",
+        let response = await fetch(`/api/reviews/`, {
+          method: "POST",
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem("token")}` 
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
           },
           body: JSON.stringify({
             rating,
@@ -45,7 +40,7 @@ export const reviewScreen = {
       } catch (e) {
         alert(`상품을 리뷰하는 과정에서 오류가 발생하였습니다: ${e.message}`)
       }
-})
+    })
   },
   render: async () => {
     const request = parseRequestUrl();

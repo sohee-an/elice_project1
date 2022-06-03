@@ -72,11 +72,6 @@
               </a>
             </div>
           </div>
-          <a href="" class="navbar-item">
-            <span class="icon">
-              <i class="fa-solid fa-magnifying-glass has-text-link"></i>
-            </span>
-          </a>
         </div>
         <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
           <!-- 로그인 안했을 때 -->
@@ -118,13 +113,15 @@
     </div>
     <ul class="login-hidden">
       <!-- 로그인 안했을 때 -->
+      <li><a href="/products">VIEW ALL</a></li>
       <li><a href="/register">회원가입</a></li>
       <li><a href="/login">로그인</a></li>
       <li><a href="/cart">카트</a></li>
     </ul>
     <ul class="logout-hidden">
       <!-- 로그인 했을 때 -->
-      <li><a href="/">계정관리</a></li>
+      <li><a href="/products">VIEW ALL</a></li>
+      <li><a href="/users">계정관리</a></li>
       <li><a class="logout-btn" href="/">로그아웃</a></li>
       <li><a href="/cart">카트</a></li>
     </ul>
@@ -168,18 +165,8 @@
         <div class="control">
           <div class="field-wrapper">
             <!-- 우편번호 -->
-            <input
-              id="sample4_postcode"
-              class="input"
-              type="text"
-              placeholder="주소찾기를 클릭해 주세요."
-              readonly
-            />
-            <button
-              class="button is-light is-hovered"
-              type="button"
-              onclick="sample4_execDaumPostcode()"
-            >
+            <input id="sample4_postcode" class="input" type="text" placeholder="주소찾기를 클릭해 주세요." readonly />
+            <button class="button is-light is-hovered" type="button" onclick="sample4_execDaumPostcode()">
               주소찾기
             </button>
           </div>
@@ -187,31 +174,18 @@
       </div>
       <!-- 도로명주소 -->
       <div class="field">
-        <input
-          id="sample4_roadAddress"
-          class="input"
-          type="text"
-        />
+        <input id="sample4_roadAddress" class="input" type="text" />
       </div>
       <!-- 상세주소 -->
       <div class="field">
-        <input
-          id="sample4_detailAddress"
-          class="input"
-          type="text"
-        />
+        <input id="sample4_detailAddress" class="input" type="text" />
       </div>
 
       <!-- 전화번호 -->
       <div class="field mb-5">
         <label class="label" for="phoneNumber">전화번호</label>
         <div class="control">
-          <input
-            class="input"
-            type="text"
-            id="phoneNumber"
-            placeholder="- 없이 입력해 주세요."
-          />
+          <input class="input" type="text" id="phoneNumber" placeholder="- 없이 입력해 주세요." />
         </div>
       </div>
 

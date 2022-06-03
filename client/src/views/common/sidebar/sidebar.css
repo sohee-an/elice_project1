@@ -22,7 +22,7 @@
     padding: 20px 40px;
     background-color: #fff;
   }
-  
+
   .side-menu i {
     display: flex;
     justify-content: center;
@@ -36,15 +36,15 @@
     font-size: 20px;
     font-weight: 400;
   }
-  
+
   .side-menu i:hover {
-    background-color: rgba(0,0,0,.05);
+    background-color: rgba(0, 0, 0, .05);
   }
-  
+
   .side-menu .top {
     height: 100px;
   }
-  
+
   .side-menu li {
     display: block;
     height: 35px;

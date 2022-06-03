@@ -54,30 +54,3 @@ imageInput.addEventListener("input", () => {
   fileNameSpan.innerText = imageInput.value.substr(12);
 })
 
-// 검색 키워드 추가 버튼
-// addKeywordBtn.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   if (searchKeywordInput.value) {
-//     const tagId = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 6);
-//     keywordContainer.innerHTML += `
-//       <div class="control" id="${tagId}">
-//         <div class="tags has-addons">
-//           <span class="tag is-link is-light">${searchKeywordInput.value}</span>
-//           <a class="tag is-link is-light is-delete"></a>
-//         </div>
-//       </div>
-//     `
-//     searchKeywordInput.value = "";
-//     initDeleteHandler();
-//   }
-// })
-
-// 검색 키워드 삭제 버튼
-// function initDeleteHandler() {
-//   const deleteTagBtns = document.querySelectorAll(".tag.is-delete");
-//   deleteTagBtns.forEach(el => {
-//     el.addEventListener("click", (e) => {
-//       e.target.closest(".control").remove()
-//     })
-//   })
-// }
