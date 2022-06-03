@@ -7,7 +7,7 @@ import { reviewService,productService } from '../services';
 const reviwRouter = Router();
 
 //리뷰한거 저장하는거  //여기에 평균별점이랑 리뷰갯수 저장해보자 
-reviwRouter.post('/',loginRequired, async (req, res, next) => {
+reviwRouter.post('/:userId', async (req, res, next) => {
 
     try {
        // const userId = req.currentUserId;
@@ -16,6 +16,11 @@ reviwRouter.post('/',loginRequired, async (req, res, next) => {
         const rating = req.body.rating
         const productId = req.body.productId;
         // 프로덕트 아이디가지고 리뷰갯수찾기
+        
+        const reviewsDate=  await reviewService.productRevewUpdate(productId,rating);
+        const productReviews= await productService.updateProduct(productId,reviewsDate); 
+        console.log(productReviews);
+       
        
 
 
@@ -32,14 +37,10 @@ reviwRouter.post('/',loginRequired, async (req, res, next) => {
 
     }
 
-    try{
-        const reviewsDate=  await reviewService.reviewData(productId);
-        const productReviews= await productService.updateProduct(productId,reviewsDate); 
-        res.status(202).json(productReviews);
+    
+       
         
-    }catch(error){
-        next(error);
-    }
+
 });
 
 
