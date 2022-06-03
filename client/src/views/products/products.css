@@ -202,3 +202,16 @@ h1 {
 .form-box .button {
   font-weight: 700;
 }
+
+/* Rating */
+.rating {
+  color: #ffc000;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rating span:last-child {
+  color: #444444;
+  font-size: 1.4rem;
+}

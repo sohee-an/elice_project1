@@ -1,5 +1,5 @@
 import { parseRequestUrl } from '../utils.js'
-import { getProduct } from '../../api.js';
+import { getProduct, getProductReview } from '../../api.js';
 import { addToCart, addToViewedItems, getViewedItems, setViewedItems } from '../../localStorage.js';
 import { addCommas } from '../../useful-functions.js';
 
@@ -16,6 +16,7 @@ export const ProductScreen = {
     renderViewed()
     const request = parseRequestUrl();
     const product = await getProduct(request.id);
+    const productReveiews = await getProductReview(request.id);
     if (product.error) {
       return `<div>${product.error}</div>`;
     }
@@ -61,6 +62,16 @@ export const ProductScreen = {
           <div class="details-viewed">
           </div>
         </div>
+      </div>
+      <h2>Reviews</h2>
+      <div class="details-reviews">
+        ${productReveiews
+                        .map(
+                          (review)=>`
+                          ${review.fullName}, ${review.reviewText},${review.rating}
+                          `
+                        ).join('\n')
+                      }
       </div>
     </div>
     `;
