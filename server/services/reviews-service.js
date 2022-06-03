@@ -16,6 +16,24 @@ class ReviewService {
     return addedReview;
 
   }
+  async productRevewUpdate(productId,rating){
+    const product_totalData=await this.reviewModel.totalRevew(productId);
+    console.log(product_totalData);
+    
+    // 리뷰 합치기 
+    let product_ratingTotals = rating;
+    console.log(product_ratingTotals);
+    for(let i =0; i<product_totalData.length;i++){
+      product_ratingTotals += product_totalData[i].rating 
+    }
+    //리뷰갯수+현재보내는거 합치기 
+    const product_reviewTotal= product_totalData.length+1;
+    console.log(product_reviewTotal);
+
+    const product_RatingAvg= (product_reviewTotal/product_ratingTotals).toFixed(1);
+    console.log(product_RatingAvg);
+    return {reviewTotal:product_reviewTotal,ratingAvg:product_RatingAvg}
+  }
 
   async reviewData(productId){
     // 상품 총 갯수 구함 
