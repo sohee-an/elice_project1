@@ -47,7 +47,7 @@ class ProductModel {
 
         return removedProduct;
     }
-
+  
     async findByString(productName) {
         const filter = { name: new RegExp(productName) }
 
