@@ -22,8 +22,6 @@ async function createOrderList() {
         let orders = await Api.get('/api/orders/admin');
         orders = orders.reverse();
 
-        console.log(orders)
-
         const orderListElem = document.querySelector('#order-list');
 
 
@@ -38,7 +36,6 @@ async function createOrderList() {
             </div>
             `;
             // 해당 주문 클릭시 보일 제품별 상세 내역
-
             let productList = cur.products.reduce((acc, item) => {
                 return acc + `<div class="product-div" id="product-${item.product._id}">
     
@@ -84,6 +81,9 @@ async function createOrderList() {
             `
             return str;
         }, listHeader);
+
+        console.log(orderList);
+
         orderListElem.innerHTML = orderList;
 
         handleAllEvent();

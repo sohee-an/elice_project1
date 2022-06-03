@@ -28,7 +28,7 @@ const ProductSchema = new Schema({
     },
     reviewTotal: {
         type: String,
-        default: "없음"
+        default: 0
     },
     ratingAvg: {
         type: String,

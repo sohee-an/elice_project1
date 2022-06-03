@@ -20,11 +20,11 @@ export const reviewScreen = {
           return alert('리뷰 정보를 모두 기입해주세요');
         }
 
-        let response = await fetch("/api/reviews", {
+        let response = await fetch(`/api/reviews/`, {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem("token")}`
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
           },
           body: JSON.stringify({
             rating,
