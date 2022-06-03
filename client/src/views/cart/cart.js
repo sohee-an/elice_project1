@@ -40,16 +40,20 @@ function createItemList() {
         <div class="item"> 
             <div> <input type="checkbox" class="checked" id="checkbox-${cur.id}" checked/> </div>
             <input type="image" class="item-img" src="/uploads/${cur.image}" onclick="window.location.href='/products/#/product/${cur.id}'">
-            <div class="item-info">
-                <p>${cur.name}</p>
-                <div class="quantity">
-                    <input type="button" value="-" class="minus-btn" />
-                    <input type="number" class="quantity-input" min="1" max="50" value="${cur.quantity}"/>
-                    <input type="button" value="+" class="plus-btn" />
+            <div class="item-contents">
+                <div class="item-info">
+                    <div><p>${cur.name}</p></div>
                 </div>
-            </div>
-            <div class="item-price">
-                <p>${addCommas(cur.price)} 원</p> X <p class="p-quantity">${cur.quantity}개</p> = <p class="p-price"> ${addCommas(cur.price * cur.quantity)} 원</p>
+                <div class="item-quantity">
+                    <div class="item-price">
+                        <p>${addCommas(cur.price)} 원</p>  X <p class="p-quantity">${cur.quantity} 개</p> = <p class="p-price"> ${addCommas(cur.price * cur.quantity)} 원</p>
+                    </div>
+                    <div class="item-input">
+                        <input type="button" value="-" class="minus-btn" />
+                        <input type="number" class="quantity-input" min="1" max="50" value="${cur.quantity}"/>
+                        <input type="button" value="+" class="plus-btn" />
+                    </div>
+                </div>
             </div>
             <input type="hidden" class="item-id" name="itemId" value="${cur.id}">
         </div>

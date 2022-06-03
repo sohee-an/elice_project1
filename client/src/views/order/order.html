@@ -126,7 +126,7 @@
     </ul>
     <ul class="logout-hidden">
       <!-- 로그인 했을 때 -->
-      <li><a href="/">계정관리</a></li>
+      <li><a href="/users">계정관리</a></li>
       <li><a class="logout-btn" href="/">로그아웃</a></li>
       <li><a href="/cart">카트</a></li>
     </ul>
@@ -135,15 +135,16 @@
   <!--- 결제 구현 --->
   <div class="div-container">
     <div class="order-header" id="processDiv">
-      <p onclick="window.location.href='/cart'"> 장바구니 &gt; </p>
-      <p class="cur-process"> 주문결제</p>
-      <p> &gt; 주문완료 </p>
+      <span> 장바구니 &gt; </span>
+      <span style="font-size: 40px;"> 주문 결제 </span>
+      <span> &gt; 주문완료 </span>
     </div>
     <div class="order-body">
       <!-- 배송 정보 -->
       <div id="delivery-form">
         <form>
           <div class="delivery-info" id="deliveryinfoDiv">
+            <a href="" id="get-contents"> 회원정보 가져오기 </a>
             <ol id="delivery-info-list" style="list-style: none;">
               <li>
                 <p>이름</p>
