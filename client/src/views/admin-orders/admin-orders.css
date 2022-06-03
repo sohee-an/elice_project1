@@ -63,30 +63,28 @@ nav {
 
 .order {
   display: flex;
-  flex-direction: colum;
+  flex-direction: column;
+  height: auto;
 }
 
 .o-list-main, .product-header {
   display: flex;
   flex-direction: row;
   width: 100%;
+  height: 100%;
   color: black;
   font-size: 15px; 
   text-align: center;
   border-bottom: grey 2px;
-  padding: 0.2em;
+  padding: 0.7em;
 }
 .product-header {
   background-color: black;
   color: white;
-  height: 2em;
-  margin-bottom: 1rem;
+  height: 3em;
 }
-.o-list-header div, .product-header div{
-  width: 20%;
-}
-.o-list-main div {
-  width: 20%;
+.o-list-main div, .o-list-header div, .product-header div{
+  width: 25%;
 }
 
 .o-list-specific {
@@ -125,14 +123,6 @@ nav {
   width: 75%;
 }
 
-.p-brand{
-  color: grey;
-}
-
-.cancel-order-btn {
-  border: none;
-
-}
 
 .product {
   display: flex;
@@ -150,7 +140,7 @@ nav {
 
 /* 상품별 상세 정보 */
 .productImg {
-  width: 5rem;
+  width: 10rem;
 }
 .reviewBtn {
   height: 5rem;

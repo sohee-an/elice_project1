@@ -14,69 +14,72 @@ createOrderList();
 // db 에서 유저의 주문내역 가져오기
 async function createOrderList() {
     // const orders = await getOrderList();
-    let orders = await Api.get('/api/orders');
-    orders = orders.reverse();
-
-    console.log(orders)
-
-    const orderListElem = document.querySelector('#order-list');
-
-
-    const listHeader = orderListElem.innerHTML;
-    const orderList = orders.reduce((acc, cur) => {
-        let orderInfo = `${cur.products[0].product.name}`;
-
-        if (cur.products.length > 1) orderInfo += ` 외  <strong>${cur.products.length - 1}</strong> 건`;
-
-        const productListHeader = `<div class="product-header">
-            주문 상품 정보
-        </div>
-        `;
-        // 해당 주문 클릭시 보일 제품별 상세 내역
-
-        let productList = cur.products.reduce((acc, item)=>{
-            let review_loc = `/products/#/review/:${item.product._id}`;
-            return acc +`<div class="product-div" id="product-${item.product._id}">
-
-                <div class="p-img">
-                    <input type="image" class="productImg" src="/uploads/${item.product.image}" onclick="window.location.href='/products/#/product/${item.product._id}'">
+    try{
+        let orders = await Api.get('/api/orders');
+        orders = orders.reverse();
+    
+        console.log(orders)
+    
+        const orderListElem = document.querySelector('#order-list');
+    
+    
+        const listHeader = orderListElem.innerHTML;
+        const orderList = orders.reduce((acc, cur) => {
+            let orderInfo = `${cur.products[0].product.name}`;
+    
+            if (cur.products.length > 1) orderInfo += ` 외  <strong>${cur.products.length - 1}</strong> 건`;
+    
+            const productListHeader = `<div class="product-header">
+                주문 상품 정보
+            </div>
+            `;
+            // 해당 주문 클릭시 보일 제품별 상세 내역
+    
+            let productList = cur.products.reduce((acc, item)=>{
+                return acc +`<div class="product-div" id="product-${item.product._id}">
+    
+                    <div class="p-img">
+                        <input type="image" class="productImg" src="/uploads/${item.product.image}" onclick="window.location.href='/products/#/product/${item.product._id}'">
+                    </div>
+                    <div class="p-contents">    
+                        <div class="p-info"> <p class="p-brand" style="color:grey;"> ${item.product.brand} </p> <strong > ${item.product.name} </strong> <br /> ${addCommas(item.product.price)} 원 / ${item.quantity} 개</div>
+                        <div class="p-review"><input type="button" class="reviewBtn" value="리뷰 작성하기" onclick="window.location.href='/products/#/reviews/${item.product._id}'"></div>
+                    </div>
+    
                 </div>
-                <div class="p-contents">    
-                    <div class="p-info"> <p class="p-brand" style="color:grey;"> ${item.product.brand} </p> <strong > ${item.product.name} </strong> <br /> ${addCommas(item.product.price)} 원 / ${item.quantity} 개</div>
-                    <div class="p-review"><input type="button" class="reviewBtn" value="리뷰 작성하기" onclick="window.location.href='/products/#//${item.product._id}'"></div>
+                `
+            }, productListHeader);
+    
+            let str = acc + `<li class="order" id="order-${cur._id}">
+                <div class="o-list-main" id="main-${cur._id}">
+                    <div class="o-date" id="date-${cur._id}"> ${cur.orderTime}</div> 
+                    <div class="o-info" id="info-${cur._id}"> ${orderInfo} </div> 
+                    <div class="o-price" id="price-${cur._id}">${addCommas(cur.total)} 원</div> 
+                    <div class="o-state" id="state-${cur._id}">${cur.state} `;
+    
+            if (cur.state == '상품 준비중') {
+                str += ` &nbsp <input type="button" value="주문 취소" class="cancel-order-btn" id="orderBtn-${cur._id}" style="border: none;">`
+            }
+            str += `  </div>
                 </div>
-
+            </li>
+            <div class="o-list-specific" id="specific-${cur._id}">
+                ${productList}
+                <div class="product-footer">
+                    <div class="o-name"> 받는사람: ${cur.name}</div>
+                    <div class="o-address"> 주소: ${cur.address.address1} ${cur.address.address2} (${cur.address.postalCode})</div>
+                    <div class="o-name"> 배송 요청사항: ${cur.orderRequest}</div>
+                </div>
             </div>
             `
-        }, productListHeader);
+            return str;
+        }, listHeader);
+        orderListElem.innerHTML = orderList;
+        handleAllEvent();
 
-        let str = acc + `<li class="order" id="order-${cur._id}">
-            <div class="o-list-main" id="main-${cur._id}">
-                <div class="o-date" id="date-${cur._id}"> ${cur.orderTime}</div> 
-                <div class="o-info" id="info-${cur._id}"> ${orderInfo} </div> 
-                <div class="o-price" id="price-${cur._id}">${addCommas(cur.total)} 원</div> 
-                <div class="o-state" id="state-${cur._id}">${cur.state} `;
-
-        if (cur.state == '상품 준비중') {
-            str += ` &nbsp <input type="button" value="주문 취소" class="cancel-order-btn" id="orderBtn-${cur._id}" style="border: none;">`
-        }
-        str += `  </div>
-            </div>
-        </li>
-        <div class="o-list-specific" id="specific-${cur._id}">
-            ${productList}
-            <div class="product-footer">
-                <div class="o-name"> 받는사람: ${cur.name}</div>
-                <div class="o-address"> 주소: ${cur.address.address1} ${cur.address.address2} (${cur.address.postalCode})</div>
-                <div class="o-name"> 배송 요청사항: ${cur.orderRequest}</div>
-            </div>
-        </div>
-        `
-        return str;
-    }, listHeader);
-    orderListElem.innerHTML = orderList;
-
-    handleAllEvent();
+    } catch(err){   
+        console.log("Error message: "+err);
+    }
 
 }
 
