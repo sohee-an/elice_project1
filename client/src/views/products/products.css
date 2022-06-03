@@ -129,7 +129,7 @@ h1 {
 }
 
 .back-to-result {
-  font-size: 20px;
+  font-size: 24px;
   margin:2rem 0;
 }
 .details {
@@ -170,6 +170,19 @@ h1 {
   border-radius: 0.5rem;
   background-color: #f8f8f8;
   padding: 1rem;
+}
+
+.details-rating {
+  color: #ffc000;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.details-rating span:last-child {
+  margin-left: 2rem;
+  color: #444444;
+  font-size: 1.4rem;
 }
 
 /* 제품상세-최근 본 항목들 */
