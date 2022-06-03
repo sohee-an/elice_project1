@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { productService, categoryService } from "../services";
+import { productService, categoryService,reviewsService } from "../services";
 import multer from "multer";
 import is from '@sindresorhus/is';
+
 
 const productRouter = Router();
 
@@ -64,6 +65,8 @@ productRouter.post('/register', upload.single('img'), async (req, res, next) => 
         const category = await categoryService.getSpecificCategory({ largeCategory, mediumCategory });
 
         const category_id = category._id;
+
+    
 
         const product = await productService.addProduct({
             name,

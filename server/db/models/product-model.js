@@ -32,6 +32,14 @@ class ProductModel {
         return updatedProduct;
     }
 
+    //  리뷰 갯수랑 별점구해서 저장하는 거
+    async updateReview(productId,updateReviews){
+        const filter={_id:productId};
+        console.log(updateReviews);
+        const updateReview =await Product.updateOne(filter,updateReviews);
+        console.log(updateReview);
+    }
+
     async remove(product_id) {
         const filter = { _id: product_id };
 
