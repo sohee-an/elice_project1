@@ -22,6 +22,7 @@ const shippingElem = document.getElementById('d-shipping');
 const totalElem = document.getElementById('d-total-price');
 const purchaseBtn = document.getElementById('purchase-btn');
 
+const getContentsElem = document.querySelector('#get-contents');
 const nameElem = document.querySelector('#d-name');
 const phoneNumberElem = document.querySelector('#d-phoneNumber');
 const postcodeElem = document.querySelector('#sample4_postcode');
@@ -49,6 +50,7 @@ function init() {
 function handleAllEvent() {
     purchaseBtn.addEventListener("click", handleSubmit);
     orderRequestElem.addEventListener("change", handleSelect);
+    getContentsElem.addEventListener("click", handleGet)
     window.addEventListener('beforeunload', storeOrderInfo);
 }
 
@@ -108,12 +110,12 @@ function storeOrderInfo() {
 async function handleSubmit(e) {
     e.preventDefault();
 
-    let name = document.querySelector('#d-name').value;
-    let phoneNumber = document.querySelector('#d-phoneNumber').value;
-    let postcode = document.querySelector('#sample4_postcode').value;
-    let address = document.querySelector('#sample4_roadAddress').value;
-    let detailAddress = document.querySelector('#sample4_detailAddress').value;
-    let orderRequest = document.querySelector('#d-requests').value;
+    let name = nameElem.value;
+    let phoneNumber = phoneNumberElem.value;
+    let postcode = postcodeElem.value;
+    let address = addressElem.value;
+    let detailAddress = detailAddressElem.value;
+    let orderRequest = orderRequestElem.value;
     if (orderRequest == 'userinput') orderRequest = userInputElem.value;
 
     console.log(orderRequest);
@@ -198,6 +200,7 @@ async function handleSubmit(e) {
                     }
                 })
             } else {
+                Api.delete('/api/orders', order._id);
                 alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
             }
         });
@@ -216,9 +219,47 @@ function handleSelect() {
 
     if (orderRequestElem.value == "userinput") {
         userInputElem.classList.remove("user-input-hide");
+        userInputElem.classList.add("user-input-show");
+
         return;
     }
-    userInputElem.addd("user-input-hide");
+    userInputElem.classList.remove("user-input-show");
+    userInputElem.classList.add("user-input-hide");
+
 
 }
 
+async function handleGet(e) {
+    e.preventDefault();
+
+    try{
+        const token = localStorage.getItem("token");
+        const userId = parseJwt(token).userId;
+        const  { fullName, phoneNumber, address } = await Api.get(`/api/basicUserInfo`, userId);
+        
+        console.log(phoneNumber);
+
+        nameElem.value=fullName;
+        phoneNumberElem.value=phoneNumber;
+        postcodeElem.value=address.postalCode;
+        addressElem.value=address.address1;
+        detailAddressElem.value=address.address2;
+
+
+    } catch(err) {
+        console.log("Error message: " + err);
+    }
+   
+    
+}
+
+// Decode token
+function parseJwt(token) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+
+  return JSON.parse(jsonPayload);
+}
