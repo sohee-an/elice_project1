@@ -1,5 +1,5 @@
 import { parseRequestUrl } from '../utils.js'
-import { getProduct, getProductReview } from '../../api.js';
+import { getProduct, getProductReview, getTotalReviewData } from '../../api.js';
 import { addToCart, addToViewedItems, getViewedItems, setViewedItems } from '../../localStorage.js';
 import { addCommas } from '../../useful-functions.js';
 import Rating from '../components/Rating.js';
@@ -18,6 +18,8 @@ export const ProductScreen = {
     const request = parseRequestUrl();
     const product = await getProduct(request.id);
     const productReveiews = await getProductReview(request.id);
+    let totalReview = await getTotalReviewData(product._id);
+
     if (product.error) {
       return `<div>${product.error}</div>`;
     }
@@ -40,6 +42,12 @@ export const ProductScreen = {
               </li>
               <li>
                 <strong>${addCommas(product.price)} 원</strong>
+              </li>
+              <li class="details-rating">
+              ${Rating.render({
+                value: totalReview.ratingAvg,
+                text: `${totalReview.reviewTotal} reviews`,
+              })}
               </li>
               <li>
                 Description:
