@@ -52,27 +52,24 @@ async function createOrderList() {
                 </div>
                 `
             }, productListHeader);
-    
+            
+           
+
             let str = acc + `<li class="order" id="order-${cur._id}">
                 <div class="o-list-main" id="main-${cur._id}">
                     <div class="o-user" id="date-${cur._id}"> ${cur.userId.email} </div> 
                     <div class="o-date" id="date-${cur._id}"> ${cur.orderTime}</div> 
                     <div class="o-info" id="info-${cur._id}"> ${orderInfo} </div> 
                     <div class="o-price" id="price-${cur._id}">${addCommas(cur.total)} 원</div> 
-                    <div class="o-state" id="state-${cur._id}-${cur._state}">
+                    <div class="o-state" id="state-${cur._id}-${cur.state}">
                         <select name="orderstate" class="o-state-select" id="select-${cur._id}">
-                            <option value="상품 준비중" selected>상품 준비중</option>
-                            <option value="결제완료">결제완료</option>
-                            <option value="배송시작">배송시작</option>
-                            <option value="배송중">배송중</option>
-                            <option value="배송완료">배송완료</option>
+                            <option value="상품 준비중" ${cur.state === "상품 준비중" ? "selected" : null}>상품 준비중</option>
+                            <option value="결제완료" ${cur.state === "결제완료" ? "selected" : null}>결제완료</option>
+                            <option value="배송시작" ${cur.state === "배송시작" ? "selected" : null}>배송시작</option>
+                            <option value="배송중" ${cur.state === "배송중" ? "selected" : null}>배송중</option>
+                            <option value="배송완료" ${cur.state === "배송완료" ? "selected" : null}>배송완료</option>
                         </select>
-                    `;
-    
-            if (cur.state == '상품 준비중') {
-                str += ` &nbsp <input type="button" value="주문 취소" class="cancel-order-btn" id="orderBtn-${cur._id}" style="border: none;">`
-            }
-            str += `  
+                        &nbsp <input type="button" value="주문 취소" class="cancel-order-btn" id="orderBtn-${cur._id}" style="border: none;" ${cur.state !== "상품 준비중" ? "hidden" : null}>  
                     </div>
                 </div>
             </li>
@@ -97,68 +94,70 @@ async function createOrderList() {
 
 }
 
+
+
 function handleAllEvent() {
     const cancelOrderBtn = document.querySelectorAll(".cancel-order-btn");
     const orderElem = document.querySelectorAll(".order");
     const selectElem = document.querySelectorAll(".o-state-select");
 
-    selectElem.forEach(elem=>{
-        let cur_state=elem.id.split('-')[2];
-        selectElem[value=cur_state].option = selected;
+    cancelOrderBtn.forEach(btn => btn.addEventListener("click", cancelOrder));
+    orderElem.forEach(item => item.addEventListener("click", toggleUserInput));
+    selectElem.forEach(select => select.addEventListener("change", changeOrderState));
+
+}
+
+async function cancelOrder(e) {
+    const orderId = e.target.id.split('-')[1];
+
+    const order = await Api.get('/api/orders');
+    const result = await jQuery.ajax({
+        url: "/api/payments/cancel", // 예: http://www.myservice.com/payments/cancel
+        type: "POST",
+        headers: { "Content-Type": "application/json" },
+        data: JSON.stringify({
+            merchant_uid: orderId, // 예: ORD20180131-0000011
+            cancel_request_amount: order.total, // 환불금액
+            reason: "테스트 결제 환불", // 환불사유
+        }),
     })
+    console.log(result);
+    await Api.delete("/api/orders", orderId);
+    alert("주문취소 및 환불 완료");
+    window.location.reload();
+}
 
-    cancelOrderBtn.forEach(btn => btn.addEventListener("click", async (e) => {
-        const orderId = e.target.id.split('-')[1];
+// 배송요청에서 직접 입력시 
+function toggleUserInput(e){
+    if(e.target.tagName == 'SELECT' || e.target.tagName == 'INPUT') return;
 
-        const order = await Api.get('/api/orders');
-        const result = await jQuery.ajax({
-            url: "/api/payments/cancel", // 예: http://www.myservice.com/payments/cancel
-            type: "POST",
-            headers: { "Content-Type": "application/json" },
-            data: JSON.stringify({
-                merchant_uid: orderId, // 예: ORD20180131-0000011
-                cancel_request_amount: order.total, // 환불금액
-                reason: "테스트 결제 환불", // 환불사유
-            }),
-        })
-        console.log(result);
-        await Api.delete("/api/orders", orderId);
-        alert("주문취소 및 환불 완료");
-        window.location.reload();
-    }))
-
-    orderElem.forEach(item => item.addEventListener("click", (e) => {
-        let targetIdElem = document.querySelector('#target_id');
-        let before_id = targetIdElem.value;
-        let target_id = e.target.id.split('-')[1];
-        console.log(before_id + "  " + target_id);
+    let targetIdElem = document.querySelector('#target_id');
+    let before_id = targetIdElem.value;
+    let target_id = e.target.id.split('-')[1];
+    console.log(before_id + "  " + target_id);
 
 
-        if (target_id == before_id) {
-            const beforeElem = document.querySelector(`#specific-${before_id}`);
-            beforeElem.classList.add("o-list-specific");
-            targetIdElem.value = "";
-            return;
-        }
-        if (targetIdElem.value) {  // 이미 선택된 주문내역이 있다면
-            const beforeElem = document.querySelector(`#specific-${before_id}`);
-            beforeElem.classList.add("o-list-specific");
-        }
+    if (target_id == before_id) {
+        const beforeElem = document.querySelector(`#specific-${before_id}`);
+        beforeElem.classList.add("o-list-specific");
+        targetIdElem.value = "";
+        return;
+    }
+    if (targetIdElem.value) {  // 이미 선택된 주문내역이 있다면
+        const beforeElem = document.querySelector(`#specific-${before_id}`);
+        beforeElem.classList.add("o-list-specific");
+    }
 
-        targetIdElem.value = target_id;
-        const targetElem = document.querySelector(`#specific-${target_id}`);
-        targetElem.classList.remove("o-list-specific");
-    }));
+    targetIdElem.value = target_id;
+    const targetElem = document.querySelector(`#specific-${target_id}`);
+    targetElem.classList.remove("o-list-specific");
+}
 
-    selectElem.forEach(select => {
-        select.addEventListener("change", async (e)=>{
+async function changeOrderState(e){
             
-            let order_id = e.target.id.split('-')[1];
-            console.log(e.target.id);
-            await Api.patch('api/orders/stateUpdate', order_id, e.target.value);
-            
-            window.location.reload();
-        })
-    })
-
+    let order_id = e.target.id.split('-')[1];
+    let order_state = e.target.value;
+    await Api.patch('/api/orders/stateUpdate', order_id,  {state: order_state} );
+    alert('배송상태가 수정되었습니다.');
+    window.location.reload();
 }

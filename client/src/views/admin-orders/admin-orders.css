@@ -72,8 +72,6 @@ nav {
   flex-direction: row;
   width: 100%;
   height: 100%;
-  color: black;
-  font-size: 15px; 
   text-align: center;
   border-bottom: grey 2px;
   padding: 0.7em;
@@ -84,7 +82,7 @@ nav {
   height: 3em;
 }
 .o-list-main div, .o-list-header div, .product-header div{
-  width: 25%;
+  width: 20%;
 }
 
 .o-list-specific {
@@ -145,6 +143,11 @@ nav {
 .reviewBtn {
   height: 5rem;
   border: none;
+}
+
+.cancel-order-btn {
+  width: 5em;
+  height: 2em;
 }
 .reviewBtn :hover{
   height: 5rem;
