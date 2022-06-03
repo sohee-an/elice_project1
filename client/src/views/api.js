@@ -120,6 +120,7 @@ async function del(endpoint, params = '', data = {}) {
 // 아래처럼 export하면, import * as Api 로 할 시 Api.get, Api.post 등으로 쓸 수 있음.
 export { get, post, patch, del as delete };
 
+// 상품 아이디로 상품 가져오기
 export const getProduct = async (id) => {
   try {
     const response = await fetch(`http://localhost:5000/api/products/${id}`,{
@@ -137,3 +138,41 @@ export const getProduct = async (id) => {
     return { error: err.response.data.message || err.message };
   }
 };
+
+// 상품에 대한 전체 리뷰와 평균 평점
+export const getTotalReviewData = async (id) =>{
+  try {
+    const response = await fetch(`http://localhost:5000/api/reviews/reviewRating/${id}`,{
+      method:'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error(response.data.message)
+    }
+    return response.json();
+  } catch (err) {
+    console.log(err);
+    return {error: err.response.data.message || err.message}
+  }
+}
+
+// 개별 상품에 코멘트한 유저이름, 코멘트내용, 개별별점 (배열 안의 객체)
+export const getProductReview = async (id)=>{
+  try {
+    const response = await fetch(`http://localhost:5000/api/reviews/productReview/${id}`,{
+      method:'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error(response.data.message)
+    }
+    return response.json();
+  } catch (err) {
+    console.log(err);
+    return {error: err.response.data.message || err.message}
+  }
+}
