@@ -10,14 +10,13 @@ const reviwRouter = Router();
 reviwRouter.post('/',loginRequired, async (req, res, next) => {
 
     try {
-        const userId = req.currentUserId;
-        //const userId= req.params.userId;
+       // const userId = req.currentUserId;
+        const userId= req.params.userId;
         const reviewText = req.body.reviewText;
         const rating = req.body.rating
         const productId = req.body.productId;
         // 프로덕트 아이디가지고 리뷰갯수찾기
-        const reviewsDate=  await reviewService.reviewData(productId);
-        const productReviews= await productService.updateProduct(productId,reviewsDate); 
+       
 
 
         const addReviews = await reviewService.addReview({
@@ -31,6 +30,15 @@ reviwRouter.post('/',loginRequired, async (req, res, next) => {
     } catch (error) {
         next(error);
 
+    }
+
+    try{
+        const reviewsDate=  await reviewService.reviewData(productId);
+        const productReviews= await productService.updateProduct(productId,reviewsDate); 
+        res.status(202).json(productReviews);
+        
+    }catch(error){
+        next(error);
     }
 });
 
