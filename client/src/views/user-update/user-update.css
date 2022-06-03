@@ -1,5 +1,22 @@
-@import '../common/sidebar/sidebar.css';
+@import '../../common/sidebar/sidebar.css';
+@import '../../common/navbar/navbar.css';
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
 
+body {
+  margin-top: 67px;
+}
+
+nav {
+  border-bottom: 3px solid black;
+}
+.navbar-start {
+  flex-grow: 1;
+  justify-content: center;
+}
+.brandname {
+  font-family: 'Limelight',cursive;
+  font-size: 24px;
+}
 .form-container {
   display: flex;
   flex-direction: column;
@@ -60,7 +77,7 @@
   transition: all 400ms ease;
 }
 
-.switch.active {
+.switch.is-active {
   background-color: #2196f3;
 }
 
@@ -76,7 +93,7 @@
   transition: all 400ms ease;
 }
 
-.switch.active::before {
+.switch.is-active::before {
   transform: translate(35px, -50%);
 }
 

@@ -1,6 +1,8 @@
 import { Router } from "express";
-import { productService, categoryService } from "../services";
+import { productService, categoryService,reviewsService } from "../services";
 import multer from "multer";
+import is from '@sindresorhus/is';
+
 
 const productRouter = Router();
 
@@ -19,80 +21,128 @@ const upload = multer({ storage: storage })
 /////////////////////////////////////////////////////////////////
 
 productRouter.get('/', async (req, res, next) => {
-    let products = await productService.getProducts();
-    let filteredProducts = [];
-    const { lc, mc } = req.query;
+    try {
+        const { lc, mc } = req.query;
 
-    if (lc && mc) {
-        filteredProducts = products.filter((product) => product.category_id.largeCategory === lc && product.category_id.mediumCategory === mc)
-    } else if (lc && (mc === undefined)) {
-        filteredProducts = products.filter((product) => product.category_id.largeCategory === lc)
-    } else if ((lc === undefined) && mc) {
-        filteredProducts = products.filter((product) => product.category_id.mediumCategory === mc)
-    } else {
-        filteredProducts = products;
+        const products = await productService.getProducts({ lc, mc });
+
+        console.log(products);
+        res.status(200).json(products);
+    } catch (err) {
+        next(err)
     }
-
-    console.log(filteredProducts);
-
-    res.status(200).json(filteredProducts);
 })
 
 
 productRouter.get('/:id', async (req, res, next) => {
-    const id = req.params.id;
+    try {
+        const id = req.params.id;
 
-    const product = await productService.getProductDetail(id);
+        const product = await productService.getProductDetail(id);
 
-    res.status(200).json(product)
+        res.status(200).json(product);
+    } catch (err) {
+        next(err);
+    }
 })
 
 //single 메소드의 인자인 'img'는 form의 필드중 name속성의 value이다.
 productRouter.post('/register', upload.single('img'), async (req, res, next) => {
+    try {
 
-    const image = req.file.filename;
-    //나중에 폼으로 대분류, 소분류 카테고리를 받아서 카테고리서비스를 통해 아이디를 가져와서 저장한다.
-    const { name, price, description, brand, largeCategory, mediumCategory } = req.body
-    const category = await categoryService.getSpecificCategory({ largeCategory, mediumCategory })
-    const category_id = category._id;
+        let image = undefined;
 
-    console.log(req.file);
+        if (req.file)
+            image = req.file.filename;
 
-    const product = await productService.addProduct({
-        name,
-        price,
-        description,
-        brand,
-        category_id,
-        image
-    })
+        //나중에 폼으로 대분류, 소분류 카테고리를 받아서 카테고리서비스를 통해 아이디를 가져와서 저장한다.
+        const { name, price, description, brand, largeCategory, mediumCategory } = req.body
 
-    res.status(200).json(product);
+        if (!image || !name || !description || !brand || !largeCategory || !mediumCategory) {
+            throw new Error("상품 정보를 모두 기입해 주세요");
+        }
+
+        const category = await categoryService.getSpecificCategory({ largeCategory, mediumCategory });
+
+        const category_id = category._id;
+
+    
+
+        const product = await productService.addProduct({
+            name,
+            price,
+            description,
+            brand,
+            category_id,
+            image
+        })
+
+        res.status(200).json(product);
+    } catch (err) {
+        next(err);
+    }
 })
 
-productRouter.patch('/:id', async (req, res, next) => {
-    const id = req.params.id;
-    const { name, price, description, madeBy, category_id } = req.body
+productRouter.patch('/:id', upload.single('img'), async (req, res, next) => {
+    try {
 
-    const updateProduct = await productService.updateProduct(id, {
-        name,
-        price,
-        description,
-        madeBy,
-        category_id,
-        image
-    })
+        const id = req.params.id;
+        const { name, price, description, brand, largeCategory, mediumCategory } = req.body
+        let image;
+        let category_id;
 
-    res.status(200).json(updateProduct);
+        if (req.file)
+            image = req.file.filename;
+
+        const category = await categoryService.getSpecificCategory({ largeCategory, mediumCategory })
+
+        if (category)
+            category_id = category._id;
+
+        const toUpdate = {
+            ...(image && { image }),
+            ...(name && { name }),
+            ...(price && { price }),
+            ...(brand && { brand }),
+            ...(description && { description }),
+            ...(category_id && { category_id }),
+        };
+
+        const updatedProduct = await productService.updateProduct(id, toUpdate)
+
+        res.status(200).json(updatedProduct);
+
+    } catch (err) {
+        next(err);
+    }
 })
 
 productRouter.delete('/:id', async (req, res, next) => {
-    const id = req.params.id;
+    try {
+        const id = req.params.id;
 
-    const result = await productService.deleteProduct(id);
+        const result = await productService.deleteProduct(id);
 
-    res.status(200).json(result);
+        res.status(200).json(result);
+    } catch (err) {
+        next(err);
+    }
 })
 
+/////////////////////////////////////기능 추가/////////////////////////////////////
+//상품 검색
+productRouter.get('/:productName/search', async (req, res, next) => {
+    try {
+        const { productName } = req.params
+
+        const searchedProducts = await productService.getSearchedProducts(productName);
+
+        res.status(200).json(searchedProducts);
+
+    } catch (err) {
+        next(err);
+    }
+})
+/////////////////////////////////////기능 추가/////////////////////////////////////
 
 export { productRouter };

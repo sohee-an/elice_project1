@@ -1,5 +1,18 @@
 @import '../common/sidebar/sidebar.css';
 @import '../common/navbar/navbar.css';
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+
+nav {
+  border-bottom: 3px solid black;
+}
+.navbar-start {
+  flex-grow: 1;
+  justify-content: center;
+}
+.brandname {
+  font-family: 'Limelight',cursive;
+  font-size: 24px;
+}
 
 /* products(제품목록) */
 a {
@@ -31,6 +44,10 @@ button.primary {
   width: 100%;
 }
 
+h1 {
+  margin-top: 24px;
+}
+
 .products {
   display: flex;
   flex-wrap: wrap;
@@ -46,7 +63,8 @@ button.primary {
   margin: 1rem;
   margin-bottom: 0;
   height: 42rem;
-  border-top: 0.2rem #e0e0e0 solid;
+  display: flex;
+  justify-content: center;
 }
 
 .product {
@@ -54,6 +72,10 @@ button.primary {
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
+}
+
+.product-image {
+  border: 1px solid black;
 }
 
 .product img {
@@ -64,38 +86,67 @@ button.primary {
 
 .product-name {
   line-height: 2.2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.product-subtitle {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .product-brand {
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
   color: #808080;
+  font-weight: 700;
+  width: 70%;
 }
 
 .product-price {
-  font-size: 2rem;
+  /* font-size: 2rem; */
+  width: 30%;
+}
+
+/* 제품 목록페이지-리뷰,평점 */
+.rating {
+  color: #ffc000;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rating span:last-child {
+  color: #444444;
+  font-size: 1.4rem;
 }
 
 /*product(제품상세) */
 
+.content {
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.back-to-result {
+  font-size: 24px;
+  margin:2rem 0;
+}
 .details {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
 }
 
-.details-image {
-  flex: 2 1 60rem;
+.details-left {
+  margin: 0 2rem;
 }
 
 .details-image img {
-  max-width: 60rem;
+  max-width: 30rem;
   width: 100%;
-}
-
-.details-info,
-.details-action {
-  flex: 1 1 30rem;
+  border: 1px solid black;
 }
 
 .details-info ul,
@@ -120,3 +171,111 @@ button.primary {
   background-color: #f8f8f8;
   padding: 1rem;
 }
+
+.details-rating {
+  color: #ffc000;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.details-rating span:last-child {
+  margin-left: 2rem;
+  color: #444444;
+  font-size: 1.4rem;
+}
+
+/* 제품상세-최근 본 항목들 */
+.details-viewed {
+  display: flex;
+  justify-content: space-around;
+}
+.details-viewedimg img {
+  max-width: 10rem;
+  width: 100%;
+}
+.content-viewed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* 제품상세-리뷰 및 평점 */
+.review-container {
+  width: 100%;
+}
+
+.details-reviews {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.details-review {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid black;
+}
+
+.details-review-rating i {
+  color: #ffc000
+}
+
+.details-review-rating {
+  color: #ffc000;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.details-review-rating span:last-child {
+  color: #444444;
+  font-size: 1.4rem;
+}
+
+.details-review_column:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.details-review-fullName {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.details-review-text {
+  font-size: 20px;
+}
+
+/* 제품 리뷰 작성 페이지 */
+.section {
+  margin: 4rem 0;
+  padding: 2rem 0;
+}
+.review-header {
+  border-bottom: 1px solid #ddd;
+  display: block;
+  padding-bottom: 0.7rem;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-box {
+  width: 40rem;
+}
+
+.form-box .title {
+  text-align: center;
+}
+
+.form-box .button {
+  font-weight: 700;
+}
+

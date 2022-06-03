@@ -7,6 +7,12 @@ class CategoryService {
     }
 
     async addCategory(categoryInfo) {
+        const foundCategory = await this.categoryModel.findOne(categoryInfo);
+
+        if (foundCategory) {
+            throw new Error("이미 등록되어 있는 카테고리 입니다.");
+        }
+
         const createdNewCategory = await this.categoryModel.create(categoryInfo);
         return createdNewCategory;
     }
@@ -17,7 +23,7 @@ class CategoryService {
     }
 
     async getSpecificCategory(categoryInfo) {
-        const category = await this.categoryModel.findCategory(categoryInfo);
+        const category = await this.categoryModel.findOne(categoryInfo);
         return category;
     }
 

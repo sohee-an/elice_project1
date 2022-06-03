@@ -24,6 +24,15 @@ const ProductSchema = new Schema({
     },
     image: {
         type: String,
+        required: true
+    },
+    reviewTotal:{
+        type:String,
+        default:"없음"
+    },
+    ratingAvg:{
+        type:String,
+        default:0
     }
 }, {
     collection: 'products',

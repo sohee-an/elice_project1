@@ -18,12 +18,12 @@
 
 <body>
   <!-- 헤더 -->
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="container mt-3">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <img src="../images/elice-rabbit.png" width="30" height="30" />
-          <span class="has-text-link">쇼핑-데모</span>
+          <img src="" alt="">
+          <span class="has-text-link brandname">SHOPAHOLIC</span>
         </a>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -32,36 +32,80 @@
           <span aria-hidden="true"></span>
         </a>
       </div>
-
-      <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-        <!-- 로그인 안했을 때 -->
-        <ul id="navbar" class="login-hidden">
-          <li><a href="/products">VIEW ALL</a></li>
-          <li><a href="/login">로그인</a></li>
-          <li><a href="/register">회원가입</a></li>
-          <li>
-            <a href="/cart" aria-current="page">
-              <span class="icon">
-                <i class="fas fa-cart-shopping"></i>
-              </span>
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="products/#/?lc=men">
+              MEN
             </a>
-          </li>
-        </ul>
-        <!-- 로그인 했을 때 -->
-        <ul id="navbar" class="logout-hidden hidden">
-          <li><a href="/products">VIEW ALL</a></li>
-          <li><a href="/">계정관리</a></li>
-          <li><a class="logout-btn" href="/">로그아웃</a></li>
-          <li>
-            <a href="/cart" aria-current="page">
-              <span class="icon">
-                <i class="fas fa-cart-shopping"></i>
-              </span>
+            <div class="navbar-dropdown is-boxed">
+              <a class="navbar-item" href="products/#/?lc=men&mc=outer">
+                OUTER
+              </a>
+              <a class="navbar-item" href="products/#/?lc=men&mc=top">
+                TOP
+              </a>
+              <a class="navbar-item" href="products/#/?lc=men&mc=bottom">
+                BOTTOM
+              </a>
+            </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="products/#/?lc=women">
+              WOMEN
             </a>
-          </li>
-        </ul>
+            <div class="navbar-dropdown is-boxed">
+              <a class="navbar-item" href="products/#/?lc=women&mc=outer">
+                OUTER
+              </a>
+              <a class="navbar-item" href="products/#/?lc=women&mc=top">
+                TOP
+              </a>
+              <a class="navbar-item" href="products/#/?lc=women&mc=bottom">
+                BOTTOM
+              </a>
+            </div>
+          </div>
+          <div class="navbar-item">
+            <div class="search">
+              <form class="search-form"  id="search-form">
+                <input type="text" name="q" id="q" placeholder="검색" /> 
+                <button class="icon" type="submit"><i class="fa fa-search"></i></button>
+              </form>
+              </div>
+          </div>
+        </div>
+        <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+          <!-- 로그인 안했을 때 -->
+          <ul id="navbar" class="login-hidden">
+            <li><a href="/products">VIEW ALL</a></li>
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/register">회원가입</a></li>
+            <li>
+              <a href="/cart" aria-current="page">
+                <span class="icon">
+                  <i class="fas fa-cart-shopping"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <!-- 로그인 했을 때 -->
+          <ul id="navbar" class="logout-hidden hidden">
+            <li><a href="/products">VIEW ALL</a></li>
+            <li><a href="/users">계정관리</a></li>
+            <li><a class="logout-btn" href="/">로그아웃</a></li>
+            <li>
+              <a href="/cart" aria-current="page">
+                <span class="icon">
+                  <i class="fas fa-cart-shopping"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
+
   </nav>
 
   <!-- 사이드 메뉴 -->
@@ -78,117 +122,103 @@
     </ul>
     <ul class="logout-hidden">
       <!-- 로그인 했을 때 -->
-      <li><a href="/">계정관리</a></li>
+      <li><a href="/users">계정관리</a></li>
       <li><a class="logout-btn" href="/">로그아웃</a></li>
       <li><a href="/cart">카트</a></li>
     </ul>
   </aside>
 
-  <!-- <div class="container mt-5 mainpagecontainer">
+  <div class="container mainpagecontainer mt-6">
+    <div class="container mt-6 allcontainer">
       <div class="shopmen" id="shopmenDiv">
-        <a href="#">
+        <a href="products/#/?lc=men">
           <div class="left">
             <img src="../images/homepage_men.JPG" alt="">
             <div>
-              <p class="hidden">MENS NEW ARRIVALS</p>
+              <p>SHOP MENS</p>
             </div>
           </div>
         </a>
       </div>
       <div class="shopwomen mx-2" id="shopwomenDiv">
-        <a href="#">
+        <a href="products/#/?lc=women">
           <div class="right">
             <img src="../images/homepage_women.JPG" alt="">
             <div>
-              <p class="hidden">WOMENS NEW ARRIVALS</p>
+              <p>SHOP WOMENS</p>
             </div>
           </div>
         </a>
       </div>
-      <div class="shopmen_outer" id="shopmenOuterDiv">
-        <a href="#">
+    </div>
+    <div class="container mt-6 outercontainer">
+      <div class="shopMenOuter" id="shopMenOuterDiv">
+        <a href="products/#/?lc=men&mc=outer">
           <div class="left">
-            <img src="../images/homepage_men_outer.JPG" alt="">
+            <img src="../images/homepage_men_outer.jpg" alt="">
             <div>
-              <p class="hidden">MENS OUTER</p>
+              <p>MENS OUTER</p>
             </div>
           </div>
         </a>
       </div>
-      <div class="shopwomen_outer" id="shopwomenOuterDiv">
-        <a href="#">
+      <div class="shopWomenOuter mx-2" id="shopWomenOuterDiv">
+        <a href="products/#/?lc=women&mc=outer">
+          <div class="right">
+            <img src="../images/homepage_women_outer.jpg" alt="">
+            <div>
+              <p>WOMENS OUTER</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="container mt-6 topcontainer">
+      <div class="shopMenTop" id="shopMenTopDiv">
+        <a href="products/#/?lc=men&mc=top">
           <div class="left">
-            <img src="../images/homepage_women_outer.JPG" alt="">
+            <img src="../images/homepage_men_top.jpg" alt="">
             <div>
-              <p class="hidden">WOMENS OUTER</p>
+              <p>MENS TOP</p>
             </div>
           </div>
         </a>
       </div>
-      <div class="shopmen_top" id="shopmenTopDiv">
-        <a href="#">
+      <div class="shopWomen mx-2" id="shopWomenTopDiv">
+        <a href="products/#/?lc=women&mc=top">
+          <div class="right">
+            <img src="../images/homepage_women_top.jpg" alt="">
+            <div>
+              <p>WOMENS TOP</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="container mt-6 bottomcontainer">
+      <div class="shopMenBottom" id="shopMenBottomDiv">
+        <a href="products/#/?lc=men&mc=bottom">
           <div class="left">
-            <img src="../images/homepage_men_top.JPG" alt="">
+            <img src="../images/homepage_men_bottom.jpg" alt="">
             <div>
-              <p class="hidden">MENS TOP</p>
+              <p>MENS BOTTOM</p>
             </div>
           </div>
         </a>
       </div>
-      <div class="shopwomen_top" id="shopwomenTopDiv">
-        <a href="#">
-          <div class="left">
-            <img src="../images/homepage_women_top.JPG" alt="">
+      <div class="shopWomen mx-2" id="shopWomenBottomDiv">
+        <a href="products/#/?lc=women&mc=bottom">
+          <div class="right">
+            <img src="../images/homepage_women_bottom.jpg" alt="">
             <div>
-              <p class="hidden">WOMENS TOP</p>
+              <p>WOMENS BOTTOM</p>
             </div>
           </div>
         </a>
       </div>
-      <div class="shopmen_bottom" id="shopmenBottomDiv">
-        <a href="#">
-          <div class="left">
-            <img src="../images/homepage_men_bottom.JPG" alt="">
-            <div>
-              <p class="hidden">MENS BOTTOM</p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="showopmen_bottom" id="shopwomenBottomDiv">
-        <a href="#">
-          <div class="left">
-            <img src="../images/homepage_women_bottom.JPG" alt="">
-            <div>
-              <p class="hidden">WOMENS BOTTOM</p>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div> -->
+    </div>
+  </div>
 
-  <main class="main_categories">
-    <section class="main_category_section">
-      <div class="main_categories_multicontainer">
-        <div class="category_container">
-          <div class="category_image_container">
-            <img src="../images/homepage_men.jpg" class="category_image" alt="MEN">
-          </div>
-          <div>
-            <p class="hidden">SHOP MENS</p>
-          </div>
-        </div>
-        <div class="category_container">
-          <div class="category_image_container">
-            <img src="../images/homepage_women.jpg" class="category_image" alt="WOMEN">
-          </div>
-          <div>
-            <p class="hidden">SHOP WOMENS</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
 </body>
 
 </html>

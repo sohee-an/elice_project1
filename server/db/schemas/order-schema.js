@@ -1,16 +1,40 @@
 import { Schema } from "mongoose";
 
 const OrderSchema = new Schema({
-    user: {
+    userId: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'users',
+        required: true,
     },
-    product: {
-        type: Schema.Types.ObjectId,
-        ref: 'products'
+    name: {
+        type: String,
+        required: true,
     },
-    quantity: {
+    phoneNumber: {
+        type: String,
+        required: true,
+    },
+    products: [{
+        type: new Schema(
+            {
+                product: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'products',
+                    required: true,
+                },
+                quantity: {
+                    type: Number,
+                    required: true,
+                },
+            },
+            {
+                _id: false,
+            },
+        )
+    }],
+    total: {
         type: Number,
+        required: true,
     },
     address: {
         type: new Schema(
@@ -23,11 +47,23 @@ const OrderSchema = new Schema({
                 _id: false,
             }
         ),
-        required: false,
-    }
+        required: true,
+    },
+    orderRequest: {
+        type: String,
+        required: true,
+    },
+    orderTime: {
+        type: String,
+        required: true,
+    },
+    state: {
+        type: String,
+        default: "상품 준비중",
+    },
 }, {
     timestamps: true,
     collection: "orders"
-})
+});
 
-export { OrderSchema }
+export { OrderSchema };

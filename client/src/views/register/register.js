@@ -1,4 +1,5 @@
 import { sidebar } from '../common/sidebar/sidebar.js';
+import { changeNavbar, handleLogoutBtn } from "../../common/navbar/navbar.js";
 import * as Api from '../api.js';
 import { validateEmail } from '../useful-functions.js';
 
@@ -7,11 +8,22 @@ const fullNameInput = document.querySelector('#fullNameInput');
 const emailInput = document.querySelector('#emailInput');
 const passwordInput = document.querySelector('#passwordInput');
 const passwordConfirmInput = document.querySelector('#passwordConfirmInput');
+const postalCodeInput = document.querySelector("#sample4_postcode");
+const address1Input = document.querySelector("#sample4_roadAddress");
+const address2Input = document.querySelector("#sample4_detailAddress");
+const phoneNumberInput = document.querySelector("#phoneNumber");
 const submitButton = document.querySelector('#submitButton');
 
 addAllElements();
 addAllEvents();
 sidebar();
+changeNavbar();
+handleLogoutBtn();
+
+// 로그인 되어있으면 메인페이지로..
+if (localStorage.getItem("token")) {
+  window.location.href = "/";
+}
 
 // html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 async function addAllElements() { }
@@ -29,6 +41,10 @@ async function handleSubmit(e) {
   const email = emailInput.value;
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
+  const postalCode = postalCodeInput.value;
+  const address1 = address1Input.value;
+  const address2 = address2Input.value;
+  const phoneNumber = phoneNumberInput.value;
 
   // 잘 입력했는지 확인
   const isFullNameValid = fullName.length >= 2;
@@ -50,7 +66,7 @@ async function handleSubmit(e) {
 
   // 회원가입 api 요청
   try {
-    const data = { fullName, email, password };
+    const data = { fullName, email, password, address: { postalCode, address1, address2 }, phoneNumber };
 
     await Api.post('/api/register', data);
 
@@ -60,6 +76,6 @@ async function handleSubmit(e) {
     window.location.href = '/login';
   } catch (err) {
     console.error(err.stack);
-    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+    alert(err.message);
   }
 }

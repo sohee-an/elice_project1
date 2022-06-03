@@ -17,16 +17,26 @@ userRouter.post('/register', async (req, res, next) => {
       );
     }
 
+    console.log(req.body)
+
     // req (request)의 body 에서 데이터 가져오기
     const fullName = req.body.fullName;
     const email = req.body.email;
     const password = req.body.password;
+    const phoneNumber = req.body.phoneNumber;
+    const address = req.body.address;
+
+    if (!fullName || !email || !password || !phoneNumber || !address) {
+      throw new Error("정보를 모두 기입해 주세요");
+    }
 
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
       fullName,
       email,
       password,
+      phoneNumber,
+      address
     });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
@@ -135,18 +145,74 @@ userRouter.patch(
 );
 
 
-userRouter.delete('/del/:pwd', loginRequired, async function (req, res, next) {
+userRouter.delete('/del/:userId', loginRequired, async function (req, res, next) {
   //로그인된 유저의 ObjectId를 가쟈온것
   try {
-    const userId = req.currentUserId; // 로그인된 유저의 아이디 가지고옴 
-    const pwd = req.params.pwd;// 현재 적은 비밀번호가지고옴 
+    const userId = req.params.userId; // 로그인된 유저의 아이디 가지고옴 
+    const pwd = req.body.password;// 현재 적은 비밀번호가지고옴 
+    console.log(pwd);
 
-    const findPassword = await userService.delteUser(userId, pwd);// 로그인 된 비밀번호와  현재 적은 비밀번호를 보낸다 .
-    res.status(200).json(findPassword);
+    const delEmail = await userService.delteUser(userId, pwd);// 로그인 된 비밀번호와  현재 적은 비밀번호를 보낸다 .
+    res.status(200).json(delEmail);
   } catch (error) {
     next(error);
   }
 
 });
+
+userRouter.get('/basicUserInfo/:userId', async function (req, res, next) {
+  //원래 로그인 가지고 오기 
+  try {
+    const userId = req.params.userId;
+    const basicUserInfo = await userService.basicUserInfo(userId);
+    res.status(200).json(basicUserInfo);
+  } catch (error) {
+    next(error);
+  }
+
+});
+
+// 관리자가 회원 삭제하는거
+userRouter.delete('/adminDel/:userId', async function (req, res, next) {
+  //로그인된 유저의 ObjectId를 가쟈온것
+  try {
+    const userId = req.params.userId; // 로그인된 유저의 아이디 가지고옴 
+
+    const delEmail = await userService.adminDelteUser(userId);// 로그인 된 비밀번호와  현재 적은 비밀번호를 보낸다 .
+    res.status(200).json(delEmail);
+  } catch (error) {
+    next(error);
+  }
+
+});
+
+userRouter.patch('/adminRole/:userId', async function (req, res, next) {
+  try {
+    const userId = req.params.userId;
+    console.log(userId);
+    const role = req.body.role;
+    const adminRoleUpdate = await userService.adminRoleUpdate(userId, role);
+
+    res.status(200).json(adminRoleUpdate);
+  } catch (error) {
+    next(error);
+  }
+})
+
+/////////////////////////////////기능추가/////////////////////////////////
+//비밀번호 초기화
+userRouter.post("/reset-pwd", async (req, res, next) => {
+  try {
+    const { email } = req.body;
+
+    const userToFindPassword = await userService.resetPassword(email);
+
+    res.status(200).json(userToFindPassword);
+
+  } catch (err) {
+    next(err)
+  }
+})
+/////////////////////////////////기능추가/////////////////////////////////
 
 export { userRouter };

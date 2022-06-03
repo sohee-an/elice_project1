@@ -13,9 +13,30 @@ viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/home',serveStatic('home'));
 viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
+
 viewsRouter.use('/cart', serveStatic('cart'));
 viewsRouter.use('/order', serveStatic('order'));
-viewsRouter.use('/products',serveStatic('products'))
+viewsRouter.use('/order/complete',serveStatic('order-complete'))
+viewsRouter.use('/order/history',serveStatic('order-history'))
+viewsRouter.use('/users',serveStatic('user'))
+viewsRouter.use('/users/update',serveStatic('user-update'))
+viewsRouter.use('/users/delete',serveStatic('user-delete'))
+viewsRouter.use('/admin',serveStatic('admin'))
+viewsRouter.use('/admin/users',serveStatic('admin-users'))
+viewsRouter.use('/admin/orders',serveStatic('admin-orders'))
+
+
+viewsRouter.use('/products',serveStatic('products'));
+viewsRouter.use('/product/add',serveStatic('product-add'))
+viewsRouter.use('/category/add',serveStatic('category-add'))
+viewsRouter.use('/product/update',serveStatic('product-update'))
+viewsRouter.use('/category/update',serveStatic('category-update'))
+viewsRouter.use('/account/password',serveStatic('password-find'))
+viewsRouter.use('/login/temporary',serveStatic('login-temporary'))
+
+//viewsRouter.use('/reviews',serveStatic('reviews'))
+
+
 
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함

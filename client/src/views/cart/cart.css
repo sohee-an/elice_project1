@@ -1,125 +1,154 @@
 @import "../common/sidebar/sidebar.css";
+@import '../common/navbar/navbar.css';
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+
+nav {
+  border-bottom: 3px solid black;
+}
+.navbar-start {
+  flex-grow: 1;
+  justify-content: center;
+}
+.brandname {
+  font-family: 'Limelight',cursive;
+  font-size: 24px;
+}
 
 .div-container {
-  position: fixed;
-  top: 1em;
   display: flex;
   flex-direction: column;
+  margin-top: 5em;
+  margin-left: 5em;
   align-items: center;
   justify-content: center;
-  height: 85vh;
+  position: relative;
+  width: 85%;
+  height: auto;
 }
 
 .order-header {
-width: 100%;
-margin: 30px;
-padding: 20px;
-display: flex;
-flex: row;
-text-align: bottom;
-border-bottom: 1px solid grey;
-border-collapse: collapse;
+  width: 100%;
+  margin: 30px;
+  padding: 20px;
+  border-bottom: 1px solid grey;
+  border-collapse: collapse;
+  vertical-align: bottom;
 }
-.order-header .cur-process {
-font: 30px bold;
-}
-
 .order-body{
-width: 100%;
-display: flex;
-flex-direction: row;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .order-iteminfo {
-margin : 10px;
-padding: 10px;
-width: 60%;
-height: auto;
-border-radius: 10px;
-box-shadow: 5px 5px 10px lightgray;
+  margin : 10px;
+  padding: 10px;
+  width: 60em;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px lightgray;
 }
-
 
 .select-container {
-height: auto;
-margin: 10px;
-border-bottom: #000;
-border-bottom: 1px solid black;
-border-collapse: collapse;
+  margin: 10px;
+  padding: 10px 0px;
+  border-bottom: 1px solid black;
+  border-collapse: collapse;
+  text-decoration:none;
+  
 }
 
-.item {
-margin: 10px;
-display: flex;
-flex-direction: row;
-}
 .order-summary {
-width: 40%;
-height: auto;
-margin : 20px;
-padding: 20px;
-color: white;
-background-color: black;
-border-radius: 10px;
-box-shadow: 5px 5px 10px lightgray;
-align-items: center;
+  width: 40em;
+  height: 20em;
+  margin : 10px;
+  padding: 20px;
+  color: white;
+  background-color: black;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px lightgray;
+  align-items: center;
 }
 #ordersummary-table {
-width: 100%;
-margin: 10px 0px;
-border-top: 1px solid white;
-border-bottom: 1px solid white;
-border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0px;
+  padding: 10px 0px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  border-collapse: collapse;
 }
+
 #purchase-btn {
-width: 100%;
-height: auto;
-padding: 10px;
-margin-top: 10px;
-background-color: grey;
-border: none;
-color: white;
-font: 20px bold;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  margin-top: 30px;
+  background-color: grey;
+  border: none;
+  color: white;
+  font: 30px bold;
+  font-weight: 700;
+}
+#purchase-btn:hover {
+  color: aquamarine;
 }
 
 /** item info **/
 
 .item {
-display: flex;
-flex-direction: row;
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.item-contents {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  
 }
 .item-img {
-height: auto;
-width: 25%;
-margin: 10px;
-}
-.item-info {
-width: 30%;
-align-items: center;
-}
-.item-price {
-width: 30%;
+  height: auto;
+  width: 10em;
+  margin: 10px;
 }
 
 .item-price p {
-display:inline;
+  display:inline;
 }
 
+.item-input input{
+  /* background-color: white; */
+  border: 1px black;
+  width: 2rem;
+  height: 2rem;
+  color: black;
+  text-align: center;
+}
 
+.item-quantity, .item-info {
+  width: 50%;
+  margin: 1rem;
+}
 
 @media screen and (max-width: 768px) {
-.div-container {
-  position: fixed;
-  top: 10px;
-}
-.order-body{
-  flex-direction: column;
-}
-.order-iteminfo {
-  width: 95%;
-}
-.order-summary {
-  width: 95%;
-}
+  .div-container {
+    position: relative;
+    margin-left: 2em;
+  }
+  .order-body{
+    flex-direction: column;
+  }
+  .order-iteminfo {
+    width: 95%;
+  }
+  .order-summary {
+    width: 95%;
+  }
+  .item-contents {
+    flex-direction: column;
+  }
+  .item-quantity, .item-info {
+    width: 70%;
+  }
 }

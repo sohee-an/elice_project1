@@ -1,4 +1,5 @@
-import { sidebar } from '../common/sidebar/sidebar.js'
+import { sidebar } from '../common/sidebar/sidebar.js';
+import { changeNavbar, handleLogoutBtn } from "../../common/navbar/navbar.js";
 import * as Api from '../api.js';
 import { validateEmail } from '../useful-functions.js';
 
@@ -10,6 +11,13 @@ const submitButton = document.querySelector('#submitButton');
 addAllElements();
 addAllEvents();
 sidebar();
+changeNavbar();
+handleLogoutBtn();
+
+// 로그인 되어있으면 메인페이지로..
+if (localStorage.getItem("token")) {
+  window.location.href = "/";
+}
 
 // html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 async function addAllElements() { }
@@ -53,13 +61,10 @@ async function handleSubmit(e) {
     alert(`정상적으로 로그인되었습니다.`);
     // 로그인 성공
 
-    // TODO: db와 로그인 폼 입력값 비교해서 맞으면 로그인 성공
-    // TODO: 관리자 계정
-
     // 기본 페이지로 이동
     window.location.href = '/';
   } catch (err) {
     console.error(err.stack);
-    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+    alert(err.message);
   }
 }

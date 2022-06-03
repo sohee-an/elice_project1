@@ -2,6 +2,7 @@ import { userModel } from '../db';
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import nodemailer from 'nodemailer'
 
 class UserService {
   // 본 파일의 맨 아래에서, new UserService(userModel) 하면, 이 함수의 인자로 전달됨
@@ -12,7 +13,7 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password } = userInfo;
+    const { email, fullName, password, phoneNumber, address } = userInfo;
 
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
@@ -27,7 +28,7 @@ class UserService {
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUserInfo = { fullName, email, password: hashedPassword };
+    const newUserInfo = { fullName, email, password: hashedPassword, phoneNumber, address };
 
     // db에 저장
     const createdNewUser = await this.userModel.create(newUserInfo);
@@ -130,8 +131,7 @@ class UserService {
 
   async delteUser(userId, currentPassword) {
     let user = await this.userModel.findById(userId);
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!deltUser!!!!!!!!!!!!")
-    console.log(userId);
+    // console.log(userId);
     // 유저 비밀번호 가지고 옴 
     const correctPasswordHash = user.password; // 유저 패스워드를  찾음 
     console.log(correctPasswordHash);
@@ -155,6 +155,70 @@ class UserService {
 
     }
 
+  }
+
+  async basicUserInfo(userId) {
+    const basicUserInfo = await this.userModel.findById(userId);
+    console.log(basicUserInfo);
+    return basicUserInfo;
+  }
+
+  /////////////////////////////////////기능 추가/////////////////////////////////////
+
+  async updateUser(userId, paymentData) {
+    const user = await this.userModel.updatePaymentData(userId, paymentData);
+    return user;
+  }
+
+  async resetPassword(email) {
+    const user = await this.userModel.findByEmail(email);
+
+    if (!user) {
+      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+
+    const userId = user._id;
+
+    const resetPassword = Math.floor(Math.random() * (10 ** 8)).toString();
+    const hashedResetPassword = await bcrypt.hash(resetPassword, 10);
+
+    console.log(resetPassword);
+    console.log(hashedResetPassword);
+
+    const userToResetPassword = await this.userModel.updateResetPassword(userId, hashedResetPassword);
+
+    //바뀐 비밀번호 메일 보내기
+    const transporter = new nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: 'seogyeonghwan48@gmail.com',
+        pass: 'sddeyoazcwavbtli',
+      }
+    });
+
+    transporter.sendMail({
+      from: "seogyeonghwan48@gmail.com",
+      to: email,
+      subject: "SHOPAHOLIC 임시 비밀번호",
+      text: `SHOPAHOLIC 에서 발급된 임시 비밀번호는 ${resetPassword} 입니다.`,
+    });
+
+    return userToResetPassword;
+  }
+
+  /////////////////////////////////////기능 추가/////////////////////////////////////
+
+  //관리자가 회원 삭제하는거 
+  async adminDelteUser(userId) {
+    const adminDeluser = await this.userModel.adminDelete(userId);
+    return adminDeluser;
+  }
+
+  //관리자 role update하는 거 
+  async adminRoleUpdate(userId, role) {
+    const update = { role: role };
+    const adminRoleUpdate = await this.userModel.roleUpdate(userId, update);
+    return adminRoleUpdate;
   }
 
 }
