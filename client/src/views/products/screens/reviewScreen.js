@@ -65,11 +65,11 @@ export const reviewScreen = {
         <div class="select is-fullwidth">
           <select id="rating" name="rating" required>
             <option value="">카테고리를 선택해 주세요</option>
-            <option value="1" class="notification is-primary is-light">1</option>
-            <option value="2" class="notification is-warning is-light">2</option>
-            <option value="3" class="notification is-danger is-light">3</option>
-            <option value="4" class="notification is-info is-light">4</option>
-            <option value="5" class="notification is-link is-light">5</option>
+            <option value="1" class="notification is-primary is-light">매우 불만족</option>
+            <option value="2" class="notification is-warning is-light">불만족</option>
+            <option value="3" class="notification is-danger is-light">보통</option>
+            <option value="4" class="notification is-info is-light">만족</option>
+            <option value="5" class="notification is-link is-light">매우 만족</option>
           </select>
         </div>
       </div>
