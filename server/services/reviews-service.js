@@ -1,4 +1,4 @@
-import { reviewsModel } from '../db';
+import { reviewsModel,productModel } from '../db';
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
