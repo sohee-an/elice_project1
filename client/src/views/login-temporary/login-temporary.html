@@ -6,18 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>쇼핑-3팀</title>
   <!-- 아이콘 -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../images/elice-rabbit-favicon.png" />
-  <!-- bulma css -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../images/elice-rabbit-favicon.png" />
+  <!-- bulma css 관련 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
   <!-- 폰트 어썸: 아이콘 -->
   <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
-  <!-- jQuery -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-  <!-- iamport.payment.js -->
-  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
   <!-- 커스텀 css, js -->
-  <link rel="stylesheet" href="order-history.css" />
-  <script src="order-history.js" type="module" defer></script>
+  <link rel="stylesheet" href="login-temporary.css" />
+  <script src="login-temporary.js" type="module" defer></script>
 </head>
 
 <body>
@@ -128,27 +124,29 @@
     </ul>
   </aside>
 
-  <!--- 카트 구현 --->
-  <div class="div-container">
-    <div class="order-header" id="processDiv">
-      <p class="cur-process"> 주문조회 </p>
-    </div>
-    <div class="order-body">
-      <div id="target_id" value="" hidden> </div>
-      <!-- 장바구니 정보 -->
-      <div class="myorder-div" id="myorderDiv">
-        <ul style="list-style: none;" id="order-list">
-          <li class="myorder-list-header">
-            <div class="o-list-header">
-              <div class="o-date">주문일</div>
-              <div class="o-info">주문정보</div>
-              <div class="o-price">결제금액</div>
-              <div class="o-state">상태</div>
-            </div>
-          </li>
-        </ul>
+  <!-- 로그인 폼(Form) -->
+  <div class="login-form-container">
+    <form class="box login-form-box" id="loginForm">
+      <p class="title is-5 has-text-info">어서오세요!</p>
+      <div class="field">
+        <label class="label" for="emailInput">이메일</label>
+        <div class="control">
+          <input class="input" id="emailInput" type="email" placeholder="abc@example.com" autocomplete="on" />
+        </div>
       </div>
-    </div>
+
+      <div class="field mb-5">
+        <label class="label" for="passwordInput">비밀번호</label>
+        <div class="control">
+          <input class="input" id="passwordInput" type="password" placeholder="********" autocomplete="on" />
+        </div>
+      </div>
+
+      <button class="button is-info is-fullwidth" id="submitButton">
+        로그인하기
+      </button>
+      <a class="link-small" href="../account/password">비밀번호 찾기</a>
+    </form>
   </div>
 </body>
 

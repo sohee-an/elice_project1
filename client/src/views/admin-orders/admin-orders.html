@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,6 +11,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
   <!-- 폰트 어썸: 아이콘 -->
   <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <!-- iamport.payment.js -->
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
   <!-- 커스텀 css, js -->
   <link rel="stylesheet" href="admin-orders.css" />
   <script src="admin-orders.js" type="module" defer></script>
@@ -133,7 +138,18 @@
       <!-- 장바구니 정보 -->
       <div class="myorder-div" id="myorderDiv">
         <ul style="list-style: none;" id="order-list">
+<<<<<<< HEAD
           
+=======
+          <li class="myorder-list-header">
+            <div class="o-list-header">
+              <div class="o-date">주문일</div>
+              <div class="o-info">주문정보</div>
+              <div class="o-price">결제금액</div>
+              <div class="o-state">상태</div>
+            </div>
+          </li>
+>>>>>>> 0d68b8f24d73491b4b466e5c2ceed76f137f57bc
         </ul>
       </div>
     </div>

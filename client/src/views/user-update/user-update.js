@@ -56,7 +56,8 @@ async function getUserInfo() {
   userEmail.innerText = email;
   if (phoneNumber) {
     phoneNumberInput.value = phoneNumber;
-  } else if (address) {
+  }
+  if (address) {
     postalCodeInput.value = address.postalCode;
     address1Input.value = address.address1;
     address2Input.value = address.address2;

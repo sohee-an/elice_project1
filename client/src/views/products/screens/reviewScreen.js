@@ -7,30 +7,43 @@ export const reviewScreen = {
 
     const submitBtn = document.getElementById('submitBtn');
     const submitForm = document.querySelector("#submitForm");
-    document.querySelector('#productId').value = request.id;
+    const ratingInput = document.getElementById('rating');
+    const reviewTextInput = document.getElementById('reviewText');
 
     submitBtn.addEventListener('click',async (e)=>{
       e.preventDefault();
       try {
-        const formData = new FormData(submitForm);
-
-        const rating = formData.get("rating");
-        const reviewText = formData.get("reviewText");
-        const productId = formData.get("productId");
+        const rating = ratingInput.value;
+        const reviewText = reviewTextInput.value;
+        const productId = request.id;
+        // const userId = localStorage.getItem('token');
 
         if (!rating || !reviewText) {
           return alert('리뷰 정보를 모두 기입해주세요');
         }
 
-        await fetch("/api/reviews/:userId",{
+        // formData.append("productId",productId);
+        // formData.append("userId",userId);
+
+       let response = await fetch("http://localhost:5000/api/reviews",{
           method:"POST",
-          body: formData
-        })
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}` 
+          },
+          body: JSON.stringify({
+            rating,
+            reviewText,
+            productId,
+          })
+        });
+        let result = await response.json();
+        console.log(result);
         alert('리뷰가 완료되었습니다.');
         window.location.href = "/order/history";
 
       } catch (e) {
-        alert('상품을 리뷰하는 과정에서 오류가 발생하였습니다: ${e.message}')
+        alert(`상품을 리뷰하는 과정에서 오류가 발생하였습니다: ${e.message}`)
       }
 })
   },
@@ -64,10 +77,6 @@ export const reviewScreen = {
           <label for="reviewText" class="label">리뷰를 적어주세요!</label>
           <textarea class="textarea" id="reviewText" name="reviewText" rows="3"
             placeholder="제품에 대한 1~2문장의 평가를 적어 주세요." autocomplete="on" required></textarea>
-        </div>
-        <div class="field is-hidden">
-          <label class="label" for="productId">상품 ID</label>
-          <input id="productId" class="input" type="text" name="productId" placeholder="상품 ID" autocomplete="on" required />
         </div>
         <div class="mt-5">
           <button type="submit" class="button is-primary is-fullwidth" id="submitBtn">리뷰 작성</button>
