@@ -21,7 +21,6 @@ class OrderService {
 
     async usersOrders() {
         const usersOrder = await this.orderModel.findUsersOrder();
-        console.log(usersOrder);
         return usersOrder;
     }
 

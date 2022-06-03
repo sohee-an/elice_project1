@@ -26,7 +26,6 @@ productRouter.get('/', async (req, res, next) => {
 
         const products = await productService.getProducts({ lc, mc });
 
-        console.log(products);
         res.status(200).json(products);
     } catch (err) {
         next(err)
@@ -65,8 +64,6 @@ productRouter.post('/register', upload.single('img'), async (req, res, next) => 
         const category = await categoryService.getSpecificCategory({ largeCategory, mediumCategory });
 
         const category_id = category._id;
-
-
 
         const product = await productService.addProduct({
             name,
