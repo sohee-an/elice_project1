@@ -1,4 +1,5 @@
-// import Rating from "./components/Rating";
+import { getTotalReviewData } from "../api.js";
+import Rating from "./components/Rating.js";
 
 const Products_screen = {
   render: async () => {
@@ -11,6 +12,7 @@ const Products_screen = {
     //브라우저 console창에서 products를 확인할 수 있음 
     //어떤 필드가 들어있는지 확인용으로 보면 좋음 
     // console.log(products);
+
     return `
     <h1>
       <strong>VIEW ALL</strong>
@@ -18,7 +20,7 @@ const Products_screen = {
     <ul class="products">
       ${products
         .map(
-          (product) => `
+            (product) =>`
         <li>
           <div class="product">
           <div class="product-image">
@@ -30,6 +32,12 @@ const Products_screen = {
             <a href="#/product/${product._id}">
               ${product.name}
             </a>
+          </div>
+          <div class="product-rating">
+          ${Rating.render({
+            value: getTotalReviewData(product._id).ratingAvg,
+            text: `${getTotalReviewData(product._id).reviewTotal} reviews`,
+          })}
           </div>
           <div class="product-subtitle">
             <div class="product-brand">
