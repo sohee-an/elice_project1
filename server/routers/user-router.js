@@ -26,6 +26,9 @@ userRouter.post('/register', async (req, res, next) => {
     const phoneNumber = req.body.phoneNumber;
     const address = req.body.address;
 
+    if (!fullName || !email || !password || !phoneNumber || !address) {
+      throw new Error("정보를 모두 기입해 주세요");
+    }
 
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
