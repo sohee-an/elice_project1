@@ -10,9 +10,7 @@ const womensTopScreen = {
     const products = await response.json();
 
     return `
-    <h1>
-      <strong>VIEW ALL</strong>
-    </h1>
+
     <ul class="products">
       ${products
         .map(

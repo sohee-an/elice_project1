@@ -13,9 +13,7 @@ const Products_screen = {
     // console.log(products);
 
     return `
-    <h1>
-      <strong>VIEW ALL</strong>
-    </h1>
+
     <ul class="products">
       ${products
         .map(
