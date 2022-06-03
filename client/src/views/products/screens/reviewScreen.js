@@ -6,7 +6,6 @@ export const reviewScreen = {
     const request = parseRequestUrl();
 
     const submitBtn = document.getElementById('submitBtn');
-    const submitForm = document.querySelector("#submitForm");
     const ratingInput = document.getElementById('rating');
     const reviewTextInput = document.getElementById('reviewText');
 
@@ -16,14 +15,10 @@ export const reviewScreen = {
         const rating = ratingInput.value;
         const reviewText = reviewTextInput.value;
         const productId = request.id;
-        // const userId = localStorage.getItem('token');
 
         if (!rating || !reviewText) {
           return alert('리뷰 정보를 모두 기입해주세요');
         }
-
-        // formData.append("productId",productId);
-        // formData.append("userId",userId);
 
        let response = await fetch("http://localhost:5000/api/reviews",{
           method:"POST",

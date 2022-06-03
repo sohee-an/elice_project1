@@ -1,4 +1,3 @@
-import { getTotalReviewData } from "../api.js";
 import Rating from "./components/Rating.js";
 
 const Products_screen = {

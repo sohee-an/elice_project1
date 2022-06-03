@@ -1,3 +1,5 @@
+import Rating from "../components/Rating.js";
+
 const womensTopScreen = {
   render: async () => {
     //fetch를 이용해서 벡엔드 데이터 가져오기
@@ -6,9 +8,7 @@ const womensTopScreen = {
       return `<div>Error in getting data</div>`
     }
     const products = await response.json();
-    //브라우저 console창에서 products를 확인할 수 있음 
-    //어떤 필드가 들어있는지 확인용으로 보면 좋음 
-    console.log(products);
+
     return `
     <h1>
       <strong>VIEW ALL</strong>
@@ -28,6 +28,12 @@ const womensTopScreen = {
             <a href="#/product/${product._id}">
               ${product.name}
             </a>
+          </div>
+          <div class="product-rating">
+          ${Rating.render({
+            value: product.ratingAvg,
+            text: `${product.reviewTotal} reviews`,
+          })}
           </div>
           <div class="product-subtitle">
             <div class="product-brand">
