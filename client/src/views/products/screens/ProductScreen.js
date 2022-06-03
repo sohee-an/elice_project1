@@ -1,7 +1,8 @@
 import { parseRequestUrl } from '../utils.js'
-import { getProduct } from '../../api.js';
+import { getProduct, getProductReview, getTotalReviewData } from '../../api.js';
 import { addToCart, addToViewedItems, getViewedItems, setViewedItems } from '../../localStorage.js';
 import { addCommas } from '../../useful-functions.js';
+import Rating from '../components/Rating.js';
 
 export const ProductScreen = {
   after_render: () => {
@@ -16,6 +17,9 @@ export const ProductScreen = {
     renderViewed()
     const request = parseRequestUrl();
     const product = await getProduct(request.id);
+    const productReveiews = await getProductReview(request.id);
+    let totalReview = await getTotalReviewData(product._id);
+
     if (product.error) {
       return `<div>${product.error}</div>`;
     }
@@ -39,6 +43,12 @@ export const ProductScreen = {
               <li>
                 <strong>${addCommas(product.price)} 원</strong>
               </li>
+              <li class="details-rating">
+              ${Rating.render({
+                value: totalReview.ratingAvg,
+                text: `${totalReview.reviewTotal} reviews`,
+              })}
+              </li>
               <li>
                 Description:
                 <div>
@@ -60,6 +70,32 @@ export const ProductScreen = {
           <h1>Recently Viewed</h1>
           <div class="details-viewed">
           </div>
+        </div>
+      </div>
+      <div class="review-container my-1">
+        <h2>Reviews</h2>
+        <div class="details-reviews">
+          ${productReveiews
+                          .map(
+                            (review)=>`
+                            <div class="details-review my-3">
+                              <div class="details-review_column">
+                                <div class="details-review-fullName">
+                                  ${review.fullName}
+                                </div>
+                                <div class="details-review-rating">
+                                  ${Rating.render({value:review.rating,text:''})}
+                                </div>
+                              </div>
+                              <div class="details-review_column">
+                                <div class="details-review-text">
+                                  <p>${review.reviewText}</p>
+                                </div>
+                              </div>
+                            </div>
+                            `
+                          ).join('\n')
+                        }
         </div>
       </div>
     </div>
