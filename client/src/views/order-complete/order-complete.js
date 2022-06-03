@@ -7,17 +7,17 @@ changeNavbar();
 handleLogoutBtn();
 
 const historyBtnElem = document.querySelector("#history-btn");
-const continueBtnElem= document.querySelector("#continue-btn");
+const continueBtnElem = document.querySelector("#continue-btn");
 
 
 handleAllEvent();
 
 function handleAllEvent() {
-    historyBtnElem.addEventListener("click", ()=>{
-        window.location.href="/order/history";
+    historyBtnElem.addEventListener("click", () => {
+        window.location.href = "/order/history";
     })
-    continueBtnElem.addEventListener("click", ()=>{
-        window.location.href="/";
+    continueBtnElem.addEventListener("click", () => {
+        window.location.href = "/";
     })
 }
 
@@ -27,7 +27,7 @@ function createOrderList() {
     let newItems = ``;
     if (items.length == 0) newItems = `<li>장바구니가 비어있습니다.</li>`;
     else newItems = items.reduce((acc, cur) => {
-       return acc + `<li id="item${cur.item}">
+        return acc + `<li id="item${cur.item}">
 
     </li>
     `}, ``);

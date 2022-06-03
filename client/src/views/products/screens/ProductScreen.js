@@ -45,9 +45,9 @@ export const ProductScreen = {
               </li>
               <li class="details-rating">
               ${Rating.render({
-                value: totalReview.ratingAvg,
-                text: `${totalReview.reviewTotal} reviews`,
-              })}
+      value: totalReview.ratingAvg,
+      text: `${totalReview.reviewTotal} reviews`,
+    })}
               </li>
               <li>
                 Description:
@@ -76,15 +76,15 @@ export const ProductScreen = {
         <h2>Reviews</h2>
         <div class="details-reviews">
           ${productReveiews
-                          .map(
-                            (review)=>`
+        .map(
+          (review) => `
                             <div class="details-review my-3">
                               <div class="details-review_column">
                                 <div class="details-review-fullName">
                                   ${review.fullName}
                                 </div>
                                 <div class="details-review-rating">
-                                  ${Rating.render({value:review.rating,text:''})}
+                                  ${Rating.render({ value: review.rating, text: '' })}
                                 </div>
                               </div>
                               <div class="details-review_column">
@@ -94,8 +94,8 @@ export const ProductScreen = {
                               </div>
                             </div>
                             `
-                          ).join('\n')
-                        }
+        ).join('\n')
+      }
         </div>
       </div>
     </div>
@@ -103,21 +103,21 @@ export const ProductScreen = {
   },
 };
 
-async function renderCart () {
+async function renderCart() {
   const request = parseRequestUrl();
   if (request.id) {
     const product = await getProduct(request.id);
     addToCart({
       id: product._id,
-      name:product.name,
-      image:product.image,
+      name: product.name,
+      image: product.image,
       price: product.price,
-      quantity:1
+      quantity: 1
     })
   }
 }
 
-async function renderViewed () {
+async function renderViewed() {
   const request = parseRequestUrl();
   if (request.id) {
     const product = await getProduct(request.id);
@@ -129,15 +129,15 @@ async function renderViewed () {
   }
 }
 
-async function after_renderViewed () {
+async function after_renderViewed() {
   let viewedItems = getViewedItems();
-  if (viewedItems.length >3) {
+  if (viewedItems.length > 3) {
     localStorage.removeItem('viewedItems')
-    setViewedItems(viewedItems.slice(viewedItems.length-3))
-    viewedItems = viewedItems.slice(viewedItems.length-4,viewedItems.length-1);
+    setViewedItems(viewedItems.slice(viewedItems.length - 3))
+    viewedItems = viewedItems.slice(viewedItems.length - 4, viewedItems.length - 1);
   }
   const detailsViewed = document.querySelector('.details-viewed');
-  let result = viewedItems.map((product)=>`
+  let result = viewedItems.map((product) => `
               <div class="content-viewed">
                 <a href="#/product/${product.id}">
                   <div class="details-viewedimg">

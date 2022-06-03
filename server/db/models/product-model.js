@@ -33,10 +33,10 @@ class ProductModel {
     }
 
     //  리뷰 갯수랑 별점구해서 저장하는 거
-    async updateReview(productId,updateReviews){
-        const filter={_id:productId};
+    async updateReview(productId, updateReviews) {
+        const filter = { _id: productId };
         console.log(updateReviews);
-        const updateReview =await Product.updateOne(filter,updateReviews);
+        const updateReview = await Product.updateOne(filter, updateReviews);
         console.log(updateReview);
     }
 
@@ -47,7 +47,7 @@ class ProductModel {
 
         return removedProduct;
     }
-  
+
     async findByString(productName) {
         const filter = { name: new RegExp(productName) }
 

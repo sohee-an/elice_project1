@@ -4,11 +4,11 @@ function changeNavbar() {
   const logoutHidden = document.querySelectorAll('.logout-hidden');
 
   if (localStorage.getItem('token')) {
-    loginHidden.forEach(el => {el.classList.add('hidden')});
-    logoutHidden.forEach(el => {el.classList.remove('hidden')});
+    loginHidden.forEach(el => { el.classList.add('hidden') });
+    logoutHidden.forEach(el => { el.classList.remove('hidden') });
   } else {
-    loginHidden.forEach(el => {el.classList.remove('hidden')});
-    logoutHidden.forEach(el => {el.classList.add('hidden')});
+    loginHidden.forEach(el => { el.classList.remove('hidden') });
+    logoutHidden.forEach(el => { el.classList.add('hidden') });
   }
 
   // 관리자로 로그인 했을 때 페이지관리 메뉴 생성

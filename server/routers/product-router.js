@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { productService, categoryService,reviewsService } from "../services";
+import { productService, categoryService, reviewsService } from "../services";
 import multer from "multer";
 import is from '@sindresorhus/is';
 
@@ -66,7 +66,7 @@ productRouter.post('/register', upload.single('img'), async (req, res, next) => 
 
         const category_id = category._id;
 
-    
+
 
         const product = await productService.addProduct({
             name,
@@ -108,7 +108,7 @@ productRouter.patch('/:id', upload.single('img'), async (req, res, next) => {
             ...(category_id && { category_id }),
         };
 
-        const updatedProduct = await productService.updateProduct(id, toUpdate)
+        const updatedProduct = await productService.updateProductInfo(id, toUpdate)
 
         res.status(200).json(updatedProduct);
 

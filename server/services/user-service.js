@@ -134,7 +134,6 @@ class UserService {
     // console.log(userId);
     // 유저 비밀번호 가지고 옴 
     const correctPasswordHash = user.password; // 유저 패스워드를  찾음 
-    console.log(correctPasswordHash);
     //비밀번호가 맞는지 한번 확인해본다.
     const isPasswordCorrect = await bcrypt.compare(
       currentPassword,
@@ -181,9 +180,6 @@ class UserService {
 
     const resetPassword = Math.floor(Math.random() * (10 ** 8)).toString();
     const hashedResetPassword = await bcrypt.hash(resetPassword, 10);
-
-    console.log(resetPassword);
-    console.log(hashedResetPassword);
 
     const userToResetPassword = await this.userModel.updateResetPassword(userId, hashedResetPassword);
 

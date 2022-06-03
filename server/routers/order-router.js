@@ -1,6 +1,4 @@
 import { Router } from "express";
-import is from '@sindresorhus/is';// DLRJ S
-
 import { loginRequired } from '../middlewares';
 import { orderService } from "../services";
 
@@ -9,8 +7,6 @@ const orderRouter = Router();
 
 
 orderRouter.post('/', loginRequired, async function (req, res, next) {
-
-    // console.log(req.body)
 
     // 데이터 가지고옴 
     try {
@@ -61,7 +57,7 @@ orderRouter.post('/', loginRequired, async function (req, res, next) {
 orderRouter.get('/', loginRequired, async function (req, res, next) {
     try {
         const userId = req.currentUserId;// 유저 아이디 찾음 
-        //const userId = req.params.userId;
+
         const userOrder = await orderService.getUserOrder(userId);
 
         res.status(200).json(userOrder);
@@ -73,6 +69,7 @@ orderRouter.get('/', loginRequired, async function (req, res, next) {
 orderRouter.get("/admin", async function (req, res, next) {
     try {
         const usersOrders = await orderService.usersOrders();
+
         res.status(200).json(usersOrders);
     } catch (error) {
         next(error);
@@ -96,12 +93,13 @@ orderRouter.patch('/stateUpdate/:orderId', async (req, res, next) => {
     try {
         const orderId = req.params.orderId;
         const state = req.body.state;
+
         const stateUpdate = await orderService.stateUpdate(orderId, state);
+
         res.status(200).json(stateUpdate);
     } catch (error) {
         next(error);
     }
-    //
 })
 
 export { orderRouter }

@@ -26,13 +26,13 @@ const ProductSchema = new Schema({
         type: String,
         required: true
     },
-    reviewTotal:{
-        type:String,
-        default:"없음"
+    reviewTotal: {
+        type: String,
+        default: "없음"
     },
-    ratingAvg:{
-        type:String,
-        default:0
+    ratingAvg: {
+        type: String,
+        default: 0
     }
 }, {
     collection: 'products',

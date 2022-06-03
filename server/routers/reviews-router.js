@@ -2,7 +2,7 @@ import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from '../middlewares';
-import { reviewService,productService } from '../services';
+import { reviewService, productService } from '../services';
 
 const reviwRouter = Router();
 
@@ -10,19 +10,15 @@ const reviwRouter = Router();
 reviwRouter.post('/:userId', async (req, res, next) => {
 
     try {
-       // const userId = req.currentUserId;
-        const userId= req.params.userId;
+
+        const userId = req.params.userId;
         const reviewText = req.body.reviewText;
         const rating = req.body.rating
         const productId = req.body.productId;
         // 프로덕트 아이디가지고 리뷰갯수찾기
-        
-        const reviewsDate=  await reviewService.productRevewUpdate(productId,rating);
-        const productReviews= await productService.updateProduct(productId,reviewsDate); 
-        console.log(productReviews);
-       
-       
 
+        const reviewsDate = await reviewService.productRevewUpdate(productId, rating);
+        const productReviews = await productService.updateProduct(productId, reviewsDate);
 
         const addReviews = await reviewService.addReview({
             userId,
@@ -31,16 +27,11 @@ reviwRouter.post('/:userId', async (req, res, next) => {
             productId,
 
         });
+
         res.status(201).json(addReviews);
     } catch (error) {
         next(error);
-
     }
-
-    
-       
-        
-
 });
 
 
@@ -65,7 +56,6 @@ reviwRouter.get('/productReview/:productId', async (req, res, next) => {
         const resProductReviw = await reviewService.prodcutReview(productId);
 
         res.status(201).json(resProductReviw);
-
 
     } catch (error) {
         next(error);

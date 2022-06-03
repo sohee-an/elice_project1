@@ -107,13 +107,15 @@
     </div>
     <ul class="login-hidden">
       <!-- 로그인 안했을 때 -->
+      <li><a href="/products">VIEW ALL</a></li>
       <li><a href="/register">회원가입</a></li>
       <li><a href="/login">로그인</a></li>
       <li><a href="/cart">카트</a></li>
     </ul>
     <ul class="logout-hidden">
       <!-- 로그인 했을 때 -->
-      <li><a href="/user">계정관리</a></li>
+      <li><a href="/products">VIEW ALL</a></li>
+      <li><a href="/users">계정관리</a></li>
       <li><a class="logout-btn" href="/">로그아웃</a></li>
       <li><a href="/cart">카트</a></li>
     </ul>
@@ -131,7 +133,8 @@
           <!-- 제품 이름 -->
           <div class="field">
             <label class="label" for="titleInput">제품 이름</label>
-            <input id="titleInput" class="input" type="text" name="name" placeholder="아이보리 티셔츠" autocomplete="on" required />
+            <input id="titleInput" class="input" type="text" name="name" placeholder="아이보리 티셔츠" autocomplete="on"
+              required />
           </div>
 
           <!-- Large Category -->
@@ -163,7 +166,8 @@
           <!-- 제조사 -->
           <div class="field">
             <label for="brandInput" class="label">제조사</label>
-            <input id="brandInput" class="input" type="text" name="brand" placeholder="OO의류제조(주)" autocomplete="on" required />
+            <input id="brandInput" class="input" type="text" name="brand" placeholder="OO의류제조(주)" autocomplete="on"
+              required />
           </div>
 
           <!-- 요약 설명 -->
@@ -190,35 +194,15 @@
             </div>
           </div>
 
-          <!-- 재고 수 -->
-          <!-- <div class="field">
-            <label for="inventoryInput" class="label">재고 수</label>
-            <input class="input" id="inventoryInput" type="number" placeholder="10" autocomplete="on">
-          </div> -->
-
           <!-- 가격 -->
           <div class="field">
             <label for="priceInput" class="label">가격</label>
             <div class="control has-icons-right">
-              <input class="input" id="priceInput" type="number" name="price" placeholder="10000" autocomplete="on" required />
+              <input class="input" id="priceInput" type="number" name="price" placeholder="10000" autocomplete="on"
+                required />
               <span class="icon is-small is-right">원</span>
             </div>
           </div>
-
-          <!-- 검색 키워드 -->
-          <!-- <div class="field">
-            <label for="searchKeywordInput" class="label">검색 키워드</label>
-            <div class="field has-addons">
-              <div class="control header-search-input is-flex-grow-1">
-                <input class="input" id="searchKeywordInput" type="text" placeholder="남자옷">
-              </div>
-              <div class="control">
-                <button class="button is-primary" id="addKeywordBtn">추가하기</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="field is-grouped is-grouped-multiline mt-3" id="keywordContainer"></div> -->
 
           <!-- 버튼 -->
           <div class="mt-5">

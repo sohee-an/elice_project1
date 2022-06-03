@@ -9,14 +9,17 @@ body {
 nav {
   border-bottom: 3px solid black;
 }
+
 .navbar-start {
   flex-grow: 1;
   justify-content: center;
 }
+
 .brandname {
-  font-family: 'Limelight',cursive;
+  font-family: 'Limelight', cursive;
   font-size: 24px;
 }
+
 .section {
   padding: 3rem 1.5rem;
 }
@@ -31,7 +34,7 @@ nav {
   grid-gap: 2rem;
   cursor: pointer;
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(25rem,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
   text-decoration: none;
 }
 

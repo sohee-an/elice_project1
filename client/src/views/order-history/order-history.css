@@ -5,12 +5,14 @@
 nav {
   border-bottom: 3px solid black;
 }
+
 .navbar-start {
   flex-grow: 1;
   justify-content: center;
 }
+
 .brandname {
-  font-family: 'Limelight',cursive;
+  font-family: 'Limelight', cursive;
   font-size: 24px;
 }
 
@@ -25,8 +27,9 @@ nav {
   width: 85%;
   height: auto;
 }
+
 /* 주문조회 테이블 상단바 */
-.order-header { 
+.order-header {
   width: 100%;
   margin: 30px;
   padding: 20px;
@@ -47,7 +50,7 @@ nav {
 
 
 .order-iteminfo {
-    width: 100%;
+  width: 100%;
 }
 
 .o-list-header {
@@ -56,7 +59,7 @@ nav {
   background-color: grey;
   width: 100%;
   color: white;
-  font-size: 15px; 
+  font-size: 15px;
   text-align: center;
   padding: 1em;
 }
@@ -67,23 +70,28 @@ nav {
   height: auto;
 }
 
-.o-list-main, .product-header {
+.o-list-main,
+.product-header {
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 100%;
   color: black;
-  font-size: 15px; 
+  font-size: 15px;
   text-align: center;
   border-bottom: grey 2px;
   padding: 0.7em;
 }
+
 .product-header {
   background-color: black;
   color: white;
   height: 3em;
 }
-.o-list-main div, .o-list-header div, .product-header div{
+
+.o-list-main div,
+.o-list-header div,
+.product-header div {
   width: 25%;
 }
 
@@ -94,7 +102,7 @@ nav {
 }
 
 .product-footer {
-  border-bottom: solid black 3px ;
+  border-bottom: solid black 3px;
   padding: 1rem;
   text-align: right;
 }
@@ -102,10 +110,11 @@ nav {
 .product-div {
   display: flex;
   flex-direction: row;
-  width:100%;
+  width: 100%;
   border: black 3px;
 }
-.p-img{
+
+.p-img {
   width: 10rem;
 }
 
@@ -116,9 +125,11 @@ nav {
   align-items: right;
   padding: 1em;
 }
+
 .p-review {
   width: 20%;
 }
+
 .p-info {
   width: 75%;
 }
@@ -142,15 +153,18 @@ nav {
 .productImg {
   width: 10rem;
 }
+
 .cancel-order-btn {
   width: 5em;
   height: 2em;
 }
+
 .reviewBtn {
   height: 5rem;
   border: none;
 }
-.reviewBtn :hover{
+
+.reviewBtn :hover {
   height: 5rem;
   border: none;
   color: aquamarine;

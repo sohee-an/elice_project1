@@ -3,7 +3,7 @@ import Rating from "../components/Rating.js";
 const mensTopScreen = {
   render: async () => {
     //fetch를 이용해서 벡엔드 데이터 가져오기
-    const response = await fetch("http://localhost:5000/api/products/?lc=men&mc=top")
+    const response = await fetch("/api/products?lc=men&mc=top")
     if (!response || !response.ok) {
       return `<div>Error in getting data</div>`
     }
