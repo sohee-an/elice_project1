@@ -1,3 +1,5 @@
+import Rating from "../components/Rating.js";
+
 const menScreen = {
   render: async () => {
     //fetch를 이용해서 벡엔드 데이터 가져오기
@@ -28,6 +30,12 @@ const menScreen = {
             <a href="#/product/${product._id}">
               ${product.name}
             </a>
+          </div>
+          <div class="product-rating">
+          ${Rating.render({
+            value: product.ratingAvg,
+            text: `${product.reviewTotal} reviews`,
+          })}
           </div>
           <div class="product-subtitle">
             <div class="product-brand">
