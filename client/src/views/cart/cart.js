@@ -42,9 +42,9 @@ function createItemList() {
             <input type="image" class="item-img" src="/uploads/${cur.image}" onclick="window.location.href='/products/#/product/${cur.id}'">
             <div class="item-contents">
                 <div class="item-info">
-                    <div><p>${cur.name}</p></div>
+                    <p>${cur.name}</p>
                 </div>
-                <div class="item-quantity">
+                <div class="item-value">
                     <div class="item-price">
                         <p>${addCommas(cur.price)} 원</p>  X <p class="p-quantity">${cur.quantity} 개</p> = <p class="p-price"> ${addCommas(cur.price * cur.quantity)} 원</p>
                     </div>
