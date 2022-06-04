@@ -14,33 +14,30 @@ createOrderList();
 if (localStorage.getItem("role") !== "admin") {
     alert('관리자 전용 페이지입니다.');
     window.location.href = "/";
-  }
+}
 
 // db 에서 유저의 주문내역 가져오기
 async function createOrderList() {
-    try{
+    try {
         let orders = await Api.get('/api/orders/admin');
         orders = orders.reverse();
-    
-        console.log(orders)
-    
+
         const orderListElem = document.querySelector('#order-list');
-    
-    
+
+
         const listHeader = orderListElem.innerHTML;
         const orderList = orders.reduce((acc, cur) => {
             let orderInfo = `${cur.products[0].product.name}`;
-    
+
             if (cur.products.length > 1) orderInfo += ` 외  <strong>${cur.products.length - 1}</strong> 건`;
-    
+
             const productListHeader = `<div class="product-header">
                 주문 상품 정보
             </div>
             `;
             // 해당 주문 클릭시 보일 제품별 상세 내역
-    
-            let productList = cur.products.reduce((acc, item)=>{
-                return acc +`<div class="product-div" id="product-${item.product._id}">
+            let productList = cur.products.reduce((acc, item) => {
+                return acc + `<div class="product-div" id="product-${item.product._id}">
     
                     <div class="p-img">
                         <input type="image" class="productImg" src="/uploads/${item.product.image}" onclick="window.location.href='/products/#/product/${item.product._id}'">
@@ -52,8 +49,8 @@ async function createOrderList() {
                 </div>
                 `
             }, productListHeader);
-            
-           
+
+
 
             let str = acc + `<li class="order" id="order-${cur._id}">
                 <div class="o-list-main" id="main-${cur._id}">
@@ -84,12 +81,15 @@ async function createOrderList() {
             `
             return str;
         }, listHeader);
+
+        console.log(orderList);
+
         orderListElem.innerHTML = orderList;
 
         handleAllEvent();
 
-    } catch(err){   
-        console.log("Error message: "+err);
+    } catch (err) {
+        console.log("Error message: " + err);
     }
 
 }
@@ -128,8 +128,8 @@ async function cancelOrder(e) {
 }
 
 // 배송요청에서 직접 입력시 
-function toggleUserInput(e){
-    if(e.target.tagName == 'SELECT' || e.target.tagName == 'INPUT') return;
+function toggleUserInput(e) {
+    if (e.target.tagName == 'SELECT' || e.target.tagName == 'INPUT') return;
 
     let targetIdElem = document.querySelector('#target_id');
     let before_id = targetIdElem.value;
@@ -153,11 +153,11 @@ function toggleUserInput(e){
     targetElem.classList.remove("o-list-specific");
 }
 
-async function changeOrderState(e){
-            
+async function changeOrderState(e) {
+
     let order_id = e.target.id.split('-')[1];
     let order_state = e.target.value;
-    await Api.patch('/api/orders/stateUpdate', order_id,  {state: order_state} );
+    await Api.patch('/api/orders/stateUpdate', order_id, { state: order_state });
     alert('배송상태가 수정되었습니다.');
     window.location.reload();
 }

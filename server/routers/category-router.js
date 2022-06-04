@@ -24,7 +24,7 @@ categoryRouter.post('/register', async (req, res, next) => {
         const { largeCategory, mediumCategory } = req.body;
         const newCategory = await categoryService.addCategory({ largeCategory, mediumCategory });
 
-      res.status(200).json(newCategory);
+        res.status(200).json(newCategory);
     } catch (err) {
         next(err);
     }

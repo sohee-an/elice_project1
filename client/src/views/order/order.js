@@ -41,9 +41,9 @@ handleAllEvent();
 
 
 function init() {
-    if(getCartItems.empty()){
+    if (getCartItems.empty()) {
         alert('결제할 상품이 없습니다.');
-        window.location.href='/';
+        window.location.href = '/';
     }
 }
 
@@ -62,10 +62,10 @@ function getPaymentInfo() {
     let shippingPrice = itemPrice ? 100 : 0;
     totalPrice = itemPrice + shippingPrice;
 
-    amountElem.innerText = addCommas(itemAmount)+'개';
-    priceElem.innerText = addCommas(itemPrice)+' 원';
-    shippingElem.innerText = addCommas(shippingPrice)+' 원';
-    totalElem.innerText = addCommas(totalPrice)+' 원';
+    amountElem.innerText = addCommas(itemAmount) + '개';
+    priceElem.innerText = addCommas(itemPrice) + ' 원';
+    shippingElem.innerText = addCommas(shippingPrice) + ' 원';
+    totalElem.innerText = addCommas(totalPrice) + ' 원';
 
 }
 
@@ -232,34 +232,34 @@ function handleSelect() {
 async function handleGet(e) {
     e.preventDefault();
 
-    try{
+    try {
         const token = localStorage.getItem("token");
         const userId = parseJwt(token).userId;
-        const  { fullName, phoneNumber, address } = await Api.get(`/api/basicUserInfo`, userId);
-        
+        const { fullName, phoneNumber, address } = await Api.get(`/api/basicUserInfo`, userId);
+
         console.log(phoneNumber);
 
-        nameElem.value=fullName;
-        phoneNumberElem.value=phoneNumber;
-        postcodeElem.value=address.postalCode;
-        addressElem.value=address.address1;
-        detailAddressElem.value=address.address2;
+        nameElem.value = fullName;
+        phoneNumberElem.value = phoneNumber;
+        postcodeElem.value = address.postalCode;
+        addressElem.value = address.address1;
+        detailAddressElem.value = address.address2;
 
 
-    } catch(err) {
+    } catch (err) {
         console.log("Error message: " + err);
     }
-   
-    
+
+
 }
 
 // Decode token
 function parseJwt(token) {
-  const base64Url = token.split('.')[1];
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
 
-  return JSON.parse(jsonPayload);
+    return JSON.parse(jsonPayload);
 }

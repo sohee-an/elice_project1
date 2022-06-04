@@ -109,11 +109,11 @@ async function saveUserInfo(e) {
     };
     const result = await Api.patch("/api/users", userId, data);
     console.log(result);
-    
+
     alert('회원정보가 안전하게 저장되었습니다.');
     modal.classList.remove("is-active");
     switchBtn.forEach(el => { el.classList.remove('is-active') });
-    input.forEach(el => { el.disabled = true;});
+    input.forEach(el => { el.disabled = true; });
   } catch (err) {
     alert(`회원정보 저장 과정에서 오류가 발생하였습니다: ${err.message}`);
   }
@@ -123,7 +123,7 @@ async function saveUserInfo(e) {
 function parseJwt(token) {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
 

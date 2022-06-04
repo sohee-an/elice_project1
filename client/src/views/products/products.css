@@ -5,12 +5,14 @@
 nav {
   border-bottom: 3px solid black;
 }
+
 .navbar-start {
   flex-grow: 1;
   justify-content: center;
 }
+
 .brandname {
-  font-family: 'Limelight',cursive;
+  font-family: 'Limelight', cursive;
   font-size: 24px;
 }
 
@@ -116,6 +118,7 @@ h1 {
   align-items: center;
   justify-content: space-between;
 }
+
 .rating span:last-child {
   color: #444444;
   font-size: 1.4rem;
@@ -130,8 +133,9 @@ h1 {
 
 .back-to-result {
   font-size: 24px;
-  margin:2rem 0;
+  margin: 2rem 0;
 }
+
 .details {
   display: flex;
   justify-content: flex-start;
@@ -179,6 +183,7 @@ h1 {
   align-items: center;
   justify-content: space-between;
 }
+
 .details-rating span:last-child {
   margin-left: 2rem;
   color: #444444;
@@ -190,10 +195,12 @@ h1 {
   display: flex;
   justify-content: space-around;
 }
+
 .details-viewedimg img {
   max-width: 10rem;
   width: 100%;
 }
+
 .content-viewed {
   display: flex;
   flex-direction: column;
@@ -231,6 +238,7 @@ h1 {
   align-items: center;
   justify-content: space-between;
 }
+
 .details-review-rating span:last-child {
   color: #444444;
   font-size: 1.4rem;
@@ -256,6 +264,7 @@ h1 {
   margin: 4rem 0;
   padding: 2rem 0;
 }
+
 .review-header {
   border-bottom: 1px solid #ddd;
   display: block;
@@ -278,4 +287,3 @@ h1 {
 .form-box .button {
   font-weight: 700;
 }
-

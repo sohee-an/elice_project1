@@ -8,7 +8,6 @@ class OrderService {
     async addOrder(newOrder) {
         //객체에 할당함 // 
         // const { userId,name, phoneNumber,cartItems,total,address,orderRequest} = newOrder;
-        console.log(newOrder);
         const createdOrder = await this.orderModel.create(newOrder);
         return createdOrder;
 
@@ -22,7 +21,6 @@ class OrderService {
 
     async usersOrders() {
         const usersOrder = await this.orderModel.findUsersOrder();
-        console.log(usersOrder);
         return usersOrder;
     }
 
@@ -53,8 +51,6 @@ class OrderService {
             update
         );
         return updateOrder;
-        //console.log(updateOrder);
-
     }
 }
 

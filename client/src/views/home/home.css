@@ -5,12 +5,14 @@
 nav {
   border-bottom: 3px solid black;
 }
+
 .navbar-start {
   flex-grow: 1;
   justify-content: center;
 }
+
 .brandname {
-  font-family: 'Limelight',cursive;
+  font-family: 'Limelight', cursive;
   font-size: 24px;
 }
 
@@ -20,20 +22,26 @@ nav {
   align-items: center;
   text-align: center;
 }
-.left,.right {
+
+.left,
+.right {
   position: relative;
   transition: all 0.3s;
 }
-.left p, .right p {
+
+.left p,
+.right p {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   font-size: 24px;
   font-weight: 700;
   color: aliceblue;
 }
-.left:hover, .right:hover {
+
+.left:hover,
+.right:hover {
   opacity: 0.5;
 }
 
@@ -41,12 +49,15 @@ nav {
   .allcontainer {
     display: flex;
   }
+
   .outercontainer {
     display: flex;
   }
+
   .topcontainer {
     display: flex;
-  } 
+  }
+
   .bottomcontainer {
     display: flex;
   }

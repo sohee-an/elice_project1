@@ -9,14 +9,17 @@ body {
 nav {
   border-bottom: 3px solid black;
 }
+
 .navbar-start {
   flex-grow: 1;
   justify-content: center;
 }
+
 .brandname {
-  font-family: 'Limelight',cursive;
+  font-family: 'Limelight', cursive;
   font-size: 24px;
 }
+
 .account-header {
   border-bottom: 1px solid #ddd;
   display: block;

@@ -17,8 +17,6 @@ userRouter.post('/register', async (req, res, next) => {
       );
     }
 
-    console.log(req.body)
-
     // req (request)의 body 에서 데이터 가져오기
     const fullName = req.body.fullName;
     const email = req.body.email;

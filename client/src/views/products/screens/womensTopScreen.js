@@ -3,16 +3,14 @@ import Rating from "../components/Rating.js";
 const womensTopScreen = {
   render: async () => {
     //fetch를 이용해서 벡엔드 데이터 가져오기
-    const response = await fetch("http://localhost:5000/api/products/?lc=women&mc=top")
+    const response = await fetch("/api/products?lc=women&mc=top")
     if (!response || !response.ok) {
       return `<div>Error in getting data</div>`
     }
     const products = await response.json();
 
     return `
-    <h1>
-      <strong>VIEW ALL</strong>
-    </h1>
+
     <ul class="products">
       ${products
         .map(
